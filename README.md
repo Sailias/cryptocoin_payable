@@ -1,5 +1,7 @@
 # Cryptocoin Payable
 
+Forked from [Bitcoin Payable](https://github.com/Sailias/bitcoin_payable)
+
 A rails gem that enables any model to have crypto coin payments.
 The polymorphic table coin_payments creates payments with unique addresses based on a BIP32 deterministic seed using https://github.com/wink/money-tree
 and uses the (https://helloblock.io OR https://blockchain.info/) API to check for payments.
@@ -177,3 +179,10 @@ This will bypass the payment, set the state to comped and call back to your app 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+## Contributors
+
+* andersonlewin
+* krtschmr  
+* mhluska

@@ -8,6 +8,7 @@ module CryptocoinPayable
 
     validates :reason, presence: true
     validates :price, presence: true
+    validates :coin_type, presence: true
 
     before_create :populate_currency_and_amount_due
     after_create :populate_address

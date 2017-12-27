@@ -1,4 +1,4 @@
-# BitcoinPayable
+# Cryptocoin Payable
 
 A rails gem that enables any model to have crypto coin payments.
 The polymorphic table coin_payments creates payments with unique addresses based on a BIP32 deterministic seed using https://github.com/wink/money-tree
@@ -14,13 +14,13 @@ No private keys needed, No bitcoind blockchain indexing on new servers, just add
 
 ## Demo
 
-[bitcoin_payable_demo](https://github.com/Sailias/bitcoin_payable_demo)
+[cryptocoin_payable_demo](https://github.com/Sailias/cryptocoin_payable_demo)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'bitcoin_payable', git: 'https://github.com/Sailias/bitcoin_payable', branch: 'releases/rails-5.1'
+    gem 'cryptocoin_payable', git: 'https://github.com/Sailias/cryptocoin_payable', branch: 'releases/rails-5.1'
 
 And then execute:
 
@@ -114,7 +114,7 @@ The `process_prices` rake task connects to api.bitcoinaverage.com to get the 24 
 It then updates all payments that havent received an update in the last 30 minutes with the new value owing in BTC.
 This *honors* the price of a payment for 30 minutes at a time.
 
-`rake bitcoin_payable:process_prices`
+`rake cryptocoin_payable:process_prices`
 
 ### Processing payments
 
@@ -131,7 +131,7 @@ Payments are not recalculated based on the current value of BTC, but in dollars.
 
 To run the payment processor:
 
-`rake bitcoin_payable:process_payments`
+`rake cryptocoin_payable:process_payments`
 
 ### Notify your application when a payment is made
 

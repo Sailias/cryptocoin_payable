@@ -14,10 +14,6 @@ No private keys needed, No bitcoind blockchain indexing on new servers, just add
 
 `142WJW4Zzc9iV7uFdbei8Unpe8WcLhUgmE`
 
-## Demo
-
-[cryptocoin_payable_demo](https://github.com/Sailias/cryptocoin_payable_demo)
-
 ## Installation
 
 Add this line to your application's Gemfile:

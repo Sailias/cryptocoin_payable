@@ -8,7 +8,7 @@ class CreateCoinPaymentTransactions < ActiveRecord::Migration[5.1]
       t.datetime :estimated_time
       t.integer :coin_payment_id
       t.integer :coin_conversion, limit: 8
-      t.integer :confirmations
+      t.integer :confirmations, default: 0
     end
 
     add_index :coin_payment_transactions, :coin_payment_id

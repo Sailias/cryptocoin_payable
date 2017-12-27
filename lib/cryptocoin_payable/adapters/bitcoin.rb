@@ -20,8 +20,8 @@ module CryptocoinPayable
         (price / exchange_rate.to_f * SATOSHI_IN_BITCOIN).ceil
       end
 
-      def self.get_rate
-        super('BTC')
+      def self.get_rate(options = {})
+        super('BTC', options)
       end
 
       def self.get_transactions_for(address)

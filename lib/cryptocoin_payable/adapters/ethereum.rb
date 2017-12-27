@@ -20,8 +20,8 @@ module CryptocoinPayable
         (price / exchange_rate.to_f * WEI_IN_ETHER).ceil
       end
 
-      def self.get_rate
-        super('ETH')
+      def self.get_rate(options = {})
+        super('ETH', options)
       end
 
       def self.get_transactions_for(address)

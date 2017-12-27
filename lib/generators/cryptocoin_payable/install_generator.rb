@@ -1,7 +1,7 @@
 require 'rails/generators'
 require 'rails/generators/active_record'
 
-module BitcoinPayable
+module CryptocoinPayable
   class InstallGenerator < ::Rails::Generators::Base
     include ::Rails::Generators::Migration
 

@@ -1,4 +1,4 @@
-module BitcoinPayable
+module CryptocoinPayable
   class CurrencyConversion < ::ActiveRecord::Base
     validates :price, presence: true
 

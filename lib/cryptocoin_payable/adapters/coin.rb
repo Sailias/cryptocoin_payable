@@ -1,4 +1,4 @@
-module BitcoinPayable
+module CryptocoinPayable
   module Adapters
     protected
 
@@ -25,10 +25,10 @@ module BitcoinPayable
 
       def self.get_rate(coin_symbol)
         amount = begin
-          response = get_request("https://api.coinbase.com/v2/prices/#{coin_symbol}-#{BitcoinPayable.configuration.currency.to_s.upcase}/spot")
+          response = get_request("https://api.coinbase.com/v2/prices/#{coin_symbol}-#{CryptocoinPayable.configuration.currency.to_s.upcase}/spot")
           JSON.parse(response.body)['data']['amount'].to_f
         rescue EOFError
-          response = get_request("https://api.gemini.com/v1/pubticker/#{coin_symbol}#{BitcoinPayable.configuration.currency.to_s.upcase}")
+          response = get_request("https://api.gemini.com/v1/pubticker/#{coin_symbol}#{CryptocoinPayable.configuration.currency.to_s.upcase}")
           JSON.parse(response.body)['last'].to_f
         end
         convert_main_to_subunit(amount)

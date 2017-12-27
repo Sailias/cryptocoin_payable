@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bitcoin_payable/version'
+require 'cryptocoin_payable/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "bitcoin_payable"
-  spec.version       = BitcoinPayable::VERSION
+  spec.name          = "cryptocoin_payable"
+  spec.version       = CryptocoinPayable::VERSION
   spec.authors       = ["Jonathan Salis"]
   spec.email         = ["jsalis@bitcoinsultants.ca"]
-  spec.description   = %q{A Bitcoin payment processor}
-  spec.summary       = %q{A Bitcoin payment processor}
+  spec.description   = %q{A Cryptocoin payment processor}
+  spec.summary       = %q{A Cryptocoin payment processor}
   spec.homepage      = ""
   spec.license       = "MIT"
 

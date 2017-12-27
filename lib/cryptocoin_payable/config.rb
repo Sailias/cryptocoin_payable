@@ -1,4 +1,4 @@
-module BitcoinPayable
+module CryptocoinPayable
   class << self
     attr_accessor :configuration
   end
@@ -26,7 +26,7 @@ module BitcoinPayable
 
       # TODO: Put this somewhere better.
       Eth.configure do |config|
-        config.chain_id = BitcoinPayable.configuration.eth.chain_id
+        config.chain_id = CryptocoinPayable.configuration.eth.chain_id
       end
     end
 
@@ -44,7 +44,7 @@ module BitcoinPayable
       end
 
       def network
-        BitcoinPayable.configuration.testnet == false ? :bitcoin : :bitcoin_testnet
+        CryptocoinPayable.configuration.testnet == false ? :bitcoin : :bitcoin_testnet
       end
     end
 
@@ -56,11 +56,11 @@ module BitcoinPayable
       end
 
       def chain_id
-        @chain_id ||= (BitcoinPayable.configuration.testnet ? 4 : 1)
+        @chain_id ||= (CryptocoinPayable.configuration.testnet ? 4 : 1)
       end
 
       def network
-        @network ||= (BitcoinPayable.configuration.testnet ? :rinkeby : :mainnet)
+        @network ||= (CryptocoinPayable.configuration.testnet ? :rinkeby : :mainnet)
       end
     end
   end

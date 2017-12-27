@@ -4,9 +4,9 @@ Given /^there should be (\d+) currency_conversions?$/ do |n|
 end
 
 Given /^the currency_conversion is (\d+)$/ do |conversion_rate|
-  BitcoinPayable::CurrencyConversion.create!(
+  CryptocoinPayable::CurrencyConversion.create!(
     currency: 1,
     price: conversion_rate.to_i,
   )
-  @currency_conversions = BitcoinPayable::CurrencyConversion.all
+  @currency_conversions = CryptocoinPayable::CurrencyConversion.all
 end

@@ -1,6 +1,6 @@
 require 'eth'
 
-module BitcoinPayable
+module CryptocoinPayable
   module Adapters
     class Ethereum < Coin
       WEI_IN_ETHER = 1_000_000_000_000_000_000
@@ -26,7 +26,7 @@ module BitcoinPayable
 
       def self.get_transactions_for(address)
         url = "#{adapter_domain}/api?module=account&action=txlist&address=#{address}&tag=latest"
-        url += '?apiKey=' + BitcoinPayable.configuration.eth.adapter_api_key if BitcoinPayable.configuration.eth.adapter_api_key
+        url += '?apiKey=' + CryptocoinPayable.configuration.eth.adapter_api_key if CryptocoinPayable.configuration.eth.adapter_api_key
 
         response = get_request(url)
         json = JSON.parse(response.body)
@@ -34,7 +34,7 @@ module BitcoinPayable
       end
 
       def self.create_address(id)
-        mnemonic = BitcoinPayable.configuration.eth.mnemonic
+        mnemonic = CryptocoinPayable.configuration.eth.mnemonic
 
         raise 'mnemonic is required' unless mnemonic
 
@@ -45,7 +45,7 @@ module BitcoinPayable
       end
 
       private_class_method def self.adapter_domain
-        @adapter_domain ||= if BitcoinPayable.configuration.testnet
+        @adapter_domain ||= if CryptocoinPayable.configuration.testnet
           'https://rinkeby.etherscan.io'
         else
           'https://api.etherscan.io'

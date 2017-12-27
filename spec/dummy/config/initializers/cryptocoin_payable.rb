@@ -1,4 +1,4 @@
-BitcoinPayable.configure do |config|
+CryptocoinPayable.configure do |config|
   config.currency = :usd
   config.testnet = true
 

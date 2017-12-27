@@ -1,10 +1,10 @@
 require 'money-tree'
 require 'state_machine'
 
-module BitcoinPayable
+module CryptocoinPayable
   class CoinPayment < ::ActiveRecord::Base
     belongs_to :payable, polymorphic: true
-    has_many :transactions, class_name: 'BitcoinPayable::CoinPaymentTransaction'
+    has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction'
 
     validates :reason, presence: true
     validates :price, presence: true
@@ -70,14 +70,14 @@ module BitcoinPayable
 
     def transactions_confirmed?
       transactions.all? { |t|
-        t.confirmations >= BitcoinPayable.configuration.send(coin_type).confirmations
+        t.confirmations >= CryptocoinPayable.configuration.send(coin_type).confirmations
       }
     end
 
     private
 
     def populate_currency_and_amount_due
-      self.currency ||= BitcoinPayable.configuration.currency
+      self.currency ||= CryptocoinPayable.configuration.currency
       self.coin_amount_due = calculate_coin_amount_due
       self.coin_conversion = CurrencyConversion.last.price
     end

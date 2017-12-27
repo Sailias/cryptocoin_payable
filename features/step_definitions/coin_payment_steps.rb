@@ -20,7 +20,7 @@ Given /^the coin_amount_due is set$/ do
 end
 
 Given /^a payment is made for (\d+) percent$/ do |percentage|
-  BitcoinPayable::Adapters::Bitcoin
+  CryptocoinPayable::Adapters::Bitcoin
     .stub(:get_transactions_for)
     .with(@coin_payment.address)
     .and_return([{

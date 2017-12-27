@@ -1,4 +1,4 @@
-module BitcoinPayable
+module CryptocoinPayable
   class PaymentProcessor
     def self.perform
       new.perform

@@ -1,7 +1,7 @@
 When /^the payment_processor is run$/ do
-  BitcoinPayable::PaymentProcessor.perform
+  CryptocoinPayable::PaymentProcessor.perform
 end
 
 When /^the pricing processor is run$/ do
-  BitcoinPayable::PricingProcessor.perform
+  CryptocoinPayable::PricingProcessor.perform
 end

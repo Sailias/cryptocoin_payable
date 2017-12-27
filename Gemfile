@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in bitcoin_payable.gemspec
+# Specify your gem's dependencies in cryptocoin_payable.gemspec
 gemspec
 
 group :test do

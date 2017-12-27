@@ -1,4 +1,4 @@
-module BitcoinPayable
+module CryptocoinPayable
   module Model
     def self.included(base)
       base.send :extend, ClassMethods
@@ -7,7 +7,7 @@ module BitcoinPayable
     module ClassMethods
       def has_coin_payments(options = {})
         has_many :coin_payments, -> { order(:id) },
-          class_name: 'BitcoinPayable::CoinPayment',
+          class_name: 'CryptocoinPayable::CoinPayment',
           as: 'payable'
       end
     end

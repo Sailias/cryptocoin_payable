@@ -20,7 +20,7 @@ No private keys needed, No bitcoind blockchain indexing on new servers, just add
 
 Add this line to your application's Gemfile:
 
-    gem 'cryptocoin_payable', git: 'https://github.com/Sailias/cryptocoin_payable', branch: 'releases/rails-5.1'
+    gem 'cryptocoin_payable', git: 'https://github.com/Sailias/cryptocoin_payable', branch: 'master'
 
 And then execute:
 
@@ -49,7 +49,7 @@ And then execute:
 
 config/initializers/coin_payable.rb
 
-    BitcoinPayable.configure do |config|
+    CryptocoinPayable.configure do |config|
       config.currency = :usd
       config.testnet = true
 
@@ -79,9 +79,9 @@ config/initializers/coin_payable.rb
     end
 
 
-* In order to use the bitcoin network and issue real addresses, BitcoinPayable.config.testnet must be set to false *
+* In order to use the bitcoin network and issue real addresses, CryptocoinPayable.config.testnet must be set to false *
 
-    BitcoinPayable.config.testnet = false
+    CryptocoinPayable.config.testnet = false
 
 #### Node Path
 
@@ -108,7 +108,7 @@ Testnet starts with: tpub
 
 ### Update payments with the current price of BTC based on your currency
 
-BitcoinPayable also supports local currency conversions and BTC exchange rates.
+CryptocoinPayable also supports local currency conversions and BTC exchange rates.
 
 The `process_prices` rake task connects to api.bitcoinaverage.com to get the 24 hour weighted average of BTC for your specified currency.
 It then updates all payments that havent received an update in the last 30 minutes with the new value owing in BTC.

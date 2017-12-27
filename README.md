@@ -77,7 +77,7 @@ config/initializers/coin_payable.rb
     end
 
 
-* In order to use the bitcoin network and issue real addresses, CryptocoinPayable.config.testnet must be set to false *
+In order to use the bitcoin network and issue real addresses, CryptocoinPayable.config.testnet must be set to false
 
     CryptocoinPayable.config.testnet = false
 

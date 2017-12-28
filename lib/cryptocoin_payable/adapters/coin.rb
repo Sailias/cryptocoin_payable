@@ -5,17 +5,31 @@ module CryptocoinPayable
     class Coin
       # Implement these in a subclass:
 
+      # Returns the amount of cents in the main unit. E.g. 10^18 Wei in Ether.
       # def self.subunit_in_main
       #   1_000_000_000_000_000_000
       # end
 
+      # Returns the currency symbol (used for querying for ticker data).
       # def self.coin_symbol
       #   'ETH'
       # end
 
+      # Queries an API like etherscan.io and returns a list of transactions
+      # which conform to the following shape:
+      # {
+      #   txHash: string,
+      #   blockHash: string,
+      #   blockTime: string,
+      #   estimatedTxTime: string,
+      #   estimatedTxValue: integer,
+      #   confirmations: integer,
+      # }
       # def self.get_transactions_for(address)
       # end
 
+      # Uses a predefined seed to generate HD addresses based on an index/id
+      # passed into the method.
       # def self.create_address(id)
       # end
 

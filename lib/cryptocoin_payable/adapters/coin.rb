@@ -28,6 +28,8 @@ module CryptocoinPayable
       # `blockTime` and `estimatedTxTime` are optional strings conforming to
       # date format ISO 8601.
       #
+      # Can optionally raise ApiLimitedReached if needed.
+      #
       # def self.get_transactions_for(address)
       # end
 
@@ -37,6 +39,9 @@ module CryptocoinPayable
       # end
 
       protected
+
+      class ApiLimitReached < StandardError
+      end
 
       def self.convert_subunit_to_main(subunit)
         subunit / subunit_in_main.to_f

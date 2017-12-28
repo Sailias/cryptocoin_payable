@@ -14,8 +14,13 @@ module CryptocoinPayable
       end
 
       def self.get_transactions_for(address)
-        address_full_txs = adapter.address_full_txs(address)
-        address_full_txs['txs'].map { |tx| convert_transactions(tx, address) }
+        response = adapter.address_full_txs(address)
+
+        if response['error'] && response['error'].include?('API calls limits have been reached')
+          raise ApiLimitReached
+        end
+
+        response['txs'].map { |tx| convert_transactions(tx, address) }
       end
 
       def self.create_address(id)

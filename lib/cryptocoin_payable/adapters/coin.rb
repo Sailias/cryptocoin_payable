@@ -20,11 +20,14 @@ module CryptocoinPayable
       # {
       #   txHash: string,
       #   blockHash: string,
-      #   blockTime: string,
-      #   estimatedTxTime: string,
+      #   blockTime: nil | string,
+      #   estimatedTxTime: nil | string,
       #   estimatedTxValue: integer,
       #   confirmations: integer,
       # }
+      # `blockTime` and `estimatedTxTime` are optional strings conforming to
+      # date format ISO 8601.
+      #
       # def self.get_transactions_for(address)
       # end
 

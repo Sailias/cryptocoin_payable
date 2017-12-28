@@ -30,8 +30,8 @@ module CryptocoinPayable
               estimated_value: tx[:estimatedTxValue],
               transaction_hash: tx[:txHash],
               block_hash: tx[:blockHash],
-              block_time: (Time.at(tx[:blockTime]) if tx[:blockTime]),
-              estimated_time: (Time.at(tx[:estimatedTxTime]) if tx[:estimatedTxTime]),
+              block_time: tx[:blockTime],
+              estimated_time: tx[:estimatedTxTime],
               coin_conversion: payment.coin_conversion,
               confirmations: tx[:confirmations]
             )

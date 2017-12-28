@@ -73,9 +73,9 @@ module CryptocoinPayable
           txHash: transaction['hash'],
           blockHash: transaction['blockHash'],
           blockTime: nil, # Not supported
-          estimatedTxTime: transaction['timeStamp'],
-          estimatedTxValue: transaction['value'], # Units here are "Wei", comparable to "Satoshi"
-          confirmations: transaction['confirmations']
+          estimatedTxTime: Time.at(transaction['timeStamp'].to_i).iso8601,
+          estimatedTxValue: transaction['value'].to_i, # Units here are "Wei", comparable to "Satoshi"
+          confirmations: transaction['confirmations'].to_i
         }
       end
     end

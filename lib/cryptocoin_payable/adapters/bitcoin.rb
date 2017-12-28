@@ -43,7 +43,7 @@ module CryptocoinPayable
           blockTime: transaction['confirmed'].nil? ? nil : DateTime.iso8601(transaction['confirmed']),
           estimatedTxTime: DateTime.iso8601(transaction['received']),
           estimatedTxValue: transaction['outputs'].sum { |out| out['addresses'].join.eql?(address) ? out['value'] : 0 },
-          confirmations: transaction['confirmations']
+          confirmations: transaction['confirmations'].to_i
         }
       end
     end

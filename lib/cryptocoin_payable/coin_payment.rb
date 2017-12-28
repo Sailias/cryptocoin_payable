@@ -66,7 +66,7 @@ module CryptocoinPayable
 
     def calculate_coin_amount_due
       rate = CurrencyConversion.where(coin_type: coin_type).last.price
-      Adapters.for(coin_type).exchange_price(currency_amount_due, rate)
+      Adapters.for(coin_type).convert_main_to_subunit(currency_amount_due / rate.to_f).ceil
     end
 
     def transactions_confirmed?

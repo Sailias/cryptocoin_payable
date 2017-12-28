@@ -5,23 +5,12 @@ module CryptocoinPayable
     class Bitcoin < Coin
       SATOSHI_IN_BITCOIN = 100_000_000
 
-      def self.convert_subunit_to_main(satoshis)
-        satoshis / SATOSHI_IN_BITCOIN.to_f
+      def self.subunit_in_main
+        SATOSHI_IN_BITCOIN
       end
 
-      def self.convert_main_to_subunit(bitcoins)
-        (bitcoins * SATOSHI_IN_BITCOIN).to_i
-      end
-
-      # @param price: cents in fiat currency
-      # @param exchange_rate: fiat cents per bitcoin
-      # @returns price in satoshi
-      def self.exchange_price(price, exchange_rate)
-        (price / exchange_rate.to_f * SATOSHI_IN_BITCOIN).ceil
-      end
-
-      def self.get_rate(options = {})
-        super('BTC', options)
+      def self.coin_symbol
+        'BTC'
       end
 
       def self.get_transactions_for(address)

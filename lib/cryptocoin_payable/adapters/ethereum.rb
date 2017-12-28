@@ -5,23 +5,12 @@ module CryptocoinPayable
     class Ethereum < Coin
       WEI_IN_ETHER = 1_000_000_000_000_000_000
 
-      def self.convert_subunit_to_main(wei)
-        wei / WEI_IN_ETHER.to_f
+      def self.subunit_in_main
+        WEI_IN_ETHER
       end
 
-      def self.convert_main_to_subunit(ether)
-        (ether * WEI_IN_ETHER).to_i
-      end
-
-      # @param price: cents in fiat currency
-      # @param exchange_rate: fiat cents per ether
-      # @returns price in wei
-      def self.exchange_price(price, exchange_rate)
-        (price / exchange_rate.to_f * WEI_IN_ETHER).ceil
-      end
-
-      def self.get_rate(options = {})
-        super('ETH', options)
+      def self.coin_symbol
+        'ETH'
       end
 
       def self.get_transactions_for(address)

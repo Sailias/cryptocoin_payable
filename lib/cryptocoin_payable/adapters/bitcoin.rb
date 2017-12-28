@@ -37,7 +37,7 @@ module CryptocoinPayable
         @adapter ||= if CryptocoinPayable.configuration.testnet
           BlockCypher::Api.new(network: BlockCypher::TEST_NET_3)
         else
-          BlockCypher::Api.new
+          BlockCypher::Api.new(api_token: CryptocoinPayable.configuration.btc.blockcypher_token)
         end
       end
 

@@ -5,28 +5,22 @@ module CryptocoinPayable
     class Bitcoin < Coin
       SATOSHI_IN_BITCOIN = 100_000_000
 
-      def self.convert_subunit_to_main(satoshis)
-        satoshis / SATOSHI_IN_BITCOIN.to_f
+      def self.subunit_in_main
+        SATOSHI_IN_BITCOIN
       end
 
-      def self.convert_main_to_subunit(bitcoins)
-        (bitcoins * SATOSHI_IN_BITCOIN).to_i
-      end
-
-      # @param price: cents in fiat currency
-      # @param exchange_rate: fiat cents per bitcoin
-      # @returns price in satoshi
-      def self.exchange_price(price, exchange_rate)
-        (price / exchange_rate.to_f * SATOSHI_IN_BITCOIN).ceil
-      end
-
-      def self.get_rate
-        super('BTC')
+      def self.coin_symbol
+        'BTC'
       end
 
       def self.get_transactions_for(address)
-        address_full_txs = adapter.address_full_txs(address)
-        address_full_txs['txs'].map { |tx| convert_transactions(tx, address) }
+        response = adapter.address_full_txs(address)
+
+        if response['error'] && response['error'].include?('API calls limits have been reached')
+          raise ApiLimitReached
+        end
+
+        response['txs'].map { |tx| convert_transactions(tx, address) }
       end
 
       def self.create_address(id)
@@ -43,7 +37,7 @@ module CryptocoinPayable
         @adapter ||= if CryptocoinPayable.configuration.testnet
           BlockCypher::Api.new(network: BlockCypher::TEST_NET_3)
         else
-          BlockCypher::Api.new
+          BlockCypher::Api.new(api_token: CryptocoinPayable.configuration.btc.blockcypher_token)
         end
       end
 
@@ -54,7 +48,7 @@ module CryptocoinPayable
           blockTime: transaction['confirmed'].nil? ? nil : DateTime.iso8601(transaction['confirmed']),
           estimatedTxTime: DateTime.iso8601(transaction['received']),
           estimatedTxValue: transaction['outputs'].sum { |out| out['addresses'].join.eql?(address) ? out['value'] : 0 },
-          confirmations: transaction['confirmations']
+          confirmations: transaction['confirmations'].to_i
         }
       end
     end

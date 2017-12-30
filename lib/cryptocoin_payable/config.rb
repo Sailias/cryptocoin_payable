@@ -37,7 +37,7 @@ module CryptocoinPayable
     end
 
     class BtcConfiguration < CoinConfiguration
-      attr_accessor :master_public_key
+      attr_accessor :master_public_key, :blockcypher_token
 
       def confirmations
         @confirmations ||= 3

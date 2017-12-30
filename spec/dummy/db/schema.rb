@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171226223917) do
+ActiveRecord::Schema.define(version: 20171227225134) do
 
   create_table "coin_payment_transactions", force: :cascade do |t|
-    t.integer "estimated_value", limit: 8
+    t.decimal "estimated_value", precision: 24
     t.string "transaction_hash"
     t.string "block_hash"
     t.datetime "block_time"
     t.datetime "estimated_time"
     t.integer "coin_payment_id"
-    t.integer "coin_conversion", limit: 8
-    t.integer "confirmations"
+    t.decimal "coin_conversion", precision: 24
+    t.integer "confirmations", default: 0
     t.index ["coin_payment_id"], name: "index_coin_payment_transactions_on_coin_payment_id"
   end
 
@@ -31,18 +31,18 @@ ActiveRecord::Schema.define(version: 20171226223917) do
     t.string "currency"
     t.string "reason"
     t.integer "price", limit: 8
-    t.integer "coin_amount_due", limit: 8, default: 0
+    t.decimal "coin_amount_due", precision: 24, default: "0"
     t.string "address"
     t.string "state", default: "pending"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "coin_conversion", limit: 8
+    t.decimal "coin_conversion", precision: 24
     t.index ["payable_type", "payable_id"], name: "index_coin_payments_on_payable_type_and_payable_id"
   end
 
   create_table "currency_conversions", force: :cascade do |t|
     t.integer "currency"
-    t.integer "price", limit: 8
+    t.decimal "price", precision: 24
     t.integer "coin_type"
     t.datetime "created_at"
     t.datetime "updated_at"

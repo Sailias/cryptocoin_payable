@@ -80,7 +80,7 @@ module CryptocoinPayable
     def populate_currency_and_amount_due
       self.currency ||= CryptocoinPayable.configuration.currency
       self.coin_amount_due = calculate_coin_amount_due
-      self.coin_conversion = CurrencyConversion.last.price
+      self.coin_conversion = CurrencyConversion.where(coin_type: coin_type).last.price
     end
 
     def populate_address

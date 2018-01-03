@@ -180,5 +180,5 @@ This will bypass the payment, set the state to comped and call back to your app 
 ## Contributors
 
 * andersonlewin
-* krtschmr  
+* krtschmr
 * mhluska

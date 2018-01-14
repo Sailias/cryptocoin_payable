@@ -33,6 +33,8 @@ module CryptocoinPayable
     end
 
     def delete_currency_conversions(time_ago)
+      # Makes sure to keep at least one record in the db since other areas of
+      # the gem assume the existence of at least one record.
       last_id = CurrencyConversion.last.id
       time = time_ago || 1.month.ago
       CurrencyConversion.where('created_at < ? AND id != ?', time, last_id).delete_all

@@ -3,10 +3,12 @@
 Forked from [Bitcoin Payable](https://github.com/Sailias/bitcoin_payable)
 
 A rails gem that enables any model to have crypto coin payments.
-The polymorphic table coin_payments creates payments with unique addresses based on a BIP32 deterministic seed using https://github.com/wink/money-tree
-and uses the (https://helloblock.io OR https://blockchain.info/) API to check for payments.
+The polymorphic table coin_payments creates payments with unique addresses based on a BIP32 deterministic seed using https://github.com/wink/money-tree and uses external APIs to check for payments:
 
-Payments have 4 states:  `pending`, `partial_payment`, `paid_in_full`, `comped`
+- https://etherscan.io
+- https://www.blockcypher.com
+
+Payments have 5 states:  `pending`, `partial_payment`, `paid_in_full`, `comped`, `confirmed`
 
 No private keys needed, No bitcoind blockchain indexing on new servers, just address and payments.
 
@@ -81,13 +83,14 @@ In order to use the bitcoin network and issue real addresses, CryptocoinPayable.
 
     CryptocoinPayable.config.testnet = false
 
-#### Node Path
+#### Node Path (Bitcoin)
 
-The derivation path for the node that will be creating your addresses
+The derivation path for the node that will be creating your addresses.
+Currently, this is only configurable for bitcoin payments (see `btc_config.node_path` above).
 
-#### Master Public Key
+#### Master Public Key (Bitcoin)
 
-A BIP32 MPK in "Extended Key" format.
+A BIP32 MPK in "Extended Key" format used when configuring bitcoin payments (see `btc_config.master_public_key` above).
 
 Public net starts with: xpub
 Testnet starts with: tpub
@@ -117,7 +120,7 @@ This *honors* the price of a payment for 30 minutes at a time.
 ### Processing payments
 
 All payments are calculated against the dollar amount of the payment.  So a `bitcoin_payment` for $49.99 will have it's value calculated in BTC.
-It will stay at that price for 30 minutes.  When a payment is made, a transaction is created that stores the BTC in satoshis paid, and the exchange rate is was paid at.
+It will stay at that price for 30 minutes.  When a payment is made, a transaction is created that stores the BTC in satoshis paid and the exchange rate is was paid at.
 This is very valuable for accounting later.  (capital gains of all payments received)
 
 If a partial payment is made, the BTC value is recalculated for the remaining *dollar* amount with the latest exchange rate.
@@ -165,7 +168,9 @@ This will bypass the payment, set the state to comped and call back to your app 
       puts transaction.estimated_value
       puts transaction.estimated_time
 
-      puts transaction.btc_conversion
+      puts transaction.coin_conversion
+
+      puts transaction.confirmations
     end
 
 ## Contributing

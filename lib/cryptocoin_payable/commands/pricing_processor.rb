@@ -4,6 +4,10 @@ module CryptocoinPayable
       new.perform
     end
 
+    def self.delete_currency_conversions(time_ago)
+      new.delete_currency_conversions(time_ago)
+    end
+
     def perform
       rates = CurrencyConversion.coin_types.map do |coin_pair|
         coin_type = coin_pair[0].to_sym
@@ -26,6 +30,12 @@ module CryptocoinPayable
           coin_conversion: rates[payment.coin_type.to_sym].price,
         )
       end
+    end
+
+    def delete_currency_conversions(time_ago)
+      last_id = CurrencyConversion.last.id
+      time = time_ago || 1.month.ago
+      CurrencyConversion.where('created_at < ? AND id != ?', time, last_id).delete_all
     end
   end
 end

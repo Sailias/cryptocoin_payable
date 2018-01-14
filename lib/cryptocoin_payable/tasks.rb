@@ -8,7 +8,12 @@ namespace :cryptocoin_payable do
     CryptocoinPayable::PricingProcessor.perform
   end
 
-  desc 'Connect to HelloBlock.io and process payments'
+  desc 'Delete old CurrencyConversion data (will delete last month by default)'
+  task :delete_currency_conversions => :environment do
+    CryptocoinPayable::PricingProcessor.delete_currency_conversions(ENV['DELETE_BEFORE'])
+  end
+
+  desc 'Get transactions from external API and process payments'
   task :process_payments => :environment do
     CryptocoinPayable::PaymentProcessor.perform
   end

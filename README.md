@@ -150,6 +150,24 @@ Use the `coin_payment_paid` method
       end
     end
 
+### Delete old CurrencyConversion data
+
+Every time the payment processor is run, several rows are inserted into the
+database to record the value of the coin at a given instance in time. Over time,
+your application will accumulate historical currency conversion data and you may
+want to clear it out:
+
+```
+rake cryptocoin_payable:delete_currency_conversions
+```
+
+By default, it will delete any data older than 1 month. You can configure this
+using an env variable:
+
+```
+DELETE_BEFORE=2017-12-15 rake cryptocoin_payable:delete_currency_conversions
+```
+
 ### Comp a payment
 
 This will bypass the payment, set the state to comped and call back to your app that the payment has been processed.

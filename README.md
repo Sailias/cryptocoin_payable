@@ -26,13 +26,13 @@ And then execute:
 
     $ bundle
 
-    $ rails g coin_payable:install
+    $ rails g cryptocoin_payable:install
 
     $ bundle exec rake db:migrate
 
     $ populate coin_payable.rb (see below)
 
-    $ bundle exec rake coin_payable:process_prices (see below)
+    $ bundle exec rake cryptocoin_payable:process_prices (see below)
 
 ## Uninstall
 
@@ -94,6 +94,8 @@ A BIP32 MPK in "Extended Key" format used when configuring bitcoin payments (see
 
 Public net starts with: xpub
 Testnet starts with: tpub
+
+* Obtain your BIP32 MPK from http://bip32.org/
 
 ### Adding it to your model
 

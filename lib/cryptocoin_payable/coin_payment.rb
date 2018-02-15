@@ -89,13 +89,13 @@ module CryptocoinPayable
 
     def notify_payable
       if self.payable.respond_to?(:coin_payment_paid)
-        self.payable.coin_payment_paid
+        self.payable.coin_payment_paid(self)
       end
     end
 
     def notify_payable_confirmed
       if self.payable.respond_to?(:coin_payment_confirmed)
-        self.payable.coin_payment_confirmed
+        self.payable.coin_payment_confirmed(self)
       end
     end
   end

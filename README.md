@@ -138,7 +138,7 @@ To run the payment processor:
 
 ### Notify your application when a payment is made
 
-Use the `coin_payment_paid` method
+Use the `coin_payment_paid` and `coin_payment_confirmed` methods
 
     def Product < ActiveRecord::Base
       has_coin_payments
@@ -147,7 +147,13 @@ Use the `coin_payment_paid` method
         self.coin_payments.create!(reason: 'sale', price: amount_in_cents, type: :btc)
       end
 
-      def coin_payment_paid
+      # Runs when the payment is first detected on the network.
+      def coin_payment_paid(payment)
+        self.notify!
+      end
+
+      # Runs when enough confirmations have occurred.
+      def coin_payment_confirmed(payment)
         self.ship!
       end
     end

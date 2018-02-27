@@ -92,8 +92,9 @@ module CryptocoinPayable
     end
 
     def notify_payable_event(event_name)
-      if self.payable.respond_to?(:"coin_payment_#{event_name}")
-        self.payable.coin_payment_paid(self)
+      method_name = :"coin_payment_#{event_name}"
+      if self.payable.respond_to?(method_name)
+        self.payable.send(method_name, self)
       end
 
       if self.payable.respond_to?(:coin_payment_event)

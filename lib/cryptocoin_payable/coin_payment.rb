@@ -25,14 +25,18 @@ module CryptocoinPayable
       state :paid_in_full
       state :confirmed
       state :comped
+      state :expired
 
-      event :paid do
+      after_transition on: :pay, do: :notify_payable_paid
+      after_transition on: :comp, do: :notify_payable_paid
+      after_transition on: :confirm, do: :notify_payable_confirmed
+      after_transition on: :expire, do: :notify_payable_expired
+
+      event :pay do
         transition [:pending, :partial_payment] => :paid_in_full
       end
 
-      after_transition :on => :paid, :do => :notify_payable
-
-      event :partially_paid do
+      event :partially_pay do
         transition :pending => :partial_payment
       end
 
@@ -40,13 +44,13 @@ module CryptocoinPayable
         transition [:pending, :partial_payment] => :comped
       end
 
-      after_transition :on => :comp, :do => :notify_payable
-
-      event :confirmed do
+      event :confirm do
         transition :paid_in_full => :confirmed
       end
 
-      after_transition :on => :confirmed, :do => :notify_payable_confirmed
+      event :expire do
+        transition [:pending, :partial_payment] => :expired
+      end
     end
 
     # @returns cents in fiat currency.
@@ -87,16 +91,26 @@ module CryptocoinPayable
       self.update(address: Adapters.for(coin_type).create_address(self.id))
     end
 
-    def notify_payable
-      if self.payable.respond_to?(:coin_payment_paid)
+    def notify_payable_event(event_name)
+      if self.payable.respond_to?(:"coin_payment_#{event_name}")
         self.payable.coin_payment_paid(self)
+      end
+
+      if self.payable.respond_to?(:coin_payment_event)
+        self.payable.coin_payment_event(self, event_name)
       end
     end
 
+    def notify_payable_paid
+      notify_payable_event(:paid)
+    end
+
     def notify_payable_confirmed
-      if self.payable.respond_to?(:coin_payment_confirmed)
-        self.payable.coin_payment_confirmed(self)
-      end
+      notify_payable_event(:confirmed)
+    end
+
+    def notify_payable_expired
+      notify_payable_event(:expired)
     end
   end
 end

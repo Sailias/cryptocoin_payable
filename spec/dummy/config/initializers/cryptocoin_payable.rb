@@ -1,6 +1,7 @@
 CryptocoinPayable.configure do |config|
   config.currency = :usd
   config.testnet = true
+  config.expire_payments_after = 15.minutes
 
   config.configure_btc do |btc_config|
     btc_config.node_path = 'm/0/'

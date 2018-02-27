@@ -8,7 +8,14 @@ The polymorphic table coin_payments creates payments with unique addresses based
 - https://etherscan.io
 - https://www.blockcypher.com
 
-Payments have 5 states:  `pending`, `partial_payment`, `paid_in_full`, `comped`, `confirmed`
+Payments have the following states:
+
+- `pending`
+- `partial_payment`
+- `paid_in_full`
+- `comped` (useful for refunding payments)
+- `confirmed` (enters state after n blockchain confirmations, see `confirmations` config option)
+- `expired` (useful for auto-expiring incomplete payments, see `expire_payments_after` config option)
 
 No private keys needed, No bitcoind blockchain indexing on new servers, just address and payments.
 
@@ -50,15 +57,16 @@ And then execute:
 config/initializers/coin_payable.rb
 
     CryptocoinPayable.configure do |config|
-      config.currency = :usd
-      config.testnet = true
+      # config.currency = :usd
+      # config.testnet = true
+
+      config.expire_payments_after = 15.minutes
 
       config.configure_btc do |btc_config|
-        btc_config.node_path = 'm/0/'
-        btc_config.master_public_key = 'tpubD6NzVbkrYhZ4X3cxCktWVsVvMDd35JbNdhzZxb1aeDCG7LfN6KbcDQsqiyJHMEQGJURRgdxGbFBBF32Brwb2LsfpE2jQfCZKwzNBBMosjfm'
-
-        # Defaults to 3 confirmations.
         # btc_config.confirmations = 3
+        # btc_config.node_path = 'm/0/'
+
+        btc_config.master_public_key = 'tpubD6NzVbkrYhZ4X3cxCktWVsVvMDd35JbNdhzZxb1aeDCG7LfN6KbcDQsqiyJHMEQGJURRgdxGbFBBF32Brwb2LsfpE2jQfCZKwzNBBMosjfm'
       end
 
       config.configure_eth do |eth_config|
@@ -77,7 +85,6 @@ config/initializers/coin_payable.rb
         eth_config.mnemonic = ENV['BITCOIN_PAYABLE_ETH_MNEMONIC']
       end
     end
-
 
 In order to use the bitcoin network and issue real addresses, CryptocoinPayable.config.testnet must be set to false
 
@@ -181,6 +188,14 @@ DELETE_BEFORE=2017-12-15 rake cryptocoin_payable:delete_currency_conversions
 This will bypass the payment, set the state to comped and call back to your app that the payment has been processed.
 
 `@coin_payment.comp`
+
+### Expire a payment
+
+`@coin_payment.expire`
+
+Payments will auto-expire if you set the `expire_payments_after` option. The
+exact timing is not precise because payment expiry is evaluated whenever
+payment_processor runs.
 
 ### View all the transactions in the payment
 

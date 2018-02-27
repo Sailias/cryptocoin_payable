@@ -9,10 +9,15 @@ module CryptocoinPayable
   end
 
   class Configuration
-    attr_accessor :currency, :open_exchange_key, :testnet, :btc, :eth
+    attr_accessor :currency, :open_exchange_key, :testnet, :btc, :eth,
+      :expire_payments_after
 
-    def initialize
+    def currency
       @currency ||= :usd
+    end
+
+    def expire_payments_after
+      @expire_payments_after ||= 15.minutes
     end
 
     def configure_btc

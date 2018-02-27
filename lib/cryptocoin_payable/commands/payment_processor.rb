@@ -51,11 +51,6 @@ module CryptocoinPayable
     protected
 
     def update_payment_state(payment)
-      expire_after = CryptocoinPayable.configuration.expire_payments_after
-      if expire_after.present? && (Time.now - payment.created_at) >= expire_after
-        payment.expire
-      end
-
       if payment.currency_amount_paid >= payment.price
         payment.pay
         if payment.transactions_confirmed?
@@ -63,6 +58,11 @@ module CryptocoinPayable
         end
       elsif payment.currency_amount_paid > 0
         payment.partially_pay
+      end
+
+      expire_after = CryptocoinPayable.configuration.expire_payments_after
+      if expire_after.present? && (Time.now - payment.created_at) >= expire_after
+        payment.expire
       end
     end
   end

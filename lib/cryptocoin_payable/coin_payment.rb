@@ -49,7 +49,7 @@ module CryptocoinPayable
       end
 
       event :expire do
-        transition [:pending, :partial_payment] => :expired
+        transition [:pending] => :expired
       end
     end
 

@@ -16,10 +16,6 @@ module CryptocoinPayable
       @currency ||= :usd
     end
 
-    def expire_payments_after
-      @expire_payments_after ||= 15.minutes
-    end
-
     def configure_btc
       self.btc ||= BtcConfiguration.new
       yield(btc)

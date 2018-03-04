@@ -53,9 +53,16 @@ module CryptocoinPayable
       end
     end
 
+    def coin_amount_paid
+      transactions.sum { |tx| adapter.convert_subunit_to_main(tx.estimated_value) }
+    end
+
+    def coin_amount_paid_subunit
+      transactions.sum { |tx| tx.estimated_value }
+    end
+
     # @returns cents in fiat currency.
     def currency_amount_paid
-      adapter = Adapters.for(coin_type)
       cents = transactions.inject(0) do |sum, tx|
         sum + (adapter.convert_subunit_to_main(tx.estimated_value) * tx.coin_conversion)
       end
@@ -70,13 +77,17 @@ module CryptocoinPayable
 
     def calculate_coin_amount_due
       rate = CurrencyConversion.where(coin_type: coin_type).last.price
-      Adapters.for(coin_type).convert_main_to_subunit(currency_amount_due / rate.to_f).ceil
+      adapter.convert_main_to_subunit(currency_amount_due / rate.to_f).ceil
     end
 
     def transactions_confirmed?
       transactions.all? { |t|
         t.confirmations >= CryptocoinPayable.configuration.send(coin_type).confirmations
       }
+    end
+
+    def adapter
+      @adapter ||= Adapters.for(coin_type)
     end
 
     private
@@ -88,7 +99,7 @@ module CryptocoinPayable
     end
 
     def populate_address
-      self.update(address: Adapters.for(coin_type).create_address(self.id))
+      self.update(address: adapter.create_address(self.id))
     end
 
     def notify_payable_event(event_name)

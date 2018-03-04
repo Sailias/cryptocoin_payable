@@ -45,6 +45,10 @@ module CryptocoinPayable
 
         # Check for payments after the response comes back.
         update_payment_state(payment)
+
+        # If the payment has not moved out of the pending state after loading
+        # new transactions, we expire it.
+        update_payment_expired_state(payment)
       end
     end
 
@@ -59,7 +63,9 @@ module CryptocoinPayable
       elsif payment.currency_amount_paid > 0
         payment.partially_pay
       end
+    end
 
+    def update_payment_expired_state(payment)
       expire_after = CryptocoinPayable.configuration.expire_payments_after
       if expire_after.present? && (Time.now - payment.created_at) >= expire_after
         payment.expire

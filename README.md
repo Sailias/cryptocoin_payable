@@ -55,7 +55,7 @@ config/initializers/coin_payable.rb
 
       config.configure_btc do |btc_config|
         btc_config.node_path = 'm/0/'
-        btc_config.master_public_key = 'tpubD6NzVbkrYhZ4X3cxCktWVsVvMDd35JbNdhzZxb1aeDCG7LfN6KbcDQsqiyJHMEQGJURRgdxGbFBBF32Brwb2LsfpE2jQfCZKwzNBBMosjfm'
+        btc_config.master_public_key = 'tpub...'
 
         # Defaults to 3 confirmations.
         # btc_config.confirmations = 3
@@ -73,8 +73,7 @@ config/initializers/coin_payable.rb
         # Defaults to 12 confirmations.
         # eth_config.confirmations = 12
 
-        # NOTE: Avoid committing your mnemonic to source.
-        eth_config.mnemonic = ENV['BITCOIN_PAYABLE_ETH_MNEMONIC']
+        eth_config.master_public_key = 'tpub...'
       end
     end
 

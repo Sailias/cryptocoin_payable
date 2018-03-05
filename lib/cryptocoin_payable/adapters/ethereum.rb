@@ -23,14 +23,13 @@ module CryptocoinPayable
       end
 
       def self.create_address(id)
-        mnemonic = CryptocoinPayable.configuration.eth.mnemonic
+        key = CryptocoinPayable.configuration.eth.master_public_key
 
-        raise 'mnemonic is required' unless mnemonic
+        raise 'master_public_key is required' unless key
 
-        master = MoneyTree::Master.new(seed_hex: ::Bitcoin::Trezor::Mnemonic.to_seed(mnemonic))
-        node = master.node_for_path("m/44'/60'/0'/0/#{id}")
-        key = Eth::Key.new(priv: node.private_key.to_hex)
-        key.address
+        master = MoneyTree::Node.from_bip32(key)
+        node = master.node_for_path(id.to_s)
+        Eth::Utils.public_key_to_address(node.public_key.uncompressed.to_hex)
       end
 
       private_class_method def self.adapter_domain

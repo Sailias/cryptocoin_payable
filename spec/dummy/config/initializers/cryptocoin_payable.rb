@@ -17,11 +17,5 @@ CryptocoinPayable.configure do |config|
     # 4: Rinkeby, the public Geth Ethereum testnet
     # See https://ethereum.stackexchange.com/a/17101/26695
     # eth_config.chain_id = 1
-
-    # NOTE: This should come from an env variable. Do not commit your real
-    # mnemonic to source.
-    eth_config.mnemonic = 'welcome public fly glance vacant pave hazard list ' +
-      'report gift wrestle space offer shove width top enough canvas relief ' +
-      'impose define armed over state'
   end
 end

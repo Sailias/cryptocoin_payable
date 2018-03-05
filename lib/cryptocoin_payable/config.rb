@@ -50,7 +50,7 @@ module CryptocoinPayable
     end
 
     class EthConfiguration < CoinConfiguration
-      attr_accessor :mnemonic, :chain_id
+      attr_accessor :master_public_key, :chain_id
 
       def confirmations
         @confirmations ||= 12

@@ -34,11 +34,10 @@ module CryptocoinPayable
       end
 
       private_class_method def self.adapter
-        @adapter ||= if CryptocoinPayable.configuration.testnet
-          BlockCypher::Api.new(network: BlockCypher::TEST_NET_3)
-        else
-          BlockCypher::Api.new(api_token: CryptocoinPayable.configuration.btc.blockcypher_token)
-        end
+        @adapter ||= BlockCypher::Api.new(
+          api_token: CryptocoinPayable.configuration.btc.blockcypher_token,
+          network: CryptocoinPayable.configuration.testnet ? BlockCypher::TEST_NET_3 : BlockCypher::MAIN_NET
+        )
       end
 
       private_class_method def self.convert_transactions(transaction, address)

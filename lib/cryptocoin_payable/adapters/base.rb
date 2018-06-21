@@ -2,7 +2,7 @@ module CryptocoinPayable
   module Adapters
     protected
 
-    class Coin
+    class Base
       # Implement these in a subclass:
 
       # Returns the amount of cents in the main unit. E.g. 10^18 Wei in Ether.

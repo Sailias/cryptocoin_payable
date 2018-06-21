@@ -1,6 +1,6 @@
 module CryptocoinPayable
   module Adapters
-    require_relative 'adapters/coin.rb'
+    require_relative 'adapters/base.rb'
     require_relative 'adapters/bitcoin.rb'
     require_relative 'adapters/ethereum.rb'
 

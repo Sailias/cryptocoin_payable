@@ -2,7 +2,7 @@ require 'eth'
 
 module CryptocoinPayable
   module Adapters
-    class Ethereum < Coin
+    class Ethereum < Base
       WEI_IN_ETHER = 1_000_000_000_000_000_000
 
       def self.subunit_in_main

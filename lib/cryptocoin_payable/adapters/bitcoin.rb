@@ -2,7 +2,7 @@ require 'blockcypher'
 
 module CryptocoinPayable
   module Adapters
-    class Bitcoin < Coin
+    class Bitcoin < Base
       SATOSHI_IN_BITCOIN = 100_000_000
 
       def self.subunit_in_main

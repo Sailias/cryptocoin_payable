@@ -45,6 +45,9 @@ module CryptocoinPayable
         rescue JSON::ParserError
           STDERR.puts 'Error processing response from server. Possible API issue or your Quota has been exceeded'
           next
+        rescue
+          STDERR.puts 'Unknown error encountered, skipping transaction'
+          next
         end
 
         # Check for payments after the response comes back.

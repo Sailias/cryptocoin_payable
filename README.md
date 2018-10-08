@@ -41,6 +41,7 @@ And then execute:
 ## Run Tests
 
     cucumber features
+    rspec
 
 ## Usage
 

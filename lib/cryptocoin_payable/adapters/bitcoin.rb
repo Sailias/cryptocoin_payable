@@ -16,8 +16,12 @@ module CryptocoinPayable
       def self.get_transactions_for(address)
         response = adapter.address_full_txs(address)
 
-        if response['error'] && response['error'].include?('API calls limits have been reached')
-          raise ApiLimitReached
+        if response['error']
+          if response['error'].include?('API calls limits have been reached')
+            raise ApiLimitReached.new(response['error'])
+          else
+            raise ApiError.new(response['error'])
+          end
         end
 
         response['txs'].map { |tx| convert_transactions(tx, address) }
@@ -34,11 +38,10 @@ module CryptocoinPayable
       end
 
       private_class_method def self.adapter
-        @adapter ||= if CryptocoinPayable.configuration.testnet
-          BlockCypher::Api.new(network: BlockCypher::TEST_NET_3)
-        else
-          BlockCypher::Api.new(api_token: CryptocoinPayable.configuration.btc.blockcypher_token)
-        end
+        @adapter ||= BlockCypher::Api.new(
+          network: CryptocoinPayable.configuration.testnet ? BlockCypher::TEST_NET_3 : BlockCypher::MAIN_NET,
+          api_token: CryptocoinPayable.configuration.btc.try(:blockcypher_token)
+        )
       end
 
       private_class_method def self.convert_transactions(transaction, address)

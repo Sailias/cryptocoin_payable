@@ -9,7 +9,7 @@ module CryptocoinPayable
   end
 
   class Configuration
-    attr_accessor :currency, :open_exchange_key, :testnet, :btc, :eth
+    attr_accessor :currency, :open_exchange_key, :testnet, :btc, :eth, :request_delay
 
     def initialize
       @currency ||= :usd

@@ -66,7 +66,12 @@ module CryptocoinPayable
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = uri.scheme == 'https'
         request = Net::HTTP::Get.new(uri.request_uri)
-        http.request(request)
+        result = http.request(request)
+
+        request_delay = CryptocoinPayable.configuration.request_delay
+        sleep request_delay if request_delay
+
+        result
       end
     end
   end

@@ -10,7 +10,7 @@ module CryptocoinPayable
 
   class Configuration
     attr_accessor :currency, :open_exchange_key, :testnet, :btc, :eth,
-      :expire_payments_after
+      :expire_payments_after, :request_delay
 
     def currency
       @currency ||= :usd

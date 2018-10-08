@@ -60,6 +60,7 @@ config/initializers/coin_payable.rb
       # config.currency = :usd
       # config.testnet = true
 
+      config.request_delay = 0.5
       config.expire_payments_after = 15.minutes
 
       config.configure_btc do |btc_config|
@@ -85,9 +86,13 @@ config/initializers/coin_payable.rb
       end
     end
 
-In order to use the bitcoin network and issue real addresses, CryptocoinPayable.config.testnet must be set to false
+In order to use the bitcoin network and issue real addresses, CryptocoinPayable.config.testnet must be set to false:
 
     CryptocoinPayable.config.testnet = false
+
+Consider adding a request delay (in seconds) to prevent API rate limit errors:
+
+    CryptocoinPayable.config.request_delay = 0.5
 
 #### Node Path (Bitcoin)
 
@@ -199,7 +204,7 @@ payment_processor runs.
 ### View all the transactions in the payment
 
     coin_payment = @product.coin_payments.first
-    coin_payment.transactions.each do |transaction|
+    coin_payment.transactions.find_each do |transaction|
       puts transaction.block_hash
       puts transaction.block_time
 

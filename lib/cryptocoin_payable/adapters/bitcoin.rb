@@ -41,7 +41,7 @@ module CryptocoinPayable
           blockTime: transaction['blocktime'].nil? ? nil : DateTime.strptime(transaction['blocktime'].to_s, '%s'),
           estimatedTxTime: DateTime.strptime(transaction['time'].to_s, '%s'),
           estimatedTxValue: transaction['vout']
-            .select { |out| out['scriptPubKey']['addresses'].include?(address) }
+            .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }
             .sum { |out| (out['value'].to_f * SATOSHI_IN_BITCOIN).to_i },
           confirmations: transaction['confirmations']
         }

@@ -14,11 +14,15 @@ module CryptocoinPayable
       end
 
       def self.get_transactions_for(address)
+        api_adapter_key = CryptocoinPayable.configuration.eth.try(:adapter_api_key)
         url = "#{adapter_domain}/api?module=account&action=txlist&address=#{address}&tag=latest"
-        url += '?apiKey=' + CryptocoinPayable.configuration.eth.adapter_api_key if CryptocoinPayable.configuration.eth.adapter_api_key
+        url += '?apiKey=' + api_adapter_key if api_adapter_key
 
         response = get_request(url)
         json = JSON.parse(response.body)
+
+        raise ApiError.new(json['result']) if json['status'] == '0'
+
         json['result'].map {|tx| convert_transactions(tx, address)}
       end
 

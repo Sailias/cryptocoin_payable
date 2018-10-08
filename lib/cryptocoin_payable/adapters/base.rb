@@ -40,9 +40,6 @@ module CryptocoinPayable
 
       protected
 
-      class ApiLimitReached < StandardError
-      end
-
       def self.convert_subunit_to_main(subunit)
         subunit / subunit_in_main.to_f
       end
@@ -55,7 +52,7 @@ module CryptocoinPayable
         amount = begin
           response = get_request("https://api.coinbase.com/v2/prices/#{coin_symbol}-#{CryptocoinPayable.configuration.currency.to_s.upcase}/spot")
           JSON.parse(response.body)['data']['amount'].to_f
-        rescue StandardError
+        rescue
           response = get_request("https://api.gemini.com/v1/pubticker/#{coin_symbol}#{CryptocoinPayable.configuration.currency.to_s.upcase}")
           JSON.parse(response.body)['last'].to_f
         end

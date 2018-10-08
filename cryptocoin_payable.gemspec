@@ -19,14 +19,17 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.required_rubygems_version = '>= 1.3.6'
 
-  spec.add_development_dependency 'rails', '~> 5.1'
   spec.add_development_dependency 'bundler', '~> 1.15'
   spec.add_development_dependency 'rake', '~> 12.3'
   spec.add_development_dependency 'sqlite3', '~> 1.3'
   spec.add_development_dependency 'rspec-rails', '~> 3.7'
   spec.add_development_dependency 'cucumber', '~> 3.1'
   spec.add_development_dependency 'database_cleaner', '~> 1.7'
+  spec.add_development_dependency 'activerecord', '~> 5.1'
+  spec.add_development_dependency 'vcr', '~> 4.0'
+  spec.add_development_dependency 'webmock', '~> 3.4'
 
+  spec.add_dependency 'rails'
   spec.add_dependency 'state_machine', '~> 1.2'
   spec.add_dependency 'blockcypher-ruby', '0.2.4'
   spec.add_dependency 'money-tree', '0.10.0'

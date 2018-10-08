@@ -1,5 +1,4 @@
 require 'net/http'
-require 'blockcypher'
 
 require 'cryptocoin_payable/config'
 require 'cryptocoin_payable/errors'

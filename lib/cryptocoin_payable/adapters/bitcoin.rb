@@ -1,5 +1,3 @@
-require 'blockcypher'
-
 module CryptocoinPayable
   module Adapters
     class Bitcoin < Base
@@ -14,17 +12,9 @@ module CryptocoinPayable
       end
 
       def self.get_transactions_for(address)
-        response = adapter.address_full_txs(address)
-
-        if response['error']
-          if response['error'].include?('API calls limits have been reached')
-            raise ApiLimitReached.new(response['error'])
-          else
-            raise ApiError.new(response['error'])
-          end
-        end
-
-        response['txs'].map { |tx| convert_transactions(tx, address) }
+        prefix = CryptocoinPayable.configuration.testnet ? 'testnet.' : ''
+        url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{address}"
+        parse_block_exporer_transactions(get_request(url).body, address)
       end
 
       def self.create_address(id)
@@ -37,21 +27,23 @@ module CryptocoinPayable
         node.to_address(network: CryptocoinPayable.configuration.btc.network)
       end
 
-      private_class_method def self.adapter
-        @adapter ||= BlockCypher::Api.new(
-          network: CryptocoinPayable.configuration.testnet ? BlockCypher::TEST_NET_3 : BlockCypher::MAIN_NET,
-          api_token: CryptocoinPayable.configuration.btc.try(:blockcypher_token)
-        )
+      private_class_method def self.parse_block_exporer_transactions(response, address)
+        json = JSON.parse(response)
+        json['txs'].map { |tx| convert_transactions(tx, address) }
+      rescue JSON::ParserError
+        raise ApiError.new(response)
       end
 
       private_class_method def self.convert_transactions(transaction, address)
         {
-          txHash: transaction['hash'],
-          blockHash: transaction['block_hash'],
-          blockTime: transaction['confirmed'].nil? ? nil : DateTime.iso8601(transaction['confirmed']),
-          estimatedTxTime: DateTime.iso8601(transaction['received']),
-          estimatedTxValue: transaction['outputs'].sum { |out| out['addresses'].join.eql?(address) ? out['value'] : 0 },
-          confirmations: transaction['confirmations'].to_i
+          txHash: transaction['txid'],
+          blockHash: transaction['blockhash'],
+          blockTime: transaction['blocktime'].nil? ? nil : DateTime.strptime(transaction['blocktime'].to_s, '%s'),
+          estimatedTxTime: DateTime.strptime(transaction['time'].to_s, '%s'),
+          estimatedTxValue: transaction['vout']
+            .select { |out| out['scriptPubKey']['addresses'].include?(address) }
+            .sum { |out| (out['value'].to_f * SATOSHI_IN_BITCOIN).to_i },
+          confirmations: transaction['confirmations']
         }
       end
     end

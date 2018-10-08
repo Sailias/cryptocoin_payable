@@ -1,7 +1,7 @@
 require 'net/http'
-require 'blockcypher'
 
 require 'cryptocoin_payable/config'
+require 'cryptocoin_payable/errors'
 require 'cryptocoin_payable/version'
 require 'cryptocoin_payable/has_coin_payments'
 require 'cryptocoin_payable/tasks'

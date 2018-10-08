@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.etherscan.io/api?action=txlist&address=0xfc8cfb26c31931572e65e450f7fa498bcc11651c&module=account&tag=latest
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/json; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      X-Frame-Options:
+      - SAMEORIGIN
+      Date:
+      - Mon, 08 Oct 2018 18:29:04 GMT
+      Content-Length:
+      - '2269'
+    body:
+      encoding: UTF-8
+      string: '{"status":"1","message":"OK","result":[{"blockNumber":"5908320","blockHash":"0x752c50e426f65820f5bf6fd49acbb08d79464f8e7e8ea5b77e2299b69fd6398b","timeStamp":"1530770313","hash":"0xa88b799514e9621962e3d0de25e7e0bc7a123e33085f322c7acdb99cc2585c6d","nonce":"342313","transactionIndex":"12","from":"0xeed16856d551569d134530ee3967ec79995e2051","to":"0xfc8cfb26c31931572e65e450f7fa498bcc11651c","value":"33753640000000000","gas":"50000","gasPrice":"93000000000","input":"0x","contractAddress":"","cumulativeGasUsed":"422633","txreceipt_status":"1","gasUsed":"21000","confirmations":"569771","isError":"0"},{"blockNumber":"5908462","blockHash":"0x1c2b73a16fd8c4d25feeccaa2f0bf5c82b8f415f1beaf4d34aaf870daf89689d","timeStamp":"1530772507","hash":"0xb325a8cf241f332bca92c7f715987e4d34be9a6b3bb78d2425c83086b4aced26","nonce":"0","transactionIndex":"36","from":"0xfc8cfb26c31931572e65e450f7fa498bcc11651c","to":"0x6e5eaac372b4abad8957d68af4f53bcf245c0100","value":"2190144444444444","gas":"21000","gasPrice":"43000000000","input":"0x","contractAddress":"","cumulativeGasUsed":"6094102","txreceipt_status":"1","gasUsed":"21000","confirmations":"569629","isError":"0"},{"blockNumber":"5908542","blockHash":"0x4ce71d11146445f123680ea9beba7db968b04dc675caddf60248c9d9d6f5739e","timeStamp":"1530773753","hash":"0xcd874917be5ad177e7ebd88b5c4a7d4283796e00e43345da5b63fb4f78130b37","nonce":"1","transactionIndex":"27","from":"0xfc8cfb26c31931572e65e450f7fa498bcc11651c","to":"0xa80de67c85669132f25678220b492c301217872e","value":"1007518888888888","gas":"21000","gasPrice":"49000000000","input":"0x","contractAddress":"","cumulativeGasUsed":"805592","txreceipt_status":"1","gasUsed":"21000","confirmations":"569549","isError":"0"},{"blockNumber":"6216122","blockHash":"0xc1361b19b2266e2259ac433b9e18b4fbc81339304988bbc62dd93aa24fac6449","timeStamp":"1535274344","hash":"0x799ec2aaafbddbc2e746334f96f59f6127dec62e5693480576db351aaf840bfb","nonce":"0","transactionIndex":"54","from":"0xd2b296fdf2eb4a441721b5a97dc2d9cca44f7a52","to":"0xfc8cfb26c31931572e65e450f7fa498bcc11651c","value":"15678420000000000","gas":"21000","gasPrice":"39000000000","input":"0x","contractAddress":"","cumulativeGasUsed":"7209675","txreceipt_status":"1","gasUsed":"21000","confirmations":"261969","isError":"0"}]}'
+    http_version: 
+  recorded_at: Mon, 08 Oct 2018 18:29:13 GMT
+recorded_with: VCR 4.0.0

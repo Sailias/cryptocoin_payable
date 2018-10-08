@@ -40,7 +40,6 @@ And then execute:
 
 ## Run Tests
 
-    gem install cucumber
     cucumber features
 
 ## Usage

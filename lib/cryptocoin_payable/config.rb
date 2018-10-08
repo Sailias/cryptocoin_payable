@@ -24,7 +24,6 @@ module CryptocoinPayable
       self.eth ||= EthConfiguration.new
       yield(eth)
 
-      # TODO: Put this somewhere better.
       Eth.configure do |config|
         config.chain_id = CryptocoinPayable.configuration.eth.chain_id
       end

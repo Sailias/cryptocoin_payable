@@ -31,7 +31,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rails'
   spec.add_dependency 'state_machine', '~> 1.2'
-  spec.add_dependency 'blockcypher-ruby', '0.2.4'
   spec.add_dependency 'money-tree', '0.10.0'
   spec.add_dependency 'eth', '0.4.8'
 end

@@ -3,21 +3,21 @@ module CryptocoinPayable
     class Bitcoin < Base
       SATOSHI_IN_BITCOIN = 100_000_000
 
-      def self.subunit_in_main
+      def subunit_in_main
         SATOSHI_IN_BITCOIN
       end
 
-      def self.coin_symbol
+      def coin_symbol
         'BTC'
       end
 
-      def self.get_transactions_for(address)
+      def get_transactions_for(address)
         prefix = CryptocoinPayable.configuration.testnet ? 'testnet.' : ''
         url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{address}"
         parse_block_exporer_transactions(get_request(url).body, address)
       end
 
-      def self.create_address(id)
+      def create_address(id)
         key = CryptocoinPayable.configuration.btc.master_public_key
 
         raise 'master_public_key is required' unless key
@@ -27,14 +27,16 @@ module CryptocoinPayable
         node.to_address(network: CryptocoinPayable.configuration.btc.network)
       end
 
-      private_class_method def self.parse_block_exporer_transactions(response, address)
+      private
+
+      def parse_block_exporer_transactions(response, address)
         json = JSON.parse(response)
         json['txs'].map { |tx| convert_transactions(tx, address) }
       rescue JSON::ParserError
         raise ApiError.new(response)
       end
 
-      private_class_method def self.convert_transactions(transaction, address)
+      def convert_transactions(transaction, address)
         {
           tx_hash: transaction['txid'],
           block_hash: transaction['blockhash'],

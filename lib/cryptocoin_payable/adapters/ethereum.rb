@@ -5,15 +5,15 @@ module CryptocoinPayable
     class Ethereum < Base
       WEI_IN_ETHER = 1_000_000_000_000_000_000
 
-      def self.subunit_in_main
+      def subunit_in_main
         WEI_IN_ETHER
       end
 
-      def self.coin_symbol
+      def coin_symbol
         'ETH'
       end
 
-      def self.get_transactions_for(address)
+      def get_transactions_for(address)
         api_adapter_key = CryptocoinPayable.configuration.eth.try(:adapter_api_key)
         url = "#{adapter_domain}/api?module=account&action=txlist&address=#{address}&tag=latest"
         url += '?apiKey=' + api_adapter_key if api_adapter_key
@@ -26,7 +26,7 @@ module CryptocoinPayable
         json['result'].map {|tx| convert_transactions(tx, address)}
       end
 
-      def self.create_address(id)
+      def create_address(id)
         key = CryptocoinPayable.configuration.eth.master_public_key
 
         raise 'master_public_key is required' unless key
@@ -36,7 +36,9 @@ module CryptocoinPayable
         Eth::Utils.public_key_to_address(node.public_key.uncompressed.to_hex)
       end
 
-      private_class_method def self.adapter_domain
+      private
+
+      def adapter_domain
         @adapter_domain ||= if CryptocoinPayable.configuration.testnet
           'https://rinkeby.etherscan.io'
         else
@@ -71,7 +73,7 @@ module CryptocoinPayable
       #     }
       #   ]
       # }
-      private_class_method def self.convert_transactions(transaction, address)
+      def convert_transactions(transaction, address)
         {
           tx_hash: transaction['hash'],
           block_hash: transaction['block_hash'],

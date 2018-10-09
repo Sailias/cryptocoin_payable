@@ -54,7 +54,7 @@ module CryptocoinPayable
       #       timeStamp: "1514144760",
       #       hash: "0x52345400e42a15ba883fb0e314d050a7e7e376a30fc59dfcd7b841007d5d710c",
       #       nonce: "215964",
-      #       blockHash: "0xe6ed0d98586cae04be57e515ca7773c020b441de60a467cd2773877a8996916f",
+      #       block_hash: "0xe6ed0d98586cae04be57e515ca7773c020b441de60a467cd2773877a8996916f",
       #       transactionIndex: "4",
       #       from: "0xd24400ae8bfebb18ca49be86258a3c749cf46853",
       #       to: "0x911f9d574d1ca099cae5ab606aa9207fe238579f",
@@ -73,11 +73,11 @@ module CryptocoinPayable
       # }
       private_class_method def self.convert_transactions(transaction, address)
         {
-          txHash: transaction['hash'],
-          blockHash: transaction['blockHash'],
-          blockTime: nil, # Not supported
-          estimatedTxTime: Time.at(transaction['timeStamp'].to_i).iso8601,
-          estimatedTxValue: transaction['value'].to_i, # Units here are "Wei", comparable to "Satoshi"
+          tx_hash: transaction['hash'],
+          block_hash: transaction['block_hash'],
+          block_time: nil, # Not supported
+          estimated_tx_time: Time.at(transaction['timeStamp'].to_i).iso8601,
+          estimated_tx_value: transaction['value'].to_i, # Units here are "Wei", comparable to "Satoshi"
           confirmations: transaction['confirmations'].to_i
         }
       end

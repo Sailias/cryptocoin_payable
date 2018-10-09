@@ -2,7 +2,7 @@ require 'money-tree'
 require 'state_machine'
 
 module CryptocoinPayable
-  class CoinPayment < ::ActiveRecord::Base
+  class CoinPayment < ActiveRecord::Base
     belongs_to :payable, polymorphic: true
     has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction'
 

@@ -18,14 +18,14 @@ module CryptocoinPayable
       # Queries an API like etherscan.io and returns a list of transactions
       # which conform to the following shape:
       # {
-      #   txHash: string,
-      #   blockHash: string,
-      #   blockTime: nil | string,
-      #   estimatedTxTime: nil | string,
-      #   estimatedTxValue: integer,
+      #   tx_hash: string,
+      #   block_hash: string,
+      #   block_time: nil | string,
+      #   estimated_tx_time: nil | string,
+      #   estimated_tx_value: integer,
       #   confirmations: integer,
       # }
-      # `blockTime` and `estimatedTxTime` are optional strings conforming to
+      # `block_time` and `estimated_tx_time` are optional strings conforming to
       # date format ISO 8601.
       #
       # Can optionally raise ApiLimitedReached if needed.

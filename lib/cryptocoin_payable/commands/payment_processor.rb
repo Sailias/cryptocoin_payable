@@ -25,16 +25,16 @@ module CryptocoinPayable
         transactions.each do |tx|
           tx.symbolize_keys!
 
-          transaction = payment.transactions.find_by_transaction_hash(tx[:txHash])
+          transaction = payment.transactions.find_by_transaction_hash(tx[:tx_hash])
           if transaction
             transaction.update(confirmations: tx[:confirmations])
           else
             payment.transactions.create!(
-              estimated_value: tx[:estimatedTxValue],
-              transaction_hash: tx[:txHash],
-              block_hash: tx[:blockHash],
-              block_time: tx[:blockTime],
-              estimated_time: tx[:estimatedTxTime],
+              estimated_value: tx[:estimated_tx_value],
+              transaction_hash: tx[:tx_hash],
+              block_hash: tx[:block_hash],
+              block_time: tx[:block_time],
+              estimated_time: tx[:estimated_tx_time],
               coin_conversion: payment.coin_conversion,
               confirmations: tx[:confirmations]
             )

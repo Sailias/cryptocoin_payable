@@ -1,5 +1,5 @@
 module CryptocoinPayable
-  class CurrencyConversion < ::ActiveRecord::Base
+  class CurrencyConversion < ActiveRecord::Base
     validates :price, presence: true
 
     # TODO: Duplicated in `CoinPayment`.

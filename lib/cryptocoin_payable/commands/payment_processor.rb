@@ -15,11 +15,11 @@ module CryptocoinPayable
           transaction.update(confirmations: tx[:confirmations])
         else
           payment.transactions.create!(
-            estimated_value: tx[:estimatedTxValue],
-            transaction_hash: tx[:txHash],
-            block_hash: tx[:blockHash],
-            block_time: tx[:blockTime],
-            estimated_time: tx[:estimatedTxTime],
+            estimated_value: tx[:estimated_tx_value],
+            transaction_hash: tx[:tx_hash],
+            block_hash: tx[:block_hash],
+            block_time: tx[:block_time],
+            estimated_time: tx[:estimated_tx_time],
             coin_conversion: payment.coin_conversion,
             confirmations: tx[:confirmations]
           )
@@ -33,7 +33,7 @@ module CryptocoinPayable
     end
 
     def perform
-      CoinPayment.where(state: [:pending, :partial_payment, :paid_in_full]).find_each do |payment|
+      CoinPayment.unconfirmed.find_each do |payment|
         # Check for completed payment first, in case it's 0 and we don't need to
         # make an API call.
         update_payment_state(payment)

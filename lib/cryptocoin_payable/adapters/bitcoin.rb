@@ -36,11 +36,11 @@ module CryptocoinPayable
 
       private_class_method def self.convert_transactions(transaction, address)
         {
-          txHash: transaction['txid'],
-          blockHash: transaction['blockhash'],
-          blockTime: transaction['blocktime'].nil? ? nil : DateTime.strptime(transaction['blocktime'].to_s, '%s'),
-          estimatedTxTime: DateTime.strptime(transaction['time'].to_s, '%s'),
-          estimatedTxValue: transaction['vout']
+          tx_hash: transaction['txid'],
+          block_hash: transaction['blockhash'],
+          block_time: transaction['blocktime'].nil? ? nil : DateTime.strptime(transaction['blocktime'].to_s, '%s'),
+          estimated_tx_time: DateTime.strptime(transaction['time'].to_s, '%s'),
+          estimated_tx_value: transaction['vout']
             .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }
             .sum { |out| (out['value'].to_f * SATOSHI_IN_BITCOIN).to_i },
           confirmations: transaction['confirmations']

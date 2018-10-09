@@ -22,11 +22,11 @@ end
 Given /^a payment is made for (\d+) percent$/ do |percentage|
   allow(CryptocoinPayable::Adapters::Bitcoin).to receive(:get_transactions_for).and_return(
     [{
-      txHash: SecureRandom.uuid,
-      blockHash: '00000000000000606aa74093ed91d657192a3772732ee4d99a7b7be8075eafa2',
-      blockTime: DateTime.iso8601('2017-12-26T21:38:44.000+00:00'),
-      estimatedTxTime: DateTime.iso8601('2017-12-26T21:30:19.858+00:00'),
-      estimatedTxValue: @coin_amount_due * (percentage.to_f / 100.0),
+      tx_hash: SecureRandom.uuid,
+      block_hash: '00000000000000606aa74093ed91d657192a3772732ee4d99a7b7be8075eafa2',
+      block_time: DateTime.iso8601('2017-12-26T21:38:44.000+00:00'),
+      estimated_tx_time: DateTime.iso8601('2017-12-26T21:30:19.858+00:00'),
+      estimated_tx_value: @coin_amount_due * (percentage.to_f / 100.0),
       confirmations: 1
     }]
   )

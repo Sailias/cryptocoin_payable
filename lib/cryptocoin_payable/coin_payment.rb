@@ -2,7 +2,7 @@ require 'money-tree'
 require 'state_machine'
 
 module CryptocoinPayable
-  class CoinPayment < ::ActiveRecord::Base
+  class CoinPayment < ActiveRecord::Base
     belongs_to :payable, polymorphic: true
     has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction'
 
@@ -12,6 +12,10 @@ module CryptocoinPayable
 
     before_create :populate_currency_and_amount_due
     after_create :populate_address
+
+    scope :unconfirmed, -> { where(state: [:pending, :partial_payment, :paid_in_full]) }
+    scope :unpaid, -> { where(state: [:pending, :partial_payment]) }
+    scope :stale, -> { where('updated_at < ? OR coin_amount_due = 0', 30.minutes.ago) }
 
     # TODO: Duplicated in `CurrencyConversion`.
     enum coin_type: %i[

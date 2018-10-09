@@ -38,17 +38,17 @@ module CryptocoinPayable
       # def self.create_address(id)
       # end
 
-      protected
-
-      def self.convert_subunit_to_main(subunit)
+      def convert_subunit_to_main(subunit)
         subunit / subunit_in_main.to_f
       end
 
-      def self.convert_main_to_subunit(main)
+      def convert_main_to_subunit(main)
         (main * subunit_in_main).to_i
       end
 
-      def self.get_rate
+      protected
+
+      def get_rate
         amount = begin
           response = get_request("https://api.coinbase.com/v2/prices/#{coin_symbol}-#{CryptocoinPayable.configuration.currency.to_s.upcase}/spot")
           JSON.parse(response.body)['data']['amount'].to_f
@@ -61,7 +61,7 @@ module CryptocoinPayable
 
       private
 
-      def self.get_request(url)
+      def get_request(url)
         uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = uri.scheme == 'https'

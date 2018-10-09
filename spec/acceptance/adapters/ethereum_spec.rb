@@ -3,7 +3,7 @@ require 'cryptocoin_payable'
 
 describe CryptocoinPayable::Adapters::Ethereum, :vcr do
   it 'gets transactions for a given address' do
-    response = subject.class.get_transactions_for('0xfc8cfb26c31931572e65e450f7fa498bcc11651c')
+    response = subject.get_transactions_for('0xfc8cfb26c31931572e65e450f7fa498bcc11651c')
 
     expect(response).to eq(
       [

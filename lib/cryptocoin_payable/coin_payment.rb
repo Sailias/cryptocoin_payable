@@ -7,7 +7,7 @@ module CryptocoinPayable
 
     has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction' do
       def create_from_tx_data!(tx_data, coin_conversion)
-        create!({
+        create!(
           estimated_value: tx_data[:estimated_tx_value],
           transaction_hash: tx_data[:tx_hash],
           block_hash: tx_data[:block_hash],
@@ -15,7 +15,7 @@ module CryptocoinPayable
           estimated_time: tx_data[:estimated_tx_time],
           coin_conversion: coin_conversion,
           confirmations: tx_data[:confirmations]
-        })
+        )
       end
     end
 

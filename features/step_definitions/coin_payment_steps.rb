@@ -1,25 +1,25 @@
-Given /^the coin_payment field (\S*) is set to (.*)/ do |field, value|
+Given(/^the coin_payment field (\S*) is set to (.*)/) do |field, value|
   @coin_payment.send("#{field}=", value)
 end
 
-Given /^the coin_payment is saved$/ do
+Given(/^the coin_payment is saved$/) do
   @coin_payment.save
   expect(@coin_payment.reload.new_record?).to be(false)
 end
 
-Given /^the coin_payment should have an address$/ do
+Given(/^the coin_payment should have an address$/) do
   expect(@coin_payment.address).to_not be(nil)
 end
 
-Given /^the coin_payment should have the state (\S+)$/ do |state|
+Given(/^the coin_payment should have the state (\S+)$/) do |state|
   expect(@coin_payment.reload.state).to eq(state)
 end
 
-Given /^the coin_amount_due is set$/ do
+Given(/^the coin_amount_due is set$/) do
   @coin_amount_due = @coin_payment.calculate_coin_amount_due
 end
 
-Given /^a payment is made for (\d+) percent$/ do |percentage|
+Given(/^a payment is made for (\d+) percent$/) do |percentage|
   CryptocoinPayable::Adapters::Bitcoin.any_instance.stub(:get_transactions_for).and_return(
     [{
       tx_hash: SecureRandom.uuid,

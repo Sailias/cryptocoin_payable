@@ -10,6 +10,9 @@ Layout/EndAlignment:
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
+Layout/IndentHash:
+  EnforcedStyle: consistent
+
 Style/Documentation:
   Enabled: false
 
@@ -21,3 +24,13 @@ Metrics/LineLength:
 
 Metrics/AbcSize:
   Max: 21
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'test/**/*.rb'
+    - 'spec/**/*.rb'

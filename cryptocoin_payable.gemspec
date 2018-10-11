@@ -2,6 +2,7 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'cryptocoin_payable/version'
 
+# rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
   spec.name          = 'cryptocoin_payable'
   spec.version       = CryptocoinPayable::VERSION
@@ -34,3 +35,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails'
   spec.add_dependency 'state_machine', '~> 1.2'
 end
+# rubocop:enable Metrics/BlockLength

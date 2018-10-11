@@ -42,7 +42,7 @@ module CryptocoinPayable
 
         begin
           self.class.update_transactions_for(payment)
-        rescue => error
+        rescue StandardError => error
           STDERR.puts 'PaymentProcessor: Unknown error encountered, skipping transaction'
           STDERR.puts error
           next

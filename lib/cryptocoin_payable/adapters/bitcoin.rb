@@ -33,7 +33,7 @@ module CryptocoinPayable
         json = JSON.parse(response)
         json['txs'].map { |tx| convert_transactions(tx, address) }
       rescue JSON::ParserError
-        raise ApiError.new(response)
+        raise ApiError, response
       end
 
       def convert_transactions(transaction, address)

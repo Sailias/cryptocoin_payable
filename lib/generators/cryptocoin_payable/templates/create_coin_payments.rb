@@ -14,6 +14,6 @@ class CreateCoinPayments < ActiveRecord::Migration[5.1]
       t.datetime :updated_at
       t.decimal  :coin_conversion, precision: 24, scale: 0
     end
-    add_index :coin_payments, [:payable_type, :payable_id]
+    add_index :coin_payments, %i[payable_type payable_id]
   end
 end

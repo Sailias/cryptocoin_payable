@@ -17,7 +17,7 @@ module CryptocoinPayable
             # TODO: Store three previous price ranges, defaulting to 100 for now.
             currency: 100,
             price: Adapters.for(coin_type).get_rate,
-            coin_type: coin_type,
+            coin_type: coin_type
           )
         ]
       end.to_h
@@ -27,7 +27,7 @@ module CryptocoinPayable
       CoinPayment.unpaid.stale.find_each do |payment|
         payment.update!(
           coin_amount_due: payment.calculate_coin_amount_due,
-          coin_conversion: rates[payment.coin_type.to_sym].price,
+          coin_conversion: rates[payment.coin_type.to_sym].price
         )
       end
     end

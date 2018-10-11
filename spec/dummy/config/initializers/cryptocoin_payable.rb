@@ -1,6 +1,7 @@
 CryptocoinPayable.configure do |config|
   config.currency = :usd
   config.testnet = true
+  config.expire_payments_after = 15.minutes
   config.request_delay = 0.5
 
   config.configure_btc do |btc_config|

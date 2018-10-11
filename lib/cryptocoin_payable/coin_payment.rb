@@ -29,14 +29,18 @@ module CryptocoinPayable
       state :paid_in_full
       state :confirmed
       state :comped
+      state :expired
 
-      event :paid do
+      after_transition on: :pay, do: :notify_payable_paid
+      after_transition on: :comp, do: :notify_payable_paid
+      after_transition on: :confirm, do: :notify_payable_confirmed
+      after_transition on: :expire, do: :notify_payable_expired
+
+      event :pay do
         transition [:pending, :partial_payment] => :paid_in_full
       end
 
-      after_transition :on => :paid, :do => :notify_payable
-
-      event :partially_paid do
+      event :partially_pay do
         transition :pending => :partial_payment
       end
 
@@ -44,18 +48,25 @@ module CryptocoinPayable
         transition [:pending, :partial_payment] => :comped
       end
 
-      after_transition :on => :comp, :do => :notify_payable
-
-      event :confirmed do
+      event :confirm do
         transition :paid_in_full => :confirmed
       end
 
-      after_transition :on => :confirmed, :do => :notify_payable_confirmed
+      event :expire do
+        transition [:pending] => :expired
+      end
+    end
+
+    def coin_amount_paid
+      transactions.sum { |tx| adapter.convert_subunit_to_main(tx.estimated_value) }
+    end
+
+    def coin_amount_paid_subunit
+      transactions.sum { |tx| tx.estimated_value }
     end
 
     # @returns cents in fiat currency.
     def currency_amount_paid
-      adapter = Adapters.for(coin_type)
       cents = transactions.inject(0) do |sum, tx|
         sum + (adapter.convert_subunit_to_main(tx.estimated_value) * tx.coin_conversion)
       end
@@ -70,13 +81,17 @@ module CryptocoinPayable
 
     def calculate_coin_amount_due
       rate = CurrencyConversion.where(coin_type: coin_type).last.price
-      Adapters.for(coin_type).convert_main_to_subunit(currency_amount_due / rate.to_f).ceil
+      adapter.convert_main_to_subunit(currency_amount_due / rate.to_f).ceil
     end
 
     def transactions_confirmed?
       transactions.all? { |t|
         t.confirmations >= CryptocoinPayable.configuration.send(coin_type).confirmations
       }
+    end
+
+    def adapter
+      @adapter ||= Adapters.for(coin_type)
     end
 
     private
@@ -88,19 +103,30 @@ module CryptocoinPayable
     end
 
     def populate_address
-      self.update(address: Adapters.for(coin_type).create_address(self.id))
+      self.update(address: adapter.create_address(self.id))
     end
 
-    def notify_payable
-      if self.payable.respond_to?(:coin_payment_paid)
-        self.payable.coin_payment_paid(self)
+    def notify_payable_event(event_name)
+      method_name = :"coin_payment_#{event_name}"
+      if self.payable.respond_to?(method_name)
+        self.payable.send(method_name, self)
       end
+
+      if self.payable.respond_to?(:coin_payment_event)
+        self.payable.coin_payment_event(self, event_name)
+      end
+    end
+
+    def notify_payable_paid
+      notify_payable_event(:paid)
     end
 
     def notify_payable_confirmed
-      if self.payable.respond_to?(:coin_payment_confirmed)
-        self.payable.coin_payment_confirmed(self)
-      end
+      notify_payable_event(:confirmed)
+    end
+
+    def notify_payable_expired
+      notify_payable_event(:expired)
     end
   end
 end

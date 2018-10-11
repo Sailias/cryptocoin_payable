@@ -26,4 +26,13 @@ describe CryptocoinPayable::Adapters::Bitcoin, :vcr do
       ]
     )
   end
+
+  it 'gets an empty result when no transactions found' do
+    response = subject.get_transactions_for('1twtr17A65VAPhJDJRxhoMSpLBTR5Xy44')
+    expect(response).to eq([])
+  end
+
+  it 'raises an error when an invalid address is passed' do
+    expect { subject.get_transactions_for('foo') }.to raise_error CryptocoinPayable::ApiError
+  end
 end

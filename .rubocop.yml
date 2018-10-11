@@ -6,3 +6,18 @@ Layout/MultilineAssignmentLayout:
 
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/AbcSize:
+  Max: 21

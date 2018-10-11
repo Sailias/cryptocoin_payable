@@ -9,8 +9,8 @@ module CryptocoinPayable
   end
 
   class Configuration
-    attr_accessor :currency, :open_exchange_key, :testnet, :btc, :eth,
-                  :expire_payments_after, :request_delay
+    attr_accessor :open_exchange_key, :testnet, :btc, :eth, :expire_payments_after, :request_delay
+    attr_writer :currency
 
     def currency
       @currency ||= :usd
@@ -30,8 +30,6 @@ module CryptocoinPayable
       end
     end
 
-    private
-
     class CoinConfiguration
       attr_accessor :node_path, :confirmations, :adapter_api_key, :network
     end
@@ -49,7 +47,8 @@ module CryptocoinPayable
     end
 
     class EthConfiguration < CoinConfiguration
-      attr_accessor :master_public_key, :chain_id
+      attr_accessor :master_public_key
+      attr_writer :chain_id
 
       def confirmations
         @confirmations ||= 12

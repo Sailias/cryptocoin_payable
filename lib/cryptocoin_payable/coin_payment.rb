@@ -4,7 +4,20 @@ require 'state_machine'
 module CryptocoinPayable
   class CoinPayment < ActiveRecord::Base
     belongs_to :payable, polymorphic: true
-    has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction'
+
+    has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction' do
+      def create_from_tx_data!(tx_data, coin_conversion)
+        create!({
+          estimated_value: tx_data[:estimated_tx_value],
+          transaction_hash: tx_data[:tx_hash],
+          block_hash: tx_data[:block_hash],
+          block_time: tx_data[:block_time],
+          estimated_time: tx_data[:estimated_tx_time],
+          coin_conversion: coin_conversion,
+          confirmations: tx_data[:confirmations]
+        })
+      end
+    end
 
     validates :reason, presence: true
     validates :price, presence: true
@@ -110,9 +123,7 @@ module CryptocoinPayable
       method_name = :"coin_payment_#{event_name}"
       payable.send(method_name, self) if payable.respond_to?(method_name)
 
-      if payable.respond_to?(:coin_payment_event)
-        payable.coin_payment_event(self, event_name)
-      end
+      payable.coin_payment_event(self, event_name) if payable.respond_to?(:coin_payment_event)
     end
 
     def notify_payable_paid

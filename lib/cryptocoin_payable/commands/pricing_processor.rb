@@ -16,7 +16,7 @@ module CryptocoinPayable
           CurrencyConversion.create!(
             # TODO: Store three previous price ranges, defaulting to 100 for now.
             currency: 100,
-            price: Adapters.for(coin_type).get_rate,
+            price: Adapters.for(coin_type).fetch_rate,
             coin_type: coin_type
           )
         ]

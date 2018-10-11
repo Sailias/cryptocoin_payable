@@ -29,6 +29,10 @@ module CryptocoinPayable
 
       private
 
+      def parse_time(timestamp)
+        DateTime.strptime(timestamp.to_s, '%s')
+      end
+
       def parse_block_exporer_transactions(response, address)
         json = JSON.parse(response)
         json['txs'].map { |tx| convert_transactions(tx, address) }
@@ -40,8 +44,8 @@ module CryptocoinPayable
         {
           tx_hash: transaction['txid'],
           block_hash: transaction['blockhash'],
-          block_time: transaction['blocktime'].nil? ? nil : DateTime.strptime(transaction['blocktime'].to_s, '%s'),
-          estimated_tx_time: DateTime.strptime(transaction['time'].to_s, '%s'),
+          block_time: transaction['blocktime'].nil? ? nil : parse_time(transaction['blocktime']),
+          estimated_tx_time: parse_time(transaction['time']),
           estimated_tx_value: transaction['vout']
             .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }
             .sum { |out| (out['value'].to_f * SATOSHI_IN_BITCOIN).to_i },

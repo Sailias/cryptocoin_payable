@@ -5,7 +5,7 @@ module CryptocoinPayable
     end
 
     module ClassMethods
-      def has_coin_payments(_options = {})
+      def has_coin_payments(_options = {}) # rubocop:disable Naming/PredicateName
         has_many :coin_payments, -> { order(:id) },
           class_name: 'CryptocoinPayable::CoinPayment',
           as: 'payable'

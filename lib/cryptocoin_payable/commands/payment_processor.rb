@@ -42,11 +42,9 @@ module CryptocoinPayable
 
         begin
           self.class.update_transactions_for(payment)
-        rescue JSON::ParserError
-          STDERR.puts 'Error processing response from server. Possible API issue or your Quota has been exceeded'
-          next
-        rescue
-          STDERR.puts 'Unknown error encountered, skipping transaction'
+        rescue => error
+          STDERR.puts 'PaymentProcessor: Unknown error encountered, skipping transaction'
+          STDERR.puts error
           next
         end
 

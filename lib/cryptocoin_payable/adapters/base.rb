@@ -46,8 +46,6 @@ module CryptocoinPayable
         (main * subunit_in_main).to_i
       end
 
-      protected
-
       def get_rate
         amount = begin
           response = get_request("https://api.coinbase.com/v2/prices/#{coin_symbol}-#{CryptocoinPayable.configuration.currency.to_s.upcase}/spot")

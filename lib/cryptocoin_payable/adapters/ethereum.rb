@@ -21,9 +21,9 @@ module CryptocoinPayable
         response = get_request(url)
         json = JSON.parse(response.body)
 
-        raise ApiError.new(json['message']) if json['status'] == '0' && json['message'] == 'NOTOK'
+        raise ApiError, json['message'] if json['status'] == '0' && json['message'] == 'NOTOK'
 
-        json['result'].map {|tx| convert_transactions(tx, address)}
+        json['result'].map { |tx| convert_transactions(tx, address) }
       end
 
       def create_address(id)
@@ -73,13 +73,13 @@ module CryptocoinPayable
       #     }
       #   ]
       # }
-      def convert_transactions(transaction, address)
+      def convert_transactions(transaction, _address)
         {
           tx_hash: transaction['hash'],
           block_hash: transaction['block_hash'],
           block_time: nil, # Not supported
           estimated_tx_time: Time.at(transaction['timeStamp'].to_i).iso8601,
-          estimated_tx_value: transaction['value'].to_i, # Units here are "Wei", comparable to "Satoshi"
+          estimated_tx_value: transaction['value'].to_i, # Units here are 'Wei'
           confirmations: transaction['confirmations'].to_i
         }
       end

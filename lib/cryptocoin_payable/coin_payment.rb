@@ -4,7 +4,20 @@ require 'state_machine'
 module CryptocoinPayable
   class CoinPayment < ActiveRecord::Base
     belongs_to :payable, polymorphic: true
-    has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction'
+
+    has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction' do
+      def create_from_tx_data!(tx_data, coin_conversion)
+        create!(
+          estimated_value: tx_data[:estimated_tx_value],
+          transaction_hash: tx_data[:tx_hash],
+          block_hash: tx_data[:block_hash],
+          block_time: tx_data[:block_time],
+          estimated_time: tx_data[:estimated_tx_time],
+          coin_conversion: coin_conversion,
+          confirmations: tx_data[:confirmations]
+        )
+      end
+    end
 
     validates :reason, presence: true
     validates :price, presence: true
@@ -13,8 +26,8 @@ module CryptocoinPayable
     before_create :populate_currency_and_amount_due
     after_create :populate_address
 
-    scope :unconfirmed, -> { where(state: [:pending, :partial_payment, :paid_in_full]) }
-    scope :unpaid, -> { where(state: [:pending, :partial_payment]) }
+    scope :unconfirmed, -> { where(state: %i[pending partial_payment paid_in_full]) }
+    scope :unpaid, -> { where(state: %i[pending partial_payment]) }
     scope :stale, -> { where('updated_at < ? OR coin_amount_due = 0', 30.minutes.ago) }
 
     # TODO: Duplicated in `CurrencyConversion`.
@@ -37,19 +50,19 @@ module CryptocoinPayable
       after_transition on: :expire, do: :notify_payable_expired
 
       event :pay do
-        transition [:pending, :partial_payment] => :paid_in_full
+        transition %i[pending partial_payment] => :paid_in_full
       end
 
       event :partially_pay do
-        transition :pending => :partial_payment
+        transition pending: :partial_payment
       end
 
       event :comp do
-        transition [:pending, :partial_payment] => :comped
+        transition %i[pending partial_payment] => :comped
       end
 
       event :confirm do
-        transition :paid_in_full => :confirmed
+        transition paid_in_full: :confirmed
       end
 
       event :expire do
@@ -62,7 +75,7 @@ module CryptocoinPayable
     end
 
     def coin_amount_paid_subunit
-      transactions.sum { |tx| tx.estimated_value }
+      transactions.sum(&:estimated_value)
     end
 
     # @returns cents in fiat currency.
@@ -76,7 +89,7 @@ module CryptocoinPayable
     end
 
     def currency_amount_due
-      self.price - currency_amount_paid
+      price - currency_amount_paid
     end
 
     def calculate_coin_amount_due
@@ -85,9 +98,9 @@ module CryptocoinPayable
     end
 
     def transactions_confirmed?
-      transactions.all? { |t|
+      transactions.all? do |t|
         t.confirmations >= CryptocoinPayable.configuration.send(coin_type).confirmations
-      }
+      end
     end
 
     def adapter
@@ -103,18 +116,14 @@ module CryptocoinPayable
     end
 
     def populate_address
-      self.update(address: adapter.create_address(self.id))
+      update(address: adapter.create_address(id))
     end
 
     def notify_payable_event(event_name)
       method_name = :"coin_payment_#{event_name}"
-      if self.payable.respond_to?(method_name)
-        self.payable.send(method_name, self)
-      end
+      payable.send(method_name, self) if payable.respond_to?(method_name)
 
-      if self.payable.respond_to?(:coin_payment_event)
-        self.payable.coin_payment_event(self, event_name)
-      end
+      payable.coin_payment_event(self, event_name) if payable.respond_to?(:coin_payment_event)
     end
 
     def notify_payable_paid

@@ -14,16 +14,7 @@ module CryptocoinPayable
         if transaction
           transaction.update(confirmations: tx[:confirmations])
         else
-          payment.transactions.create!(
-            estimated_value: tx[:estimated_tx_value],
-            transaction_hash: tx[:tx_hash],
-            block_hash: tx[:block_hash],
-            block_time: tx[:block_time],
-            estimated_time: tx[:estimated_tx_time],
-            coin_conversion: payment.coin_conversion,
-            confirmations: tx[:confirmations]
-          )
-
+          payment.transactions.create_from_tx_data!(tx, payment.coin_conversion)
           payment.update(
             coin_amount_due: payment.calculate_coin_amount_due,
             coin_conversion: CurrencyConversion.where(coin_type: payment.coin_type).last.price
@@ -42,7 +33,7 @@ module CryptocoinPayable
 
         begin
           self.class.update_transactions_for(payment)
-        rescue => error
+        rescue StandardError => error
           STDERR.puts 'PaymentProcessor: Unknown error encountered, skipping transaction'
           STDERR.puts error
           next
@@ -70,9 +61,7 @@ module CryptocoinPayable
 
     def update_payment_expired_state(payment)
       expire_after = CryptocoinPayable.configuration.expire_payments_after
-      if expire_after.present? && (Time.now - payment.created_at) >= expire_after
-        payment.expire
-      end
+      payment.expire if expire_after.present? && (Time.now - payment.created_at) >= expire_after
     end
   end
 end

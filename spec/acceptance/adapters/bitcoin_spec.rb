@@ -12,16 +12,16 @@ describe CryptocoinPayable::Adapters::Bitcoin, :vcr do
           block_hash: '0000000000000000048e8ea3fdd2c3a59ddcbcf7575f82cb96ce9fd17da9f2f4',
           block_time: DateTime.iso8601('2016-09-13T15:41:00.000000000+00:00'),
           estimated_tx_time: DateTime.iso8601('2016-09-13T15:41:00.000000000+00:00'),
-          estimated_tx_value: 499000000,
-          confirmations: 115297
+          estimated_tx_value: 499_000_000,
+          confirmations: 115_297
         },
         {
           tx_hash: 'e7bcdb13d9c903973bd8a740054d4c056a559bae67d4e8f6d0a42b4bab552623',
           block_hash: '000000000000000001af27feb303ad97af81a5882157f166781784c639f8e896',
           block_time: DateTime.iso8601('2016-09-13T15:22:42.000000000+00:00'),
           estimated_tx_time: DateTime.iso8601('2016-09-13T15:22:42.000000000+00:00'),
-          estimated_tx_value: 1000000,
-          confirmations: 115300
+          estimated_tx_value: 1_000_000,
+          confirmations: 115_300
         }
       ]
     )

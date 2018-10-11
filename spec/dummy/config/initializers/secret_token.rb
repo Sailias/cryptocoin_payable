@@ -9,4 +9,6 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
+# rubocop:disable Metrics/LineLength
 Dummy::Application.config.secret_key_base = '138c9dde72de8eb2544bc525694ea35b9cf95cb3703796f4c1863593c46838206cf9a0fb1872729d14c1fcf59cf22690c3777e9f66e15a30603a75f78da01498'
+# rubocop:enable Metrics/LineLength

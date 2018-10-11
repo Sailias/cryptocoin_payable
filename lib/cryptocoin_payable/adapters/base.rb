@@ -1,7 +1,5 @@
 module CryptocoinPayable
   module Adapters
-    protected
-
     class Base
       # Implement these in a subclass:
 
@@ -46,14 +44,17 @@ module CryptocoinPayable
         (main * subunit_in_main).to_i
       end
 
-      def get_rate
-        amount = begin
-          response = get_request("https://api.coinbase.com/v2/prices/#{coin_symbol}-#{CryptocoinPayable.configuration.currency.to_s.upcase}/spot")
-          JSON.parse(response.body)['data']['amount'].to_f
-        rescue
-          response = get_request("https://api.gemini.com/v1/pubticker/#{coin_symbol}#{CryptocoinPayable.configuration.currency.to_s.upcase}")
-          JSON.parse(response.body)['last'].to_f
-        end
+      def fetch_rate
+        currency = CryptocoinPayable.configuration.currency.to_s.upcase
+        amount =
+          begin
+            response = get_request("https://api.coinbase.com/v2/prices/#{coin_symbol}-#{currency}/spot")
+            JSON.parse(response.body)['data']['amount'].to_f
+          rescue StandardError
+            response = get_request("https://api.gemini.com/v1/pubticker/#{coin_symbol}#{currency}")
+            JSON.parse(response.body)['last'].to_f
+          end
+
         (amount * 100).to_i
       end
 

@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.etherscan.io/api?action=txlist&address=0x772fDD41BFB34C9903B253322baccdbE2C10851e&module=account&tag=latest
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/json; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      X-Frame-Options:
+      - SAMEORIGIN
+      Date:
+      - Thu, 11 Oct 2018 06:20:39 GMT
+      Content-Length:
+      - '60'
+    body:
+      encoding: UTF-8
+      string: '{"status":"0","message":"No transactions found","result":[]}'
+    http_version: 
+  recorded_at: Thu, 11 Oct 2018 06:20:56 GMT
+recorded_with: VCR 4.0.0

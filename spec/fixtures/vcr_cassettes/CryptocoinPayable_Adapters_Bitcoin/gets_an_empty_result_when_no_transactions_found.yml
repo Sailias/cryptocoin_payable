@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://blockexplorer.com/api/txs/?address=1twtr17A65VAPhJDJRxhoMSpLBTR5Xy44
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 11 Oct 2018 06:26:39 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '25'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=db42f3afdcbaf6aa07207b108a6c2ded41539239198; expires=Fri, 11-Oct-19
+        06:26:38 GMT; path=/; domain=.blockexplorer.com; HttpOnly; Secure
+      X-Powered-By:
+      - Express
+      X-Ratelimit-Limit:
+      - '10800'
+      X-Ratelimit-Remaining:
+      - '10779'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, PUT, POST, OPTIONS
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Content-Length, Cache-Control,
+        cf-connecting-ip
+      Cache-Control:
+      - public, max-age=30
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      Etag:
+      - W/"19-ateSR7OFd51Y/7Qm9D9BXg"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - MISS
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 467f419ebe13c35b-SIN
+    body:
+      encoding: UTF-8
+      string: '{"pagesTotal":0,"txs":[]}'
+    http_version: 
+  recorded_at: Thu, 11 Oct 2018 06:26:55 GMT
+recorded_with: VCR 4.0.0

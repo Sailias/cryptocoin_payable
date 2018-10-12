@@ -1,13 +1,12 @@
 module CryptocoinPayable
   module Adapters
     class Bitcoin < Base
-      SATOSHI_IN_BITCOIN = 100_000_000
-
-      def subunit_in_main
-        SATOSHI_IN_BITCOIN
+      # Satoshi in Bitcoin
+      def self.subunit_in_main
+        100_000_000
       end
 
-      def coin_symbol
+      def self.coin_symbol
         'BTC'
       end
 
@@ -33,6 +32,12 @@ module CryptocoinPayable
         DateTime.strptime(timestamp.to_s, '%s')
       end
 
+      def parse_total_tx_value(output_transactions, address)
+        output_transactions
+          .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }
+          .sum { |out| (out['value'].to_f * self.class.subunit_in_main).to_i }
+      end
+
       def parse_block_exporer_transactions(response, address)
         json = JSON.parse(response)
         json['txs'].map { |tx| convert_transactions(tx, address) }
@@ -46,9 +51,7 @@ module CryptocoinPayable
           block_hash: transaction['blockhash'],
           block_time: transaction['blocktime'].nil? ? nil : parse_time(transaction['blocktime']),
           estimated_tx_time: parse_time(transaction['time']),
-          estimated_tx_value: transaction['vout']
-            .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }
-            .sum { |out| (out['value'].to_f * SATOSHI_IN_BITCOIN).to_i },
+          estimated_tx_value: parse_total_tx_value(transaction['vout'], address),
           confirmations: transaction['confirmations']
         }
       end

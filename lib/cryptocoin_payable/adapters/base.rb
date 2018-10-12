@@ -37,21 +37,22 @@ module CryptocoinPayable
       # end
 
       def convert_subunit_to_main(subunit)
-        subunit / subunit_in_main.to_f
+        subunit / self.class.subunit_in_main.to_f
       end
 
       def convert_main_to_subunit(main)
-        (main * subunit_in_main).to_i
+        (main * self.class.subunit_in_main).to_i
       end
 
       def fetch_rate
         currency = CryptocoinPayable.configuration.currency.to_s.upcase
+        symbol = self.class.coin_symbol
         amount =
           begin
-            response = get_request("https://api.coinbase.com/v2/prices/#{coin_symbol}-#{currency}/spot")
+            response = get_request("https://api.coinbase.com/v2/prices/#{symbol}-#{currency}/spot")
             JSON.parse(response.body)['data']['amount'].to_f
           rescue StandardError
-            response = get_request("https://api.gemini.com/v1/pubticker/#{coin_symbol}#{currency}")
+            response = get_request("https://api.gemini.com/v1/pubticker/#{symbol}#{currency}")
             JSON.parse(response.body)['last'].to_f
           end
 

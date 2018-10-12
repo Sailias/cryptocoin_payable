@@ -3,13 +3,12 @@ require 'eth'
 module CryptocoinPayable
   module Adapters
     class Ethereum < Base
-      WEI_IN_ETHER = 1_000_000_000_000_000_000
-
-      def subunit_in_main
-        WEI_IN_ETHER
+      # Wei in Ether
+      def self.subunit_in_main
+        1_000_000_000_000_000_000
       end
 
-      def coin_symbol
+      def self.coin_symbol
         'ETH'
       end
 

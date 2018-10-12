@@ -12,7 +12,7 @@ module CryptocoinPayable
         'ETH'
       end
 
-      def get_transactions_for(address)
+      def fetch_transactions(address)
         api_adapter_key = CryptocoinPayable.configuration.eth.try(:adapter_api_key)
         url = "#{adapter_domain}/api?module=account&action=txlist&address=#{address}&tag=latest"
         url += '?apiKey=' + api_adapter_key if api_adapter_key

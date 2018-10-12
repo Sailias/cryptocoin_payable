@@ -5,7 +5,7 @@ module CryptocoinPayable
     end
 
     def self.update_transactions_for(payment)
-      transactions = Adapters.for(payment.coin_type).get_transactions_for(payment.address)
+      transactions = Adapters.for(payment.coin_type).fetch_transactions(payment.address)
 
       transactions.each do |tx|
         tx.symbolize_keys!

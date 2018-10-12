@@ -10,7 +10,7 @@ module CryptocoinPayable
         'BTC'
       end
 
-      def get_transactions_for(address)
+      def fetch_transactions(address)
         prefix = CryptocoinPayable.configuration.testnet ? 'testnet.' : ''
         url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{address}"
         parse_block_exporer_transactions(get_request(url).body, address)

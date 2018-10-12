@@ -28,7 +28,7 @@ module CryptocoinPayable
       #
       # Can optionally raise ApiLimitedReached if needed.
       #
-      # def self.get_transactions_for(address)
+      # def self.fetch_transactions(address)
       # end
 
       # Uses a predefined seed to generate HD addresses based on an index/id

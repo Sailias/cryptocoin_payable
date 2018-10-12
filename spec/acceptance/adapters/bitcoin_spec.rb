@@ -3,7 +3,7 @@ require 'cryptocoin_payable'
 
 describe CryptocoinPayable::Adapters::Bitcoin, :vcr do
   it 'gets transactions for a given address' do
-    response = subject.get_transactions_for('3HR9xYD7MybbE7JLVTjwijYse48BtfEKni')
+    response = subject.fetch_transactions('3HR9xYD7MybbE7JLVTjwijYse48BtfEKni')
 
     expect(response).to eq(
       [
@@ -28,11 +28,11 @@ describe CryptocoinPayable::Adapters::Bitcoin, :vcr do
   end
 
   it 'gets an empty result when no transactions found' do
-    response = subject.get_transactions_for('1twtr17A65VAPhJDJRxhoMSpLBTR5Xy44')
+    response = subject.fetch_transactions('1twtr17A65VAPhJDJRxhoMSpLBTR5Xy44')
     expect(response).to eq([])
   end
 
   it 'raises an error when an invalid address is passed' do
-    expect { subject.get_transactions_for('foo') }.to raise_error CryptocoinPayable::ApiError
+    expect { subject.fetch_transactions('foo') }.to raise_error CryptocoinPayable::ApiError
   end
 end

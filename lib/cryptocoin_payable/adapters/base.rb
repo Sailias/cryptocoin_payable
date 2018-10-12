@@ -72,6 +72,10 @@ module CryptocoinPayable
         @coin_config ||= CryptocoinPayable.configuration.send(self.class.coin_symbol.downcase)
       end
 
+      def parse_time(timestamp)
+        DateTime.strptime(timestamp.to_s, '%s')
+      end
+
       private
 
       def get_request(url)

@@ -29,10 +29,6 @@ module CryptocoinPayable
         CryptocoinPayable.configuration.testnet ? :bitcoin_testnet : :bitcoin
       end
 
-      def parse_time(timestamp)
-        DateTime.strptime(timestamp.to_s, '%s')
-      end
-
       def parse_total_tx_value(output_transactions, address)
         output_transactions
           .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }

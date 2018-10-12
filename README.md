@@ -11,6 +11,7 @@ The polymorphic table coin_payments creates payments with unique addresses based
 Supported coins are:
 
 - Bitcoin
+- Bitcoin Cash
 - Ethereum
 
 Payments have the following states:

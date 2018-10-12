@@ -29,10 +29,6 @@ module CryptocoinPayable
       def prefix
         CryptocoinPayable.configuration.testnet ? 'bchtest.' : 'bitcoincash.'
       end
-
-      def network
-        CryptocoinPayable.configuration.testnet ? :bitcoin_testnet : :bitcoin
-      end
     end
   end
 end

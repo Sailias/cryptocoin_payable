@@ -3,10 +3,15 @@
 Forked from [Bitcoin Payable](https://github.com/Sailias/bitcoin_payable)
 
 A rails gem that enables any model to have crypto coin payments.
-The polymorphic table coin_payments creates payments with unique addresses based on a BIP32 deterministic seed using https://github.com/wink/money-tree and uses external APIs to check for payments:
+The polymorphic table coin_payments creates payments with unique addresses based on a BIP32 deterministic seed using https://github.com/GemHQ/money-tree and uses external APIs to check for payments:
 
 - https://etherscan.io
-- https://www.blockcypher.com
+- https://blockexplorer.com
+
+Supported coins are:
+
+- Bitcoin
+- Ethereum
 
 Payments have the following states:
 
@@ -43,7 +48,7 @@ And then execute:
 
 ## Uninstall
 
-    $ rails d coin_payable:install
+    $ rails d cryptocoin_payable:install
 
 ## Run Tests
 
@@ -94,12 +99,11 @@ Consider adding a request delay (in seconds) to prevent API rate limit errors:
 
     CryptocoinPayable.config.request_delay = 0.5
 
-#### Node Path (Bitcoin)
+#### Node Path
 
 The derivation path for the node that will be creating your addresses.
-Currently, this is only configurable for bitcoin payments (see `btc_config.node_path` above).
 
-#### Master Public Key (Bitcoin)
+#### Master Public Key
 
 A BIP32 MPK in "Extended Key" format used when configuring bitcoin payments (see `btc_config.master_public_key` above).
 
@@ -225,7 +229,6 @@ payment_processor runs.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
 
 ## Contributors
 

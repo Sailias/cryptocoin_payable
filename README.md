@@ -85,7 +85,7 @@ config/initializers/coin_payable.rb
 
       config.configure_eth do |eth_config|
         # eth_config.confirmations = 12
-        # btc_config.node_path = ''
+        # eth_config.node_path = ''
 
         eth_config.master_public_key = 'tpub...'
       end

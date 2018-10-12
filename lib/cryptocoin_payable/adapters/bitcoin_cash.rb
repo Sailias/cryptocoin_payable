@@ -1,28 +1,35 @@
+require 'cash_addr'
+
 module CryptocoinPayable
   module Adapters
-    class Bitcoin < Base
+    class BitcoinCash < Base
       # Satoshi in Bitcoin
       def self.subunit_in_main
         100_000_000
       end
 
       def self.coin_symbol
-        'BTC'
+        'BCH'
       end
 
       def fetch_transactions(address)
-        url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{address}"
+        raise NetworkNotSupported if CryptocoinPayable.configuration.testnet
+
+        legacy_address = CashAddr::Converter.to_legacy_address(address)
+        url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{legacy_address}"
         parse_block_exporer_transactions(get_request(url).body, address)
+      rescue CashAddr::InvalidAddress
+        raise ApiError
       end
 
       def create_address(id)
-        super.to_address(network: network)
+        CashAddr::Converter.to_cash_address(super.to_address(network: network))
       end
 
       private
 
       def prefix
-        CryptocoinPayable.configuration.testnet ? 'testnet.' : ''
+        CryptocoinPayable.configuration.testnet ? 'bchtest.' : 'bitcoincash.'
       end
 
       def network

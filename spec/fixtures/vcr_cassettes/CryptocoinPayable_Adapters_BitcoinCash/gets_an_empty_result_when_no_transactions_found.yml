@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bitcoincash.blockexplorer.com/api/txs/?address=16E1jiUfQevixSoe7uE4fscNj4PjJkd1o9
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 12 Oct 2018 07:32:41 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '25'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=daacb5c42d20ef981bf9b41e8b10381d41539329560; expires=Sat, 12-Oct-19
+        07:32:40 GMT; path=/; domain=.blockexplorer.com; HttpOnly; Secure
+      X-Powered-By:
+      - Express
+      X-Ratelimit-Limit:
+      - '10800'
+      X-Ratelimit-Remaining:
+      - '10701'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, PUT, POST, OPTIONS
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Content-Length, Cache-Control,
+        cf-connecting-ip
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - W/"19-yV2jHjCT6452sEiXtqmAbfkYdac"
+      Vary:
+      - Accept-Encoding
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4687dfb7d85f318c-SIN
+    body:
+      encoding: UTF-8
+      string: '{"pagesTotal":0,"txs":[]}'
+    http_version: 
+  recorded_at: Fri, 12 Oct 2018 07:32:42 GMT
+recorded_with: VCR 4.0.0

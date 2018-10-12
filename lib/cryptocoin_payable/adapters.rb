@@ -23,4 +23,5 @@ end
 
 require 'cryptocoin_payable/adapters/base'
 require 'cryptocoin_payable/adapters/bitcoin'
+require 'cryptocoin_payable/adapters/bitcoin_cash'
 require 'cryptocoin_payable/adapters/ethereum'

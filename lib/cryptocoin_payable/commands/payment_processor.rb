@@ -10,7 +10,7 @@ module CryptocoinPayable
       transactions.each do |tx|
         tx.symbolize_keys!
 
-        transaction = payment.transactions.find_by_transaction_hash(tx[:txHash])
+        transaction = payment.transactions.find_by_transaction_hash(tx[:tx_hash])
         if transaction
           transaction.update(confirmations: tx[:confirmations])
         else

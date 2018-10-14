@@ -4,7 +4,7 @@
 
 Forked from [Bitcoin Payable](https://github.com/Sailias/bitcoin_payable)
 
-A rails gem that enables any model to have crypto coin payments.
+A rails gem that enables any model to have cryptocurrency payments.
 The polymorphic table coin_payments creates payments with unique addresses based on a BIP32 deterministic seed using https://github.com/GemHQ/money-tree and uses external APIs to check for payments:
 
 - https://etherscan.io

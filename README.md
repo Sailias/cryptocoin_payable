@@ -33,7 +33,7 @@ No private keys needed, No bitcoind blockchain indexing on new servers, just add
 
 Add this line to your application's Gemfile:
 
-    gem 'cryptocoin_payable', git: 'https://github.com/Sailias/cryptocoin_payable', branch: 'master'
+    gem 'cryptocoin_payable'
 
 And then execute:
 

@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/cryptocoin_payable.svg)](https://badge.fury.io/rb/cryptocoin_payable)
+
 # Cryptocoin Payable
 
 Forked from [Bitcoin Payable](https://github.com/Sailias/bitcoin_payable)

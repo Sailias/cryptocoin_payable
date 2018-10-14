@@ -52,7 +52,7 @@ module CryptocoinPayable
         {
           tx_hash: transaction['txid'],
           block_hash: transaction['blockhash'],
-          block_time: transaction['blocktime'].nil? ? nil : parse_timestamp(transaction['blocktime']),
+          block_time: parse_timestamp(transaction['blocktime']),
           estimated_tx_time: parse_timestamp(transaction['time']),
           estimated_tx_value: parse_total_tx_value_block_explorer(transaction['vout'], address),
           confirmations: transaction['confirmations']

@@ -28,8 +28,8 @@ No private keys needed, No bitcoind blockchain indexing on new servers, just add
 
 **Donations appreciated**
 
-`142WJW4Zzc9iV7uFdbei8Unpe8WcLhUgmE` (Jon Salis)
-`14xXZ6SFjwYZHATiywBE2durFknLePYqHS` (Maros Hluska)
+- `142WJW4Zzc9iV7uFdbei8Unpe8WcLhUgmE` (Jon Salis)
+- `14xXZ6SFjwYZHATiywBE2durFknLePYqHS` (Maros Hluska)
 
 ## Installation
 

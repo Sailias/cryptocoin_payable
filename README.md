@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/cryptocoin_payable.svg)](https://badge.fury.io/rb/cryptocoin_payable)
-[![Build Status](https://travis-ci.com/mhluska/cryptocoin_payable.svg?branch=master)](https://travis-ci.com/mhluska/cryptocoin_payable)
+[![Build Status](https://travis-ci.com/Sailias/cryptocoin_payable.svg?branch=master)](https://travis-ci.com/Sailias/cryptocoin_payable)
 
 # Cryptocoin Payable
 

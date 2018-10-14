@@ -7,6 +7,7 @@ The polymorphic table coin_payments creates payments with unique addresses based
 
 - https://etherscan.io
 - https://blockexplorer.com
+- https://www.blockcypher.com
 
 Supported coins are:
 
@@ -27,7 +28,8 @@ No private keys needed, No bitcoind blockchain indexing on new servers, just add
 
 **Donations appreciated**
 
-`142WJW4Zzc9iV7uFdbei8Unpe8WcLhUgmE`
+`142WJW4Zzc9iV7uFdbei8Unpe8WcLhUgmE` (Jon Salis)
+`14xXZ6SFjwYZHATiywBE2durFknLePYqHS` (Maros Hluska)
 
 ## Installation
 

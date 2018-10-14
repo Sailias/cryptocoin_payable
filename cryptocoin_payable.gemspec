@@ -6,8 +6,8 @@ require 'cryptocoin_payable/version'
 Gem::Specification.new do |spec|
   spec.name          = 'cryptocoin_payable'
   spec.version       = CryptocoinPayable::VERSION
-  spec.authors       = ['Jonathan Salis']
-  spec.email         = ['jsalis@bitcoinsultants.ca']
+  spec.authors       = ['Jonathan Salis', 'Maros Hluska']
+  spec.email         = ['jsalis@bitcoinsultants.ca', 'mhluska@gmail.com']
   spec.description   = 'Cryptocurrency payment processor'
   spec.summary       = 'Cryptocurrency payment processor'
   spec.homepage      = ''

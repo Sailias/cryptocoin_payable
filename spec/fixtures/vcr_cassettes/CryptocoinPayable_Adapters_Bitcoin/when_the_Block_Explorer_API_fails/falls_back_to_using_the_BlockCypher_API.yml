@@ -1,0 +1,171 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.blockcypher.com/v1/btc/main/addrs/3HR9xYD7MybbE7JLVTjwijYse48BtfEKni/full
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Sun, 14 Oct 2018 10:46:00 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Ratelimit-Remaining:
+      - '97'
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "address": "3HR9xYD7MybbE7JLVTjwijYse48BtfEKni",
+          "total_received": 500000000,
+          "total_sent": 0,
+          "balance": 500000000,
+          "unconfirmed_balance": 0,
+          "final_balance": 500000000,
+          "n_tx": 2,
+          "unconfirmed_n_tx": 0,
+          "final_n_tx": 2,
+          "txs": [
+            {
+              "block_hash": "0000000000000000048e8ea3fdd2c3a59ddcbcf7575f82cb96ce9fd17da9f2f4",
+              "block_height": 429632,
+              "block_index": 893,
+              "hash": "5bdeaf7829148d7e0e1e7b5233512a2c5ae54ef7ccbc8e68b2f85b7e49c917a0",
+              "addresses": [
+                "1CJzCcrY9WarJ5nZCcfbNu2eAnuHqSGqJP",
+                "1CVCj6B2Q4DJ1rFEhaXDdcEcaQQho37yrT",
+                "3HR9xYD7MybbE7JLVTjwijYse48BtfEKni"
+              ],
+              "total": 826645063,
+              "fees": 13740,
+              "size": 223,
+              "preference": "high",
+              "relayed_by": "79.208.245.182:8333",
+              "confirmed": "2016-09-13T15:41:00Z",
+              "received": "2016-09-13T15:33:29.126Z",
+              "ver": 1,
+              "double_spend": false,
+              "vin_sz": 1,
+              "vout_sz": 2,
+              "confirmations": 116077,
+              "confidence": 1,
+              "inputs": [
+                {
+                  "prev_hash": "252dde616fbbd25ebaf37ee8df82c38d2135a87100cc1f0315797b1b42f52f01",
+                  "output_index": 0,
+                  "script": "47304402206b40298326b6c4ab181c4c61b43569490e91773997c0ec53309ab01851098c1002202731263d747aba117b65aaf7d5ee0ad5e88c2e3b4dc3e47d6ecc414e3bbb38e8012102027fcba75d05e735e734d9287c3b22b90465e30ee87ff064303b8175ddeb48fa",
+                  "output_value": 826658803,
+                  "sequence": 4294967295,
+                  "addresses": [
+                    "1CJzCcrY9WarJ5nZCcfbNu2eAnuHqSGqJP"
+                  ],
+                  "script_type": "pay-to-pubkey-hash",
+                  "age": 426962
+                }
+              ],
+              "outputs": [
+                {
+                  "value": 499000000,
+                  "script": "a914ac82105dbe13eb1b2b606b8fa4e58ced5b317ceb87",
+                  "addresses": [
+                    "3HR9xYD7MybbE7JLVTjwijYse48BtfEKni"
+                  ],
+                  "script_type": "pay-to-script-hash"
+                },
+                {
+                  "value": 327645063,
+                  "script": "76a9147dfed19339f4a44a5a9888448ebb270656e2919488ac",
+                  "spent_by": "08aee92c75baa331b66aaf8ad27fdaea80053f3fdb090112ce332983cb63de00",
+                  "addresses": [
+                    "1CVCj6B2Q4DJ1rFEhaXDdcEcaQQho37yrT"
+                  ],
+                  "script_type": "pay-to-pubkey-hash"
+                }
+              ]
+            },
+            {
+              "block_hash": "000000000000000001af27feb303ad97af81a5882157f166781784c639f8e896",
+              "block_height": 429629,
+              "block_index": 255,
+              "hash": "e7bcdb13d9c903973bd8a740054d4c056a559bae67d4e8f6d0a42b4bab552623",
+              "addresses": [
+                "13Rd2fKcsUQ9eChqMZGprGeo8XAMAsQhMV",
+                "1GWPE3nEHHLY6C5U4c6qj3wxZvx4hiVDxZ",
+                "3HR9xYD7MybbE7JLVTjwijYse48BtfEKni"
+              ],
+              "total": 464992520,
+              "fees": 13740,
+              "size": 223,
+              "preference": "high",
+              "relayed_by": "71.206.238.16:8333",
+              "confirmed": "2016-09-13T15:22:42Z",
+              "received": "2016-09-13T15:20:15.538Z",
+              "ver": 1,
+              "double_spend": false,
+              "vin_sz": 1,
+              "vout_sz": 2,
+              "confirmations": 116080,
+              "confidence": 1,
+              "inputs": [
+                {
+                  "prev_hash": "e5c2d3a1ffa653121e38d051274dcbfde19ec53ed13d5e4eba54fdf77e8fbf60",
+                  "output_index": 0,
+                  "script": "47304402201d1d8197bd319e43ca5931023dad0bd4fbcd5d941f7bbf51e5ea6390bdf59c3702202303a697a6f722a90981e3fd1d7f0f27d397de3e1ee601e0f681ec933b809ccd0121028ee20d4ea0b72c78caf36b803a79e5a315c61f6d76193130699040cded33ad90",
+                  "output_value": 465006260,
+                  "sequence": 4294967295,
+                  "addresses": [
+                    "1GWPE3nEHHLY6C5U4c6qj3wxZvx4hiVDxZ"
+                  ],
+                  "script_type": "pay-to-pubkey-hash",
+                  "age": 428716
+                }
+              ],
+              "outputs": [
+                {
+                  "value": 463992520,
+                  "script": "76a9141a984f5195f48bcd9995ec4bb5ed5a386a10dfdf88ac",
+                  "spent_by": "5c9864d21dca5bd4715a5489fad9e51dbdcde1588e03d58ddbbbcabc0de54e32",
+                  "addresses": [
+                    "13Rd2fKcsUQ9eChqMZGprGeo8XAMAsQhMV"
+                  ],
+                  "script_type": "pay-to-pubkey-hash"
+                },
+                {
+                  "value": 1000000,
+                  "script": "a914ac82105dbe13eb1b2b606b8fa4e58ced5b317ceb87",
+                  "addresses": [
+                    "3HR9xYD7MybbE7JLVTjwijYse48BtfEKni"
+                  ],
+                  "script_type": "pay-to-script-hash"
+                }
+              ]
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Sun, 14 Oct 2018 10:46:02 GMT
+recorded_with: VCR 4.0.0

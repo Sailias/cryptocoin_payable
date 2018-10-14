@@ -72,8 +72,12 @@ module CryptocoinPayable
         @coin_config ||= CryptocoinPayable.configuration.send(self.class.coin_symbol.downcase)
       end
 
-      def parse_time(timestamp)
-        DateTime.strptime(timestamp.to_s, '%s')
+      def parse_timestamp(timestamp)
+        timestamp.nil? ? nil : DateTime.strptime(timestamp.to_s, '%s')
+      end
+
+      def parse_time(time)
+        time.nil? ? nil : DateTime.iso8601(time)
       end
 
       private

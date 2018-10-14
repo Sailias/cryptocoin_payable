@@ -11,8 +11,9 @@ module CryptocoinPayable
       end
 
       def fetch_transactions(address)
-        url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{address}"
-        parse_block_exporer_transactions(get_request(url).body, address)
+        fetch_block_explorer_transactions(address)
+      rescue StandardError
+        fetch_block_cypher_transactions(address)
       end
 
       def create_address(id)
@@ -29,27 +30,62 @@ module CryptocoinPayable
         CryptocoinPayable.configuration.testnet ? :bitcoin_testnet : :bitcoin
       end
 
-      def parse_total_tx_value(output_transactions, address)
+      def parse_total_tx_value_block_explorer(output_transactions, address)
         output_transactions
           .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }
           .sum { |out| (out['value'].to_f * self.class.subunit_in_main).to_i }
       end
 
-      def parse_block_exporer_transactions(response, address)
+      def fetch_block_explorer_transactions(address)
+        url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{address}"
+        parse_block_explorer_transactions(get_request(url).body, address)
+      end
+
+      def parse_block_explorer_transactions(response, address)
         json = JSON.parse(response)
-        json['txs'].map { |tx| convert_transactions(tx, address) }
+        json['txs'].map { |tx| convert_block_explorer_transactions(tx, address) }
       rescue JSON::ParserError
         raise ApiError, response
       end
 
-      def convert_transactions(transaction, address)
+      def convert_block_explorer_transactions(transaction, address)
         {
           tx_hash: transaction['txid'],
           block_hash: transaction['blockhash'],
-          block_time: transaction['blocktime'].nil? ? nil : parse_time(transaction['blocktime']),
-          estimated_tx_time: parse_time(transaction['time']),
-          estimated_tx_value: parse_total_tx_value(transaction['vout'], address),
+          block_time: transaction['blocktime'].nil? ? nil : parse_timestamp(transaction['blocktime']),
+          estimated_tx_time: parse_timestamp(transaction['time']),
+          estimated_tx_value: parse_total_tx_value_block_explorer(transaction['vout'], address),
           confirmations: transaction['confirmations']
+        }
+      end
+
+      def parse_total_tx_value_block_cypher(output_transactions, address)
+        output_transactions
+          .sum { |out| out['addresses'].join.eql?(address) ? out['value'] : 0 }
+      end
+
+      def fetch_block_cypher_transactions(address)
+        url = "https://api.blockcypher.com/v1/btc/main/addrs/#{address}/full"
+        parse_block_cypher_transactions(get_request(url).body, address)
+      end
+
+      def parse_block_cypher_transactions(response, address)
+        json = JSON.parse(response)
+        raise ApiError, json['error'] if json['error']
+
+        json['txs'].map { |tx| convert_block_cypher_transactions(tx, address) }
+      rescue JSON::ParserError
+        raise ApiError, response
+      end
+
+      def convert_block_cypher_transactions(transaction, address)
+        {
+          tx_hash: transaction['hash'],
+          block_hash: transaction['block_hash'],
+          block_time: parse_time(transaction['confirmed']),
+          estimated_tx_time: parse_time(transaction['received']),
+          estimated_tx_value: parse_total_tx_value_block_cypher(transaction['outputs'], address),
+          confirmations: transaction['confirmations'].to_i
         }
       end
     end

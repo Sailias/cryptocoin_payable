@@ -11,7 +11,7 @@ module CryptocoinPayable
         raise NetworkNotSupported if CryptocoinPayable.configuration.testnet
 
         url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{legacy_address(address)}"
-        parse_block_exporer_transactions(get_request(url).body, address)
+        parse_block_explorer_transactions(get_request(url).body, address)
       end
 
       def create_address(id)

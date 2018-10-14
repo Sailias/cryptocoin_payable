@@ -9,7 +9,6 @@ CryptocoinPayable.configure do |config|
     # rubocop:disable Metrics/LineLength
     btc_config.master_public_key = 'tpubD6NzVbkrYhZ4X3cxCktWVsVvMDd35JbNdhzZxb1aeDCG7LfN6KbcDQsqiyJHMEQGJURRgdxGbFBBF32Brwb2LsfpE2jQfCZKwzNBBMosjfm'
     # rubocop:enable Metrics/LineLength
-    btc_config.blockcypher_token = ''
   end
 
   config.configure_eth do |eth_config|

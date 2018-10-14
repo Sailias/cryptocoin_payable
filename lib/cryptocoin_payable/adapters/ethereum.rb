@@ -13,8 +13,8 @@ module CryptocoinPayable
       end
 
       def fetch_transactions(address)
-        api_adapter_key = CryptocoinPayable.configuration.eth.try(:adapter_api_key)
-        url = "#{adapter_domain}/api?module=account&action=txlist&address=#{address}&tag=latest"
+        api_adapter_key = coin_config.try(:adapter_api_key)
+        url = "https://#{subdomain}.etherscan.io/api?module=account&action=txlist&address=#{address}&tag=latest"
         url += '?apiKey=' + api_adapter_key if api_adapter_key
 
         response = get_request(url)
@@ -26,23 +26,13 @@ module CryptocoinPayable
       end
 
       def create_address(id)
-        key = CryptocoinPayable.configuration.eth.master_public_key
-
-        raise 'master_public_key is required' unless key
-
-        master = MoneyTree::Node.from_bip32(key)
-        node = master.node_for_path(id.to_s)
-        Eth::Utils.public_key_to_address(node.public_key.uncompressed.to_hex)
+        Eth::Utils.public_key_to_address(super.public_key.uncompressed.to_hex)
       end
 
       private
 
-      def adapter_domain
-        @adapter_domain ||= if CryptocoinPayable.configuration.testnet
-          'https://rinkeby.etherscan.io'
-        else
-          'https://api.etherscan.io'
-        end
+      def subdomain
+        @subdomain ||= CryptocoinPayable.configuration.testnet ? 'rinkeby' : 'api'
       end
 
       # Example response:

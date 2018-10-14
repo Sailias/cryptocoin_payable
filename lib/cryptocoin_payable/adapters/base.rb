@@ -59,6 +59,23 @@ module CryptocoinPayable
         (amount * 100).to_i
       end
 
+      def create_address(id)
+        raise MissingMasterPublicKey, 'master_public_key is required' unless coin_config.master_public_key
+
+        master = MoneyTree::Node.from_bip32(coin_config.master_public_key)
+        master.node_for_path(coin_config.node_path + id.to_s)
+      end
+
+      protected
+
+      def coin_config
+        @coin_config ||= CryptocoinPayable.configuration.send(self.class.coin_symbol.downcase)
+      end
+
+      def parse_time(timestamp)
+        DateTime.strptime(timestamp.to_s, '%s')
+      end
+
       private
 
       def get_request(url)

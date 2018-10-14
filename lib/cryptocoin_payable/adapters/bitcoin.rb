@@ -11,25 +11,22 @@ module CryptocoinPayable
       end
 
       def fetch_transactions(address)
-        prefix = CryptocoinPayable.configuration.testnet ? 'testnet.' : ''
         url = "https://#{prefix}blockexplorer.com/api/txs/?address=#{address}"
         parse_block_exporer_transactions(get_request(url).body, address)
       end
 
       def create_address(id)
-        key = CryptocoinPayable.configuration.btc.master_public_key
-
-        raise 'master_public_key is required' unless key
-
-        master = MoneyTree::Node.from_bip32(key)
-        node = master.node_for_path(CryptocoinPayable.configuration.btc.node_path + id.to_s)
-        node.to_address(network: CryptocoinPayable.configuration.btc.network)
+        super.to_address(network: network)
       end
 
       private
 
-      def parse_time(timestamp)
-        DateTime.strptime(timestamp.to_s, '%s')
+      def prefix
+        CryptocoinPayable.configuration.testnet ? 'testnet.' : ''
+      end
+
+      def network
+        CryptocoinPayable.configuration.testnet ? :bitcoin_testnet : :bitcoin
       end
 
       def parse_total_tx_value(output_transactions, address)

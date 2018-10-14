@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bitcoincash.blockexplorer.com/api/txs/?address=1HfknBcT93RE12YC4SBfm4NNBkARsNc8Wa
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 12 Oct 2018 07:32:39 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=dda29ada292f7048f8a3ebdd480e7fd041539329558; expires=Sat, 12-Oct-19
+        07:32:38 GMT; path=/; domain=.blockexplorer.com; HttpOnly; Secure
+      X-Powered-By:
+      - Express
+      X-Ratelimit-Limit:
+      - '10800'
+      X-Ratelimit-Remaining:
+      - '10702'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, PUT, POST, OPTIONS
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Content-Length, Cache-Control,
+        cf-connecting-ip
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - W/"84c-f7pBa6wjN3QCqsDu9o519TbOLmo"
+      Vary:
+      - Accept-Encoding
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4687dfaf2b563186-SIN
+    body:
+      encoding: ASCII-8BIT
+      string: '{"pagesTotal":1,"txs":[{"txid":"10d9d3927a21d90c573a5fbbb347f409af37219ceb93f7475d6c4cca4231d29f","version":1,"locktime":0,"vin":[{"txid":"0214539ca7f81cd38a046c7083b592d88e10a74e139c1c66f87904d62db8c149","vout":0,"sequence":4294967295,"n":0,"scriptSig":{"hex":"483045022100e89cbd22d6ffbfeb30c68420d9c5bd39c2ddb9514fc545704778dc42c3ee003b0220696c92a97b3b1c32a4ab140e8f6c447c9b5cb8596eafdc3dac45d6c1f87dc38a412102bec87afd168c0701f5cac29cda799f45eb0d70f52ce902e337b958c9c986005b","asm":"3045022100e89cbd22d6ffbfeb30c68420d9c5bd39c2ddb9514fc545704778dc42c3ee003b0220696c92a97b3b1c32a4ab140e8f6c447c9b5cb8596eafdc3dac45d6c1f87dc38a[ALL|FORKID]
+        02bec87afd168c0701f5cac29cda799f45eb0d70f52ce902e337b958c9c986005b"},"addr":"bitcoincash:qpth77f5fzj3hmmtpw42tt00c9t3and9guumguzfj2","valueSat":4049279,"value":0.04049279,"doubleSpentTxID":null},{"txid":"bf91d7c20551e78665be98c7344ed87281af543d0bfa3997e6dfa2bf4524f4d2","vout":0,"sequence":4294967295,"n":1,"scriptSig":{"hex":"483045022100dcbb116b70e597e1344394e34bc11936f8bf6e7833cb00a6af425b846c31c72e022034f18e40c530a7f9e4af3498dfb83d72b99913ab5ffcdc31e657a6eef84e42ba41210287ad2b715b610834654606551bdf1045ec163cff2df03e3d49f3c6231aa9cf33","asm":"3045022100dcbb116b70e597e1344394e34bc11936f8bf6e7833cb00a6af425b846c31c72e022034f18e40c530a7f9e4af3498dfb83d72b99913ab5ffcdc31e657a6eef84e42ba[ALL|FORKID]
+        0287ad2b715b610834654606551bdf1045ec163cff2df03e3d49f3c6231aa9cf33"},"addr":"bitcoincash:qpe0ccjkmwyku7mk7kqtphlq7x3p6ykedyg8tlttqq","valueSat":79513,"value":0.00079513,"doubleSpentTxID":null}],"vout":[{"value":"0.04128450","n":0,"scriptPubKey":{"hex":"76a914b6d65d2d333d2f16f0d3cefbb775f404649801c688ac","asm":"OP_DUP
+        OP_HASH160 b6d65d2d333d2f16f0d3cefbb775f404649801c6 OP_EQUALVERIFY OP_CHECKSIG","addresses":["bitcoincash:qzmdvhfdxv7j79hs6080hdm47szxfxqpccemzq6n52"],"type":"pubkeyhash"},"spentTxId":null,"spentIndex":null,"spentHeight":null}],"blockhash":"0000000000000000015493ab50fde669130f9b64f0918031a5b6dcc44f14698f","blockheight":551829,"confirmations":2,"time":1539329301,"blocktime":1539329301,"valueOut":0.0412845,"size":340,"valueIn":0.04128792,"fees":0.00000342}]}'
+    http_version:
+  recorded_at: Fri, 12 Oct 2018 07:32:41 GMT
+recorded_with: VCR 4.0.0

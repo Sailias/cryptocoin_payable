@@ -4,12 +4,12 @@ module CryptocoinPayable
   end
 
   def self.configure
-    self.configuration ||= Configuration.new
+    @configuration ||= Configuration.new
     yield(configuration)
   end
 
   class Configuration
-    attr_accessor :open_exchange_key, :testnet, :btc, :eth, :expire_payments_after, :request_delay
+    attr_accessor :testnet, :expire_payments_after, :request_delay, :btc, :bch, :eth
     attr_writer :currency
 
     def currency
@@ -17,49 +17,48 @@ module CryptocoinPayable
     end
 
     def configure_btc
-      self.btc ||= BtcConfiguration.new
-      yield(btc)
+      @btc ||= BtcConfiguration.new
+      yield(@btc)
+    end
+
+    def configure_bch
+      @bch ||= BchConfiguration.new
+      yield(@bch)
     end
 
     def configure_eth
-      self.eth ||= EthConfiguration.new
-      yield(eth)
+      @eth ||= EthConfiguration.new
+      yield(@eth)
 
       Eth.configure do |config|
-        config.chain_id = CryptocoinPayable.configuration.eth.chain_id
+        config.chain_id = CryptocoinPayable.configuration.testnet ? 4 : 1
       end
     end
 
     class CoinConfiguration
-      attr_accessor :node_path, :confirmations, :adapter_api_key, :network
+      attr_accessor :master_public_key, :confirmations, :adapter_api_key
+      attr_writer :node_path
+
+      def node_path
+        @node_path ||= ''
+      end
     end
 
     class BtcConfiguration < CoinConfiguration
-      attr_accessor :master_public_key, :blockcypher_token
-
       def confirmations
         @confirmations ||= 3
       end
+    end
 
-      def network
-        CryptocoinPayable.configuration.testnet == false ? :bitcoin : :bitcoin_testnet
+    class BchConfiguration < CoinConfiguration
+      def confirmations
+        @confirmations ||= 3
       end
     end
 
     class EthConfiguration < CoinConfiguration
-      attr_accessor :master_public_key
-      attr_writer :chain_id
-
       def confirmations
         @confirmations ||= 12
-      end
-
-      def chain_id
-        @chain_id ||= (CryptocoinPayable.configuration.testnet ? 4 : 1)
-      end
-
-      def network
-        @network ||= (CryptocoinPayable.configuration.testnet ? :rinkeby : :mainnet)
       end
     end
   end

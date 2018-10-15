@@ -72,6 +72,10 @@ module CryptocoinPayable
         @coin_config ||= CryptocoinPayable.configuration.send(self.class.coin_symbol.downcase)
       end
 
+      def api_adapter_key
+        @api_adapter_key ||= coin_config && coin_config.api_adapter_key
+      end
+
       def parse_timestamp(timestamp)
         timestamp.nil? ? nil : DateTime.strptime(timestamp.to_s, '%s')
       end

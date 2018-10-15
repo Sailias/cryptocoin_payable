@@ -1,3 +1,5 @@
+require 'state_machine'
+
 module StateMachine
   module Integrations
     module ActiveModel

@@ -1,3 +1,5 @@
+require 'activerecord-import'
+
 module CryptocoinPayable
   class PaymentProcessor
     def self.perform
@@ -6,20 +8,21 @@ module CryptocoinPayable
 
     def self.update_transactions_for(payment)
       transactions = Adapters.for(payment.coin_type).fetch_transactions(payment.address)
+      transactions.each do |t|
+        t[:coin_conversion] = payment.coin_conversion
+        t[:coin_payment_id] = payment.id
+      end
 
-      transactions.each do |tx|
-        tx.symbolize_keys!
-
-        transaction = payment.transactions.find_by_transaction_hash(tx[:tx_hash])
-        if transaction
-          transaction.update(confirmations: tx[:confirmations])
-        else
-          payment.transactions.create_from_tx_data!(tx, payment.coin_conversion)
-          payment.update(
-            coin_amount_due: payment.calculate_coin_amount_due,
-            coin_conversion: CurrencyConversion.where(coin_type: payment.coin_type).last.price
-          )
-        end
+      payment.transaction do
+        CoinPaymentTransaction.import(
+          transactions,
+          on_duplicate_key_update: {
+            conflict_target: [:transaction_hash],
+            columns: [:coin_conversion]
+          }
+        )
+        payment.reload
+        payment.update_coin_amount_due
       end
     end
 

@@ -1,6 +1,8 @@
 require 'vcr'
 require 'webmock/rspec'
 
+# ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
+
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   config.hook_into :webmock

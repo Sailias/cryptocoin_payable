@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'vcr', '~> 4.0'
   spec.add_development_dependency 'webmock', '~> 3.4'
 
+  spec.add_dependency 'activerecord-import', '~> 0.27'
   spec.add_dependency 'cash-addr', '~> 0.2'
   spec.add_dependency 'eth', '0.4.8'
   spec.add_dependency 'money-tree', '0.10.0'

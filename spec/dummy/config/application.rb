@@ -3,6 +3,7 @@ require File.expand_path('boot', __dir__)
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
+
 require 'cryptocoin_payable'
 
 module Dummy

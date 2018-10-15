@@ -32,7 +32,8 @@ module CryptocoinPayable
 
       def parse_total_tx_value_block_explorer(output_transactions, address)
         output_transactions
-          .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }
+          .reject { |out| out['scriptPubKey']['addresses'].nil? }
+          .select { |out| out['scriptPubKey']['addresses'].include?(address) }
           .sum { |out| (out['value'].to_f * self.class.subunit_in_main).to_i }
       end
 

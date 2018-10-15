@@ -34,7 +34,8 @@ module CryptocoinPayable
         output_transactions
           .reject { |out| out['scriptPubKey']['addresses'].nil? }
           .select { |out| out['scriptPubKey']['addresses'].include?(address) }
-          .sum { |out| (out['value'].to_f * self.class.subunit_in_main).to_i }
+          .map { |out| (out['value'].to_f * self.class.subunit_in_main).to_i }
+          .inject(:+)
       end
 
       def fetch_block_explorer_transactions(address)

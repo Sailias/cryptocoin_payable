@@ -32,8 +32,10 @@ module CryptocoinPayable
 
       def parse_total_tx_value_block_explorer(output_transactions, address)
         output_transactions
-          .select { |out| out['scriptPubKey']['addresses'].try('include?', address) }
-          .sum { |out| (out['value'].to_f * self.class.subunit_in_main).to_i }
+          .reject { |out| out['scriptPubKey']['addresses'].nil? }
+          .select { |out| out['scriptPubKey']['addresses'].include?(address) }
+          .map { |out| (out['value'].to_f * self.class.subunit_in_main).to_i }
+          .inject(:+)
       end
 
       def fetch_block_explorer_transactions(address)
@@ -61,7 +63,8 @@ module CryptocoinPayable
 
       def parse_total_tx_value_block_cypher(output_transactions, address)
         output_transactions
-          .sum { |out| out['addresses'].join.eql?(address) ? out['value'] : 0 }
+          .map { |out| out['addresses'].join.eql?(address) ? out['value'] : 0 }
+          .inject(:+)
       end
 
       def fetch_block_cypher_transactions(address)

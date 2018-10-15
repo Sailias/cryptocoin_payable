@@ -13,7 +13,6 @@ module CryptocoinPayable
       end
 
       def fetch_transactions(address)
-        api_adapter_key = coin_config.try(:adapter_api_key)
         url = "https://#{subdomain}.etherscan.io/api?module=account&action=txlist&address=#{address}&tag=latest"
         url += '?apiKey=' + api_adapter_key if api_adapter_key
 

@@ -1,5 +1,6 @@
 require 'vcr'
 require 'webmock/rspec'
+require 'active_support/time'
 
 # ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
 

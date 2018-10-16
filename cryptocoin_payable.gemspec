@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'cucumber'
   spec.add_development_dependency 'cucumber-rails'
   spec.add_development_dependency 'database_cleaner', '~> 1.7'
-  spec.add_development_dependency 'pg'
+  spec.add_development_dependency 'pg', '~> 0.21.0'
   spec.add_development_dependency 'rails', '>= 4.0.0'
   spec.add_development_dependency 'rake', '~> 12.3'
   spec.add_development_dependency 'rspec-benchmark', '~> 0.4'

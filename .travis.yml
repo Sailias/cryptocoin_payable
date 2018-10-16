@@ -23,11 +23,6 @@ before_install:
 before_script:
   - psql -c 'create database cryptocoin_payable_test;' -U postgres
 
-matrix:
-  include:
-    - rvm: 2.5
-      gemfile: gemfiles/rails_master.gemfile
-
 notifications:
   email: false
 

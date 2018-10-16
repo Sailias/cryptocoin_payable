@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 12.3'
   spec.add_development_dependency 'rspec-benchmark', '~> 0.4'
   spec.add_development_dependency 'rspec-rails', '~> 3.7'
+  spec.add_development_dependency 'rspec-retry', '~> 0.6'
   spec.add_development_dependency 'rubocop', '~> 0.59'
   spec.add_development_dependency 'sqlite3', '~> 1.3'
   spec.add_development_dependency 'vcr', '~> 4.0'

@@ -2,4 +2,3 @@ spec/dummy/log/*
 *.gem
 /Gemfile.lock
 /spec/dummy/log/development.log
-/spec/dummy/db/test.sqlite3

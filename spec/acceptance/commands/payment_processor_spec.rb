@@ -19,6 +19,7 @@ describe CryptocoinPayable::PaymentProcessor do
   end
 
   def create_tables
+    ENV['RAILS_ENV'] = 'test'
     load 'spec/dummy/db/schema.rb'
   end
 

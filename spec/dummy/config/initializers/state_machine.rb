@@ -3,10 +3,9 @@ require 'state_machine'
 module StateMachine
   module Integrations
     module ActiveModel
-      alias around_validation_protected around_validation
-      def around_validation(*args, &block)
-        around_validation_protected(*args, &block)
-      end
+      # rubocop:disable Style/AccessModifierDeclarations
+      public :around_validation
+      # rubocop:enable Style/AccessModifierDeclarations
     end
   end
 end

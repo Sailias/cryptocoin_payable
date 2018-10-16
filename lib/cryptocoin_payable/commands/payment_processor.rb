@@ -45,6 +45,8 @@ module CryptocoinPayable
           update_via_many_insert(payment, transactions)
         end
       end
+
+      transactions
     end
 
     private
@@ -68,7 +70,7 @@ module CryptocoinPayable
 
     def update_via_many_insert(payment, transactions)
       transactions.each do |tx|
-        transaction = payment.transactions.find_by_transaction_hash(tx[:tx_hash])
+        transaction = payment.transactions.find_by_transaction_hash(tx[:transaction_hash])
         if transaction
           transaction.update(confirmations: tx[:confirmations])
         else

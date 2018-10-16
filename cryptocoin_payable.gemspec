@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.15'
   spec.add_development_dependency 'cucumber', '~> 3.1'
+  spec.add_development_dependency 'cucumber-rails', '~> 1.6'
   spec.add_development_dependency 'database_cleaner', '~> 1.7'
   spec.add_development_dependency 'pg'
   spec.add_development_dependency 'rails', '>= 4.0.0'

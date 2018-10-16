@@ -32,7 +32,8 @@ script:
   - bundle exec rubocop
 
 allow_failures:
-  - gemfile: gemfiles/rails-master.gemfile
+  - gemfile: gemfiles/rails_4_0.gemfile
+  - gemfile: gemfiles/rails_master.gemfile
 
 addons:
   postgresql: '9.5'

@@ -22,6 +22,7 @@ before_install:
 
 before_script:
   - psql -c 'create database cryptocoin_payable_test;' -U postgres
+  - bundle exec rake -f spec/dummy/Rakefile db:schema:load RAILS_ENV=test
 
 notifications:
   email: false

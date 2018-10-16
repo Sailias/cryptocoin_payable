@@ -38,10 +38,12 @@ module CryptocoinPayable
     def update_transactions_for(payment)
       transactions = Adapters.for(payment.coin_type).fetch_transactions(payment.address)
 
-      if ActiveRecord::Base.connection.supports_on_duplicate_key_update?
-        update_via_bulk_insert(payment, transactions)
-      else
-        update_via_many_insert(payment, transactions)
+      payment.transaction do
+        if ActiveRecord::Base.connection.supports_on_duplicate_key_update?
+          update_via_bulk_insert(payment, transactions)
+        else
+          update_via_many_insert(payment, transactions)
+        end
       end
     end
 
@@ -53,17 +55,15 @@ module CryptocoinPayable
         t[:coin_payment_id] = payment.id
       end
 
-      payment.transaction do
-        CoinPaymentTransaction.import(
-          transactions,
-          on_duplicate_key_update: {
-            conflict_target: [:transaction_hash],
-            columns: [:coin_conversion]
-          }
-        )
-        payment.reload
-        payment.update_coin_amount_due
-      end
+      CoinPaymentTransaction.import(
+        transactions,
+        on_duplicate_key_update: {
+          conflict_target: [:transaction_hash],
+          columns: [:coin_conversion]
+        }
+      )
+      payment.reload
+      payment.update_coin_amount_due
     end
 
     def update_via_many_insert(payment, transactions)

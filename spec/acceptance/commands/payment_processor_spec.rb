@@ -1,13 +1,13 @@
+require 'digest'
 require 'active_record'
-require 'database_cleaner'
 require 'cryptocoin_payable/orm/activerecord'
 
 describe CryptocoinPayable::PaymentProcessor do
   def build_fake_transactions_data
     transactions = []
-    300.times do
+    300.times do |i|
       transactions << {
-        transaction_hash: '5bdeaf7829148d7e0e1e7b5233512a2c5ae54ef7ccbc8e68b2f85b7e49c917a0',
+        transaction_hash: Digest::SHA2.new(256).hexdigest(i.to_s),
         block_hash: '0000000000000000048e8ea3fdd2c3a59ddcbcf7575f82cb96ce9fd17da9f2f4',
         block_time: DateTime.iso8601('2016-09-13T15:41:00.000000000+00:00'),
         estimated_time: DateTime.iso8601('2016-09-13T15:41:00.000000000+00:00'),
@@ -18,26 +18,31 @@ describe CryptocoinPayable::PaymentProcessor do
     transactions
   end
 
+  def migrate
+    ActiveRecord::Migrator.migrate('spec/dummy/db/migrate')
+  end
+
+  def rollback
+    steps = ActiveRecord::Migrator.get_all_versions.size
+    ActiveRecord::Migrator.rollback('spec/dummy/db/migrate', steps)
+  end
+
   context 'when testing performance of database interaction' do
     before(:all) do
-      ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'spec/dummy/db/test.sqlite3')
-      DatabaseCleaner.strategy = :truncation
+      ActiveRecord::Base.establish_connection(adapter: 'postgresql', database: 'cryptocoin_payable_test')
+      migrate
       GC.disable
     end
 
     after(:all) do
       GC.enable
+      rollback
     end
 
     before do
-      DatabaseCleaner.clean
       CryptocoinPayable::CurrencyConversion.create!(coin_type: :btc, currency: 1, price: 1)
       adapter = CryptocoinPayable::Adapters.bitcoin_adapter
       allow(adapter).to receive(:fetch_transactions) { build_fake_transactions_data }
-    end
-
-    after do
-      DatabaseCleaner.clean
     end
 
     it 'should insert 300 transactions in under 300ms', retry: 3 do

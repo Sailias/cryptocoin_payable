@@ -52,11 +52,11 @@ module CryptocoinPayable
 
       def convert_block_explorer_transactions(transaction, address)
         {
-          tx_hash: transaction['txid'],
+          transaction_hash: transaction['txid'],
           block_hash: transaction['blockhash'],
           block_time: parse_timestamp(transaction['blocktime']),
-          estimated_tx_time: parse_timestamp(transaction['time']),
-          estimated_tx_value: parse_total_tx_value_block_explorer(transaction['vout'], address),
+          estimated_time: parse_timestamp(transaction['time']),
+          estimated_value: parse_total_tx_value_block_explorer(transaction['vout'], address),
           confirmations: transaction['confirmations']
         }
       end
@@ -83,11 +83,11 @@ module CryptocoinPayable
 
       def convert_block_cypher_transactions(transaction, address)
         {
-          tx_hash: transaction['hash'],
+          transaction_hash: transaction['hash'],
           block_hash: transaction['block_hash'],
           block_time: parse_time(transaction['confirmed']),
-          estimated_tx_time: parse_time(transaction['received']),
-          estimated_tx_value: parse_total_tx_value_block_cypher(transaction['outputs'], address),
+          estimated_time: parse_time(transaction['received']),
+          estimated_value: parse_total_tx_value_block_cypher(transaction['outputs'], address),
           confirmations: transaction['confirmations'].to_i
         }
       end

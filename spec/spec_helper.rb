@@ -1,6 +1,10 @@
 require 'vcr'
 require 'webmock/rspec'
 require 'active_support/time'
+require 'rspec-benchmark'
+require 'rspec/retry'
+
+# ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
@@ -58,6 +62,8 @@ RSpec.configure do |config|
     CryptocoinPayable.configure do
     end
   end
+
+  config.include RSpec::Benchmark::Matchers
 
   # The settings below are suggested to provide a good initial experience
   # with RSpec, but feel free to customize to your heart's content.

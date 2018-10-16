@@ -1,3 +1,5 @@
+require 'activerecord-import'
+
 module CryptocoinPayable
   class PaymentProcessor
     def self.perform
@@ -5,22 +7,7 @@ module CryptocoinPayable
     end
 
     def self.update_transactions_for(payment)
-      transactions = Adapters.for(payment.coin_type).fetch_transactions(payment.address)
-
-      transactions.each do |tx|
-        tx.symbolize_keys!
-
-        transaction = payment.transactions.find_by_transaction_hash(tx[:tx_hash])
-        if transaction
-          transaction.update(confirmations: tx[:confirmations])
-        else
-          payment.transactions.create_from_tx_data!(tx, payment.coin_conversion)
-          payment.update(
-            coin_amount_due: payment.calculate_coin_amount_due,
-            coin_conversion: CurrencyConversion.where(coin_type: payment.coin_type).last.price
-          )
-        end
-      end
+      new.update_transactions_for(payment)
     end
 
     def perform
@@ -32,7 +19,7 @@ module CryptocoinPayable
         next if payment.confirmed?
 
         begin
-          self.class.update_transactions_for(payment)
+          update_transactions_for(payment)
         rescue StandardError => error
           STDERR.puts 'PaymentProcessor: Unknown error encountered, skipping transaction'
           STDERR.puts error
@@ -48,7 +35,51 @@ module CryptocoinPayable
       end
     end
 
-    protected
+    def update_transactions_for(payment)
+      transactions = Adapters.for(payment.coin_type).fetch_transactions(payment.address)
+
+      payment.transaction do
+        if ActiveRecord::Base.connection.supports_on_duplicate_key_update?
+          update_via_bulk_insert(payment, transactions)
+        else
+          update_via_many_insert(payment, transactions)
+        end
+      end
+
+      transactions
+    end
+
+    private
+
+    def update_via_bulk_insert(payment, transactions)
+      transactions.each do |t|
+        t[:coin_conversion] = payment.coin_conversion
+        t[:coin_payment_id] = payment.id
+      end
+
+      CoinPaymentTransaction.import(
+        transactions,
+        on_duplicate_key_update: {
+          conflict_target: [:transaction_hash],
+          columns: [:coin_conversion]
+        }
+      )
+      payment.reload
+      payment.update_coin_amount_due
+    end
+
+    def update_via_many_insert(payment, transactions)
+      transactions.each do |tx|
+        transaction = payment.transactions.find_by_transaction_hash(tx[:transaction_hash])
+        if transaction
+          transaction.update(confirmations: tx[:confirmations])
+        else
+          tx[:coin_conversion] = payment.coin_conversion
+          payment.transactions.create!(tx)
+          payment.update_coin_amount_due
+        end
+      end
+    end
 
     def update_payment_state(payment)
       if payment.currency_amount_paid >= payment.price

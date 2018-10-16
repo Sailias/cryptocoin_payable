@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_171_227_225_134) do
+ActiveRecord::Schema.define(version: 20_181_015_141_952) do
   create_table 'coin_payment_transactions', force: :cascade do |t|
     t.decimal 'estimated_value', precision: 24
     t.string 'transaction_hash'
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20_171_227_225_134) do
     t.decimal 'coin_conversion', precision: 24
     t.integer 'confirmations', default: 0
     t.index ['coin_payment_id'], name: 'index_coin_payment_transactions_on_coin_payment_id'
+    t.index ['transaction_hash'], name: 'index_coin_payment_transactions_on_transaction_hash', unique: true
   end
 
   create_table 'coin_payments', force: :cascade do |t|

@@ -8,11 +8,11 @@ describe CryptocoinPayable::Adapters::BitcoinCash, :vcr do
     expect(response).to eq(
       [
         {
-          tx_hash: '10d9d3927a21d90c573a5fbbb347f409af37219ceb93f7475d6c4cca4231d29f',
+          transaction_hash: '10d9d3927a21d90c573a5fbbb347f409af37219ceb93f7475d6c4cca4231d29f',
           block_hash: '0000000000000000015493ab50fde669130f9b64f0918031a5b6dcc44f14698f',
           block_time: DateTime.iso8601('2018-10-12T07:28:21.000000000+00:00'),
-          estimated_tx_time: DateTime.iso8601('2018-10-12T07:28:21.000000000+00:00'),
-          estimated_tx_value: 4_128_450,
+          estimated_time: DateTime.iso8601('2018-10-12T07:28:21.000000000+00:00'),
+          estimated_value: 4_128_450,
           confirmations: 2
         }
       ]

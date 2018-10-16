@@ -4,20 +4,7 @@ require 'state_machine'
 module CryptocoinPayable
   class CoinPayment < ActiveRecord::Base
     belongs_to :payable, polymorphic: true
-
-    has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction' do
-      def create_from_tx_data!(tx_data, coin_conversion)
-        create!(
-          estimated_value: tx_data[:estimated_tx_value],
-          transaction_hash: tx_data[:tx_hash],
-          block_hash: tx_data[:block_hash],
-          block_time: tx_data[:block_time],
-          estimated_time: tx_data[:estimated_tx_time],
-          coin_conversion: coin_conversion,
-          confirmations: tx_data[:confirmations]
-        )
-      end
-    end
+    has_many :transactions, class_name: 'CryptocoinPayable::CoinPaymentTransaction'
 
     validates :reason, presence: true
     validates :price, presence: true
@@ -93,8 +80,18 @@ module CryptocoinPayable
     end
 
     def calculate_coin_amount_due
-      rate = CurrencyConversion.where(coin_type: coin_type).last.price
-      adapter.convert_main_to_subunit(currency_amount_due / rate.to_f).ceil
+      adapter.convert_main_to_subunit(currency_amount_due / coin_conversion.to_f).ceil
+    end
+
+    def coin_conversion
+      @coin_conversion ||= CurrencyConversion.where(coin_type: coin_type).last.price
+    end
+
+    def update_coin_amount_due(rate: coin_conversion)
+      update!(
+        coin_amount_due: calculate_coin_amount_due,
+        coin_conversion: rate
+      )
     end
 
     def transactions_confirmed?
@@ -112,7 +109,7 @@ module CryptocoinPayable
     def populate_currency_and_amount_due
       self.currency ||= CryptocoinPayable.configuration.currency
       self.coin_amount_due = calculate_coin_amount_due
-      self.coin_conversion = CurrencyConversion.where(coin_type: coin_type).last.price
+      self.coin_conversion = coin_conversion
     end
 
     def populate_address

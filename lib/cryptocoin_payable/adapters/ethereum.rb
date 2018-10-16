@@ -63,11 +63,11 @@ module CryptocoinPayable
       # }
       def convert_transactions(transaction, _address)
         {
-          tx_hash: transaction['hash'],
+          transaction_hash: transaction['hash'],
           block_hash: transaction['block_hash'],
           block_time: nil, # Not supported
-          estimated_tx_time: parse_timestamp(transaction['timeStamp']),
-          estimated_tx_value: transaction['value'].to_i, # Units here are 'Wei'
+          estimated_time: parse_timestamp(transaction['timeStamp']),
+          estimated_value: transaction['value'].to_i, # Units here are 'Wei'
           confirmations: transaction['confirmations'].to_i
         }
       end

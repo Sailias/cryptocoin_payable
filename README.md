@@ -48,7 +48,7 @@ And then execute:
 
     $ bundle exec rake db:migrate
 
-    $ populate coin_payable.rb (see below)
+    $ populate cryptocoin_payable.rb (see below)
 
     $ bundle exec rake cryptocoin_payable:process_prices (see below)
 
@@ -65,7 +65,7 @@ And then execute:
 
 ### Configuration
 
-config/initializers/coin_payable.rb
+config/initializers/cryptocoin_payable.rb
 
     CryptocoinPayable.configure do |config|
       # config.currency = :usd

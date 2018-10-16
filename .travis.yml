@@ -22,3 +22,6 @@ script:
   - bundle exec cucumber features
   - bundle exec rspec
   - bundle exec rubocop
+
+allow_failures:
+  - gemfile: gemfiles/rails-master.gemfile

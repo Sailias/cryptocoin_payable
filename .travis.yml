@@ -6,6 +6,24 @@ rvm:
   - 2.4
   - 2.5
 
+gemfile:
+  - gemfiles/rails_4_0.gemfile
+  - gemfiles/rails_4_1.gemfile
+  - gemfiles/rails_4_2.gemfile
+  - gemfiles/rails_5_0.gemfile
+  - gemfiles/rails_5_1.gemfile
+  - gemfiles/rails_5_2.gemfile
+  - gemfiles/rails_master.gemfile
+
+sudo: false
+
+before_install:
+  - gem install bundler
+
+before_script:
+  - psql -c 'create database cryptocoin_payable_test;' -U postgres
+  - bundle exec rake -f spec/dummy/Rakefile db:schema:load RAILS_ENV=test
+
 notifications:
   email: false
 
@@ -13,3 +31,12 @@ script:
   - bundle exec cucumber features
   - bundle exec rspec
   - bundle exec rubocop
+
+matrix:
+  allow_failures:
+    - gemfile: gemfiles/rails_4_0.gemfile
+    - gemfile: gemfiles/rails_4_1.gemfile
+    - gemfile: gemfiles/rails_master.gemfile
+
+addons:
+  postgresql: '9.5'

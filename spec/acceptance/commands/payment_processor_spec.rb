@@ -35,6 +35,9 @@ describe CryptocoinPayable::PaymentProcessor do
   end
 
   context 'when testing performance of database interaction' do
+    # TODO: Remove this once this is fixed: https://github.com/zdennis/activerecord-import/issues/559
+    skip if Gem.loaded_specs['rails'].version < Gem::Version.create('4.2')
+
     before(:all) do
       ActiveRecord::Base.establish_connection(adapter: 'postgresql', database: 'cryptocoin_payable_test')
       create_tables

@@ -1,5 +1,4 @@
 require 'active_record'
-require 'cryptocoin_payable/state_machine'
 require 'cryptocoin_payable/coin_payment_transaction'
 require 'cryptocoin_payable/coin_payment'
 require 'cryptocoin_payable/currency_conversion'

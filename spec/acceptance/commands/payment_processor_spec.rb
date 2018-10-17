@@ -53,6 +53,9 @@ describe CryptocoinPayable::PaymentProcessor do
     end
 
     it 'should insert 300 transactions in under 400ms', retry: 3 do
+      # TODO: Remove this once this is fixed: https://github.com/zdennis/activerecord-import/issues/559
+      skip if Gem.loaded_specs['rails'].version < Gem::Version.create('4.2')
+
       payment = CryptocoinPayable::CoinPayment.create!(reason: 'test', price: 1, coin_type: :btc)
       payment.update(address: '3HR9xYD7MybbE7JLVTjwijYse48BtfEKni')
 

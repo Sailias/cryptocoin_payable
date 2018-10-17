@@ -39,7 +39,7 @@ module CryptocoinPayable
       transactions = Adapters.for(payment.coin_type).fetch_transactions(payment.address)
 
       payment.transaction do
-        if ActiveRecord::Base.connection.supports_on_duplicate_key_update?
+        if supports_bulk_insert?
           update_via_bulk_insert(payment, transactions)
         else
           update_via_many_insert(payment, transactions)
@@ -50,6 +50,13 @@ module CryptocoinPayable
     end
 
     private
+
+    def supports_bulk_insert?
+      # TODO: Remove this once this is fixed: https://github.com/zdennis/activerecord-import/issues/559
+      return false if Gem.loaded_specs['rails'].version < Gem::Version.create('4.2')
+
+      ActiveRecord::Base.connection.supports_on_duplicate_key_update?
+    end
 
     def update_via_bulk_insert(payment, transactions)
       transactions.each do |t|

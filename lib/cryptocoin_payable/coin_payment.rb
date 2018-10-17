@@ -1,5 +1,5 @@
 require 'money-tree'
-require 'state_machine'
+require 'state_machines-activerecord'
 
 module CryptocoinPayable
   class CoinPayment < ActiveRecord::Base
@@ -23,7 +23,7 @@ module CryptocoinPayable
       eth
     ]
 
-    state_machine :state do
+    state_machine :state, initial: :pending do
       state :pending
       state :partial_payment
       state :paid_in_full

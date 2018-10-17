@@ -38,6 +38,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'cash-addr', '~> 0.2'
   spec.add_dependency 'eth', '0.4.8'
   spec.add_dependency 'money-tree', '0.10.0'
-  spec.add_dependency 'state_machine', '~> 1.2'
+  spec.add_dependency 'state_machines-activerecord', '~> 0.5'
 end
 # rubocop:enable Metrics/BlockLength

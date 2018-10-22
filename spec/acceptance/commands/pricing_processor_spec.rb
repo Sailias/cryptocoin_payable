@@ -1,6 +1,3 @@
-require 'digest'
-require 'active_record'
-require 'cryptocoin_payable/orm/activerecord'
 require 'timecop'
 
 describe CryptocoinPayable::PricingProcessor, vcr: true do

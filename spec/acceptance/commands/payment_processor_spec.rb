@@ -18,33 +18,9 @@ describe CryptocoinPayable::PaymentProcessor do
     transactions
   end
 
-  def create_tables
-    ENV['RAILS_ENV'] = 'test'
-    load 'spec/dummy/db/schema.rb'
-  end
-
-  def drop_tables
-    %i[
-      coin_payment_transactions
-      coin_payments
-      currency_conversions
-      widgets
-    ].each do |table_name|
-      ActiveRecord::Base.connection.drop_table(table_name)
-    end
-  end
-
   context 'when testing performance of database interaction' do
-    before(:all) do
-      ActiveRecord::Base.establish_connection(adapter: 'postgresql', database: 'cryptocoin_payable_test')
-      create_tables
-      GC.disable
-    end
-
-    after(:all) do
-      GC.enable
-      drop_tables
-    end
+    before(:all) { GC.disable }
+    after(:all) { GC.enable }
 
     before do
       CryptocoinPayable::CurrencyConversion.create!(coin_type: :btc, currency: 1, price: 1)

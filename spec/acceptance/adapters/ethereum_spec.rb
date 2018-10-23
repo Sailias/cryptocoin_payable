@@ -55,26 +55,11 @@ describe CryptocoinPayable::Adapters::Ethereum, :vcr do
     expect { subject.fetch_transactions('foo') }.to raise_error CryptocoinPayable::ApiError
   end
 
-  context 'when configured with a master public key' do
-    before do
-      CryptocoinPayable.configure do |config|
-        config.configure_eth do |eth_config|
-          # Created using BIP39 mnemonic 'cute season foam off pistol interest
-          # soup wasp slice oxygen nominee anxiety step raven teach'
-          # See https://iancoleman.io/bip39
-          # rubocop:disable Metrics/LineLength
-          eth_config.master_public_key = 'xpub69AhsZVugHWJ2iwbrYYhJ79W1KsbzUqGuUHRuMguZGa8ZSP6qFNCpy8pvkCUDdc2hNfVFeJL2vxxdgaDxeBGXuWL5hUVfuE9tjDDbX4eRUh'
-          # rubocop:enable Metrics/LineLength
-        end
-      end
-    end
-
-    it 'creates BIP32 addresses' do
-      3.times do
-        expect(subject.create_address(0)).to eq('0xcDe321aCfa5B779dCD174850C3FB6E5Ff15cDEAf')
-        expect(subject.create_address(1)).to eq('0x0CA6E0C53EEb559c0D8803076D4F02b72f0FAE9C')
-        expect(subject.create_address(2)).to eq('0xD87D2476c93411242778fe0ef6e758De19ed19E8')
-      end
+  it 'creates BIP32 addresses' do
+    3.times do
+      expect(subject.create_address(0)).to eq('0xcDe321aCfa5B779dCD174850C3FB6E5Ff15cDEAf')
+      expect(subject.create_address(1)).to eq('0x0CA6E0C53EEb559c0D8803076D4F02b72f0FAE9C')
+      expect(subject.create_address(2)).to eq('0xD87D2476c93411242778fe0ef6e758De19ed19E8')
     end
   end
 end

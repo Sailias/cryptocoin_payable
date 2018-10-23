@@ -72,8 +72,8 @@ module CryptocoinPayable
         @coin_config ||= CryptocoinPayable.configuration.send(self.class.coin_symbol.downcase)
       end
 
-      def api_adapter_key
-        @api_adapter_key ||= coin_config && coin_config.api_adapter_key
+      def adapter_api_key
+        @adapter_api_key ||= coin_config && coin_config.adapter_api_key
       end
 
       def parse_timestamp(timestamp)

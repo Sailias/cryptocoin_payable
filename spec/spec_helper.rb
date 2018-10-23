@@ -75,7 +75,34 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   config.before(:suite) do
-    CryptocoinPayable.configure do
+    CryptocoinPayable.configure do |c|
+      c.configure_btc do |btc_config|
+        # Created using BIP39 mnemonic 'dose rug must junk rug spell bracket
+        # inside tissue artist patrol evil turtle brass ivory'
+        # See https://iancoleman.io/bip39
+        # rubocop:disable Metrics/LineLength
+        btc_config.master_public_key = 'xpub688gtTMXY1ykq6RKrrSyVzGad7HTsTNVfT5UzyWL72fs73skbBFEuBfiYH5BhST5xzfUx7SFw5BF7jbJRDnxSjUtdfTS4Be9veEBdqZW1qg'
+        # rubocop:enable Metrics/LineLength
+      end
+
+      c.configure_eth do |eth_config|
+        # Created using BIP39 mnemonic 'cute season foam off pistol interest
+        # soup wasp slice oxygen nominee anxiety step raven teach'
+        # See https://iancoleman.io/bip39
+        # rubocop:disable Metrics/LineLength
+        eth_config.master_public_key = 'xpub69AhsZVugHWJ2iwbrYYhJ79W1KsbzUqGuUHRuMguZGa8ZSP6qFNCpy8pvkCUDdc2hNfVFeJL2vxxdgaDxeBGXuWL5hUVfuE9tjDDbX4eRUh'
+        # rubocop:enable Metrics/LineLength
+      end
+
+      c.configure_bch do |bch_config|
+        # Created using BIP39 mnemonic 'over dentist endorse dial muscle
+        # decline front canvas initial business fashion priority clay tribe
+        # praise'
+        # See https://iancoleman.io/bip39
+        # rubocop:disable Metrics/LineLength
+        bch_config.master_public_key = 'xpub69m5Zouf7QU8wRjLfQX2F5VtgyTNJ45Xy6xg6SbrynM5D31U7uowkwe55y569b5Aonz9LJySajB1qkdkhFCdLVQE6U51VB6aGMeejKafAET'
+        # rubocop:enable Metrics/LineLength
+      end
     end
 
     ActiveRecord::Base.establish_connection(adapter: 'postgresql', database: 'cryptocoin_payable_test')

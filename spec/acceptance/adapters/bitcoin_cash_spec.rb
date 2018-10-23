@@ -28,27 +28,11 @@ describe CryptocoinPayable::Adapters::BitcoinCash, :vcr do
     expect { subject.fetch_transactions('foo') }.to raise_error CryptocoinPayable::ApiError
   end
 
-  context 'when configured with a master public key' do
-    before do
-      CryptocoinPayable.configure do |config|
-        config.configure_bch do |bch_config|
-          # Created using BIP39 mnemonic 'over dentist endorse dial muscle
-          # decline front canvas initial business fashion priority clay tribe
-          # praise'
-          # See https://iancoleman.io/bip39
-          # rubocop:disable Metrics/LineLength
-          bch_config.master_public_key = 'xpub69m5Zouf7QU8wRjLfQX2F5VtgyTNJ45Xy6xg6SbrynM5D31U7uowkwe55y569b5Aonz9LJySajB1qkdkhFCdLVQE6U51VB6aGMeejKafAET'
-          # rubocop:enable Metrics/LineLength
-        end
-      end
-    end
-
-    it 'creates BIP32 addresses' do
-      3.times do
-        expect(subject.create_address(0)).to eq('bitcoincash:qpfspf58t6vcsvq7xeumpuudqhvj38s5sus4uutspg')
-        expect(subject.create_address(1)).to eq('bitcoincash:qz94rwzlgccnkvaaea5klmtmad32l8gndgrcfwaryc')
-        expect(subject.create_address(2)).to eq('bitcoincash:qrgpwhl6x5qvf8ratcdl992r5afuv6286ujfa82xrh')
-      end
+  it 'creates BIP32 addresses' do
+    3.times do
+      expect(subject.create_address(0)).to eq('bitcoincash:qpfspf58t6vcsvq7xeumpuudqhvj38s5sus4uutspg')
+      expect(subject.create_address(1)).to eq('bitcoincash:qz94rwzlgccnkvaaea5klmtmad32l8gndgrcfwaryc')
+      expect(subject.create_address(2)).to eq('bitcoincash:qrgpwhl6x5qvf8ratcdl992r5afuv6286ujfa82xrh')
     end
   end
 end

@@ -54,26 +54,11 @@ describe CryptocoinPayable::Adapters::Bitcoin, :vcr do
     end
   end
 
-  context 'when configured with a master public key' do
-    before do
-      CryptocoinPayable.configure do |config|
-        config.configure_btc do |btc_config|
-          # Created using BIP39 mnemonic 'dose rug must junk rug spell bracket
-          # inside tissue artist patrol evil turtle brass ivory'
-          # See https://iancoleman.io/bip39
-          # rubocop:disable Metrics/LineLength
-          btc_config.master_public_key = 'xpub688gtTMXY1ykq6RKrrSyVzGad7HTsTNVfT5UzyWL72fs73skbBFEuBfiYH5BhST5xzfUx7SFw5BF7jbJRDnxSjUtdfTS4Be9veEBdqZW1qg'
-          # rubocop:enable Metrics/LineLength
-        end
-      end
-    end
-
-    it 'creates BIP32 addresses' do
-      3.times do
-        expect(subject.create_address(0)).to eq('1D5qJDG6No5xcHovLmyNU1b3vq7xkEzTRH')
-        expect(subject.create_address(1)).to eq('17A91ZXzkJQkSrbNWcY8ywDC7D9aW9roKo')
-        expect(subject.create_address(2)).to eq('16Ak3B8ahHWbrZvukMUe8PUDLR5HScM6LK')
-      end
+  it 'creates BIP32 addresses' do
+    3.times do
+      expect(subject.create_address(0)).to eq('1D5qJDG6No5xcHovLmyNU1b3vq7xkEzTRH')
+      expect(subject.create_address(1)).to eq('17A91ZXzkJQkSrbNWcY8ywDC7D9aW9roKo')
+      expect(subject.create_address(2)).to eq('16Ak3B8ahHWbrZvukMUe8PUDLR5HScM6LK')
     end
   end
 end

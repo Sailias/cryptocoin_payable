@@ -14,7 +14,7 @@ module CryptocoinPayable
 
       def fetch_transactions(address)
         url = "https://#{subdomain}.etherscan.io/api?module=account&action=txlist&address=#{address}&tag=latest"
-        url += '?apiKey=' + api_adapter_key if api_adapter_key
+        url += '?apiKey=' + adapter_api_key if adapter_api_key
 
         response = get_request(url)
         json = JSON.parse(response.body)

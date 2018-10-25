@@ -30,6 +30,12 @@ describe CryptocoinPayable::Adapters::Bitcoin, :vcr do
     expect_transaction_result(response)
   end
 
+  it 'returns zero estimated value for zero-value transactions' do
+    response = subject.fetch_transactions('1PKKkNRPPfPjrPiufHzuLFX2gMAVJbcN8H')
+    expect(response.first[:estimated_value]).not_to be_nil
+    expect(response.first[:estimated_value]).to be_zero
+  end
+
   it 'gets an empty result when no transactions found' do
     response = subject.fetch_transactions('1twtr17A65VAPhJDJRxhoMSpLBTR5Xy44')
     expect(response).to eq([])

@@ -1,0 +1,74 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://blockexplorer.com/api/txs/?address=1PKKkNRPPfPjrPiufHzuLFX2gMAVJbcN8H
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 25 Oct 2018 05:42:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d723480bb1497f5e9445df42588704d991540446119; expires=Fri, 25-Oct-19
+        05:41:59 GMT; path=/; domain=.blockexplorer.com; HttpOnly; Secure
+      X-Powered-By:
+      - Express
+      X-Ratelimit-Limit:
+      - '10800'
+      X-Ratelimit-Remaining:
+      - '10799'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, PUT, POST, OPTIONS
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Content-Length, Cache-Control,
+        cf-connecting-ip
+      Cache-Control:
+      - public, max-age=30
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      Etag:
+      - W/"1068-qj/jkrI8Gp8RPKM+4Iwz6Q"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - REVALIDATED
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 46f25b76ad0d83ad-BKK
+    body:
+      encoding: ASCII-8BIT
+      string: '{"pagesTotal":1,"txs":[{"txid":"1c085fb7180d35736dae4d1526f18c71fb551173c7471a70251bff88d38d559d","version":1,"locktime":0,"vin":[{"txid":"5dd89fb2f9a2adfe6f4918db6a203b7c8c91c25c7cb0cd9bfb8a250e3c25abdd","vout":0,"scriptSig":{"asm":"3045022100b029679930b80ce4c067b9c903571c6a935983d7beecaeb902ad1fffa9dba21502204e542e193b74acf68ab17cb13f821d339244aea9cb339bede4b195b3c3b35c6c[ALL]
+        028005d0d0b1c96d549f0eb5e18fb9f7b35ed5a28fb2f3c55842ab9dc9a9218976","hex":"483045022100b029679930b80ce4c067b9c903571c6a935983d7beecaeb902ad1fffa9dba21502204e542e193b74acf68ab17cb13f821d339244aea9cb339bede4b195b3c3b35c6c0121028005d0d0b1c96d549f0eb5e18fb9f7b35ed5a28fb2f3c55842ab9dc9a9218976"},"sequence":4294967295,"n":0,"addr":"1PKKkNRPPfPjrPiufHzuLFX2gMAVJbcN8H","valueSat":55965,"value":0.00055965,"doubleSpentTxID":null},{"txid":"5dd89fb2f9a2adfe6f4918db6a203b7c8c91c25c7cb0cd9bfb8a250e3c25abdd","vout":1,"scriptSig":{"asm":"3044022048fad34851bc49c267386186df590ac12390172669f5612b2c28dc09d517223c02203fe2ecf934c10cfaa3d27d1e739ec3413fd16612ba16eaa15ba7a2cfbf0b3a79[ALL]
+        034994bba249dc54ed3651595dab6c5c6e3c177032495e00a3fe53874adf565a34","hex":"473044022048fad34851bc49c267386186df590ac12390172669f5612b2c28dc09d517223c02203fe2ecf934c10cfaa3d27d1e739ec3413fd16612ba16eaa15ba7a2cfbf0b3a790121034994bba249dc54ed3651595dab6c5c6e3c177032495e00a3fe53874adf565a34"},"sequence":4294967295,"n":1,"addr":"15Gmaq5M8cMD4mAy1Gh6dVtnoDX3XAazwf","valueSat":503191,"value":0.00503191,"doubleSpentTxID":null}],"vout":[{"value":"0.00062184","n":0,"scriptPubKey":{"hex":"a91484fd6a85eb6cb335e0b8641717f3cf7f392f897587","asm":"OP_HASH160
+        84fd6a85eb6cb335e0b8641717f3cf7f392f8975 OP_EQUAL","addresses":["3DpChXQfjya6zQdUcgpA5tQFfqv9KgRXMP"],"type":"scripthash"},"spentTxId":"0a4c5507fe17f62d698f4ad30843909320770fd5b7159a925a0df289ed77c38e","spentIndex":1,"spentHeight":547179},{"value":"0.00495855","n":1,"scriptPubKey":{"hex":"76a9142edbf57347f7f56a2975c4c5c147680a781e32a988ac","asm":"OP_DUP
+        OP_HASH160 2edbf57347f7f56a2975c4c5c147680a781e32a9 OP_EQUALVERIFY OP_CHECKSIG","addresses":["15Gmaq5M8cMD4mAy1Gh6dVtnoDX3XAazwf"],"type":"pubkeyhash"},"spentTxId":null,"spentIndex":null,"spentHeight":null}],"blockhash":"00000000000000000008d05a3b4530691dcfe048fa046bc1c95cbf7ae6c60ff0","blockheight":547177,"confirmations":45,"time":1540413667,"blocktime":1540413667,"valueOut":0.00558039,"size":371,"valueIn":0.00559156,"fees":0.00001117},{"txid":"5dd89fb2f9a2adfe6f4918db6a203b7c8c91c25c7cb0cd9bfb8a250e3c25abdd","version":1,"locktime":0,"vin":[{"txid":"040d0d19654c2fa3e5dbea6654849339261c0bc5f4540173bf87ad0c9d1b2726","vout":1,"scriptSig":{"asm":"3045022100d74af226278b3eaa850f12ccbbdc005796da6172b4b4664d1769586a361982a60220227b54175f2989cbceb4795997381c4b7a3f99d579431bf74294fcde8317ac8c[ALL]
+        034994bba249dc54ed3651595dab6c5c6e3c177032495e00a3fe53874adf565a34","hex":"483045022100d74af226278b3eaa850f12ccbbdc005796da6172b4b4664d1769586a361982a60220227b54175f2989cbceb4795997381c4b7a3f99d579431bf74294fcde8317ac8c0121034994bba249dc54ed3651595dab6c5c6e3c177032495e00a3fe53874adf565a34"},"sequence":4294967295,"n":0,"addr":"15Gmaq5M8cMD4mAy1Gh6dVtnoDX3XAazwf","valueSat":559835,"value":0.00559835,"doubleSpentTxID":null}],"vout":[{"value":"0.00055965","n":0,"scriptPubKey":{"hex":"76a914f4c9e785dbe753f59b98c082d793b2e1312c558788ac","asm":"OP_DUP
+        OP_HASH160 f4c9e785dbe753f59b98c082d793b2e1312c5587 OP_EQUALVERIFY OP_CHECKSIG","addresses":["1PKKkNRPPfPjrPiufHzuLFX2gMAVJbcN8H"],"type":"pubkeyhash"},"spentTxId":"1c085fb7180d35736dae4d1526f18c71fb551173c7471a70251bff88d38d559d","spentIndex":0,"spentHeight":547177},{"value":"0.00503191","n":1,"scriptPubKey":{"hex":"76a9142edbf57347f7f56a2975c4c5c147680a781e32a988ac","asm":"OP_DUP
+        OP_HASH160 2edbf57347f7f56a2975c4c5c147680a781e32a9 OP_EQUALVERIFY OP_CHECKSIG","addresses":["15Gmaq5M8cMD4mAy1Gh6dVtnoDX3XAazwf"],"type":"pubkeyhash"},"spentTxId":"1c085fb7180d35736dae4d1526f18c71fb551173c7471a70251bff88d38d559d","spentIndex":1,"spentHeight":547177}],"blockhash":"0000000000000000001e7b7b2bf28d3e3813e0a37354f95288fe05fa18a0bc8a","blockheight":547126,"confirmations":96,"time":1540380059,"blocktime":1540380059,"valueOut":0.00559156,"size":226,"valueIn":0.00559835,"fees":0.00000679}]}'
+    http_version: 
+  recorded_at: Thu, 25 Oct 2018 05:42:23 GMT
+recorded_with: VCR 4.0.0

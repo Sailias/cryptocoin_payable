@@ -4,6 +4,7 @@ module CryptocoinPayable
 
     # TODO: Duplicated in `CoinPayment`.
     enum coin_type: %i[
+      bch
       btc
       eth
     ]

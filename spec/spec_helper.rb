@@ -107,6 +107,14 @@ RSpec.configure do |config|
 
     ActiveRecord::Base.establish_connection(adapter: 'postgresql', database: 'cryptocoin_payable_test')
     create_tables
+
+    CryptocoinPayable::CurrencyConversion.coin_types.keys.each do |coin_type|
+      CryptocoinPayable::CurrencyConversion.create!(
+        coin_type: coin_type,
+        currency: 1,
+        price: 1
+      )
+    end
   end
 
   config.after(:suite) do

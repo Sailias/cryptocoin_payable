@@ -19,6 +19,7 @@ module CryptocoinPayable
 
     # TODO: Duplicated in `CurrencyConversion`.
     enum coin_type: %i[
+      bch
       btc
       eth
     ]

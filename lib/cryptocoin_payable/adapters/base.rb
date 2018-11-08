@@ -77,11 +77,11 @@ module CryptocoinPayable
       end
 
       def parse_timestamp(timestamp)
-        timestamp.nil? ? nil : DateTime.strptime(timestamp.to_s, '%s')
+        timestamp.nil? ? nil : Time.strptime(timestamp.to_s, '%s')
       end
 
       def parse_time(time)
-        time.nil? ? nil : DateTime.iso8601(time)
+        time.nil? ? nil : Time.iso8601(time)
       end
 
       private

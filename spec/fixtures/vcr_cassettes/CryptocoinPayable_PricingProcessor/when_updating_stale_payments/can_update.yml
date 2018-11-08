@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.coinbase.com/v2/prices/BTC-USD/spot
+    uri: https://api.coinbase.com/v2/prices/BCH-USD/spot
     body:
       encoding: US-ASCII
       string: ''
@@ -19,16 +19,16 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 22 Oct 2018 12:03:43 GMT
+      - Thu, 08 Nov 2018 17:53:56 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '81'
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=d3e71f70698fb0777476e87de15b925f71540209823; expires=Tue, 22-Oct-19
-        12:03:43 GMT; path=/; domain=.coinbase.com; HttpOnly
+      - __cfduid=d5f901b0febd4880997885e4cdc0882561541699635; expires=Fri, 08-Nov-19
+        17:53:55 GMT; path=/; domain=.coinbase.com; HttpOnly
       Cache-Control:
       - public, max-age=30
       Content-Disposition:
@@ -65,7 +65,7 @@ http_interactions:
         https://www.coinbase.com https://assets.coinbase.com/ static.coinbase.com;
         report-uri /csp-report'
       Etag:
-      - W/"50113d3b29ac6ba037f591afa45666d5"
+      - W/"b660661171f1c14502e61d57793828bd"
       Expect-Ct:
       - enforce; max-age=86400; report-uri="https://coinbase.report-uri.io/r/default/ct/reportOnly"
       Referrer-Policy:
@@ -85,22 +85,123 @@ http_interactions:
       X-Powered-By:
       - Proof-of-Work
       X-Request-Id:
-      - c4a1f140-cfaf-4fd5-b690-c8cbd93cdf98
+      - 875e27b8-fda6-465f-b629-d783863ee485
       X-Xss-Protection:
       - 1; mode=block
       Cf-Cache-Status:
       - HIT
       Expires:
-      - Mon, 22 Oct 2018 12:04:13 GMT
+      - Thu, 08 Nov 2018 17:54:26 GMT
       Server:
       - cloudflare
       Cf-Ray:
-      - 46dbd2859e5549a9-BKK
+      - 4769e6e35bd0a491-PNH
     body:
       encoding: ASCII-8BIT
-      string: '{"data":{"base":"BTC","currency":"USD","amount":"6399.36"}}'
+      string: '{"data":{"base":"BCH","currency":"USD","amount":"587.97"}}'
     http_version: 
-  recorded_at: Thu, 25 Oct 2018 12:03:55 GMT
+  recorded_at: Sun, 11 Nov 2018 17:54:00 GMT
+- request:
+    method: get
+    uri: https://api.coinbase.com/v2/prices/BTC-USD/spot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Nov 2018 17:53:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '82'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d04b2b46c8cd0d0c16375884efe5462451541699636; expires=Fri, 08-Nov-19
+        17:53:56 GMT; path=/; domain=.coinbase.com; HttpOnly
+      Cache-Control:
+      - public, max-age=30
+      Content-Disposition:
+      - attachment; filename=response.json
+      Content-Security-Policy:
+      - 'default-src ''self'' https://www.coinbase.com; child-src ''self'' https://www.coinbase.com
+        https://*.online-metrix.net https://*.wpstn.com https://netverify.com https://platform.twitter.com
+        https://www.google.com/recaptcha/ https://cdn.plaid.com/link/ https://*.doubleclick.net/
+        blob: https://coinbase.ada.support; connect-src ''self'' https://www.coinbase.com
+        https://api.coinbase.com https://api.mixpanel.com https://*.online-metrix.net
+        https://api.cloudinary.com https://ott9.wpstn.com/live https://api.amplitude.com/
+        static.coinbase.com wss://ws.coinbase.com wss://ws.coinbase.com:443 https://www.coinbase.com/api
+        https://coinbase.ada.support/api/; font-src ''self'' https://www.coinbase.com
+        https://assets.coinbase.com/ static.coinbase.com; img-src ''self'' data: https://www.coinbase.com
+        https://images.coinbase.com https://exceptions.coinbase.com https://coinbase-uploads.s3.amazonaws.com
+        https://s3.amazonaws.com/app-public/ https://maps.gstatic.com https://ssl.google-analytics.com
+        https://www.google.com https://maps.googleapis.com https://csi.gstatic.com
+        https://www.google-analytics.com https://res.cloudinary.com https://secure.gravatar.com
+        https://i2.wp.com https://*.online-metrix.net https://assets.coinbase.com/
+        https://hexagon-analytics.com https://api.mixpanel.com https://cb-brand.s3.amazonaws.com
+        https://googleads.g.doubleclick.net https://stats.g.doubleclick.net/r/collect
+        blob: static.coinbase.com https://d124s1zbdqkqqe.cloudfront.net https://www.facebook.com/tr;
+        media-src ''self'' https://www.coinbase.com blob:; object-src ''self'' data:
+        blob: https://www.coinbase.com https://cdn.siftscience.com https://*.online-metrix.net
+        https://www.gstatic.com https://www.google.com/recaptcha/api/; script-src
+        ''self'' ''unsafe-inline'' ''unsafe-eval'' https://www.coinbase.com https://cdn.siftscience.com
+        https://*.newrelic.com https://bam.nr-data.net https://*.google-analytics.com
+        https://www.google.com https://www.gstatic.com https://*.online-metrix.net
+        https://code.jquery.com https://chart.googleapis.com https://maps.googleapis.com
+        https://maps.gstatic.com https://netverify.com https://ajax.cloudflare.com
+        https://cdn.plaid.com/link/v2/stable/ https://www.googletagmanager.com/gtag/js
+        https://www.googletagmanager.com/gtm.js https://www.googleadservices.com https://googleads.g.doubleclick.net
+        https://assets.coinbase.com/ static.coinbase.com; style-src ''self'' ''unsafe-inline''
+        https://www.coinbase.com https://assets.coinbase.com/ static.coinbase.com;
+        report-uri /csp-report'
+      Etag:
+      - W/"4f5f2ad82a3963f92662806d45ab3edf"
+      Expect-Ct:
+      - enforce; max-age=86400; report-uri="https://coinbase.report-uri.io/r/default/ct/reportOnly"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Origin,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Powered-By:
+      - Proof-of-Work
+      X-Request-Id:
+      - d16c1c0c-26ea-4fc7-a1ef-b02abfa8bf80
+      X-Xss-Protection:
+      - 1; mode=block
+      Cf-Cache-Status:
+      - HIT
+      Expires:
+      - Thu, 08 Nov 2018 17:54:27 GMT
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4769e6ea49b4a485-PNH
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"base":"BTC","currency":"USD","amount":"6424.00"}}'
+    http_version: 
+  recorded_at: Sun, 11 Nov 2018 17:54:00 GMT
 - request:
     method: get
     uri: https://api.coinbase.com/v2/prices/ETH-USD/spot
@@ -120,7 +221,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 22 Oct 2018 12:03:45 GMT
+      - Thu, 08 Nov 2018 17:53:59 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -128,8 +229,8 @@ http_interactions:
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=d3e71f70698fb0777476e87de15b925f71540209823; expires=Tue, 22-Oct-19
-        12:03:43 GMT; path=/; domain=.coinbase.com; HttpOnly
+      - __cfduid=d233c228c665e49647bb663088827d07f1541699638; expires=Fri, 08-Nov-19
+        17:53:58 GMT; path=/; domain=.coinbase.com; HttpOnly
       Cache-Control:
       - public, max-age=30
       Content-Disposition:
@@ -166,7 +267,7 @@ http_interactions:
         https://www.coinbase.com https://assets.coinbase.com/ static.coinbase.com;
         report-uri /csp-report'
       Etag:
-      - W/"efc1bc8e6732bdf6cba86c542ae05a3f"
+      - W/"3f88f9ab53d68d44e3364543ddfdb274"
       Expect-Ct:
       - enforce; max-age=86400; report-uri="https://coinbase.report-uri.io/r/default/ct/reportOnly"
       Referrer-Policy:
@@ -186,20 +287,20 @@ http_interactions:
       X-Powered-By:
       - Proof-of-Work
       X-Request-Id:
-      - 12c5f4dc-a501-4d49-80f7-3bb02d826bfa
+      - bc27a504-585e-4550-98f5-a71b699a954b
       X-Xss-Protection:
       - 1; mode=block
       Cf-Cache-Status:
       - HIT
       Expires:
-      - Mon, 22 Oct 2018 12:04:15 GMT
+      - Thu, 08 Nov 2018 17:54:29 GMT
       Server:
       - cloudflare
       Cf-Ray:
-      - 46dbd286cf8849a9-BKK
+      - 4769e6f1aa45a4af-PNH
     body:
       encoding: ASCII-8BIT
-      string: '{"data":{"base":"ETH","currency":"USD","amount":"201.96"}}'
+      string: '{"data":{"base":"ETH","currency":"USD","amount":"211.81"}}'
     http_version: 
-  recorded_at: Thu, 25 Oct 2018 12:03:55 GMT
+  recorded_at: Sun, 11 Nov 2018 17:54:00 GMT
 recorded_with: VCR 4.0.0

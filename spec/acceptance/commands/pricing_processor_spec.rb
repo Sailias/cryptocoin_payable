@@ -6,12 +6,6 @@ describe CryptocoinPayable::PricingProcessor, vcr: true do
       # Ensure we have a stale payment.
       Timecop.freeze(3.days.from_now)
 
-      CryptocoinPayable::CurrencyConversion.create!(
-        coin_type: :btc,
-        currency: 1,
-        price: 1
-      )
-
       CryptocoinPayable::CoinPayment.create!(
         state: :pending,
         coin_type: :btc,

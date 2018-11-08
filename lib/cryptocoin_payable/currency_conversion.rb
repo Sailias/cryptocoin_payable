@@ -6,6 +6,7 @@ module CryptocoinPayable
     enum coin_type: %i[
       btc
       eth
+      bch
     ]
   end
 end

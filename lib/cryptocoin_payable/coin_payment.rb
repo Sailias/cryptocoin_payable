@@ -21,6 +21,7 @@ module CryptocoinPayable
     enum coin_type: %i[
       btc
       eth
+      bch
     ]
 
     state_machine :state, initial: :pending do

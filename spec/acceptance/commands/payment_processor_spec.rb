@@ -9,8 +9,8 @@ describe CryptocoinPayable::PaymentProcessor do
       transactions << {
         transaction_hash: Digest::SHA2.new(256).hexdigest(i.to_s),
         block_hash: '0000000000000000048e8ea3fdd2c3a59ddcbcf7575f82cb96ce9fd17da9f2f4',
-        block_time: DateTime.iso8601('2016-09-13T15:41:00.000000000+00:00'),
-        estimated_time: DateTime.iso8601('2016-09-13T15:41:00.000000000+00:00'),
+        block_time: Time.iso8601('2016-09-13T15:41:00.000000000+00:00'),
+        estimated_time: Time.iso8601('2016-09-13T15:41:00.000000000+00:00'),
         estimated_value: 499_000_000,
         confirmations: 116_077
       }
@@ -23,7 +23,6 @@ describe CryptocoinPayable::PaymentProcessor do
     after(:all) { GC.enable }
 
     before do
-      CryptocoinPayable::CurrencyConversion.create!(coin_type: :btc, currency: 1, price: 1)
       adapter = CryptocoinPayable::Adapters.bitcoin_adapter
       allow(adapter).to receive(:fetch_transactions) { build_fake_transactions_data }
     end

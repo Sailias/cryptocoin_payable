@@ -23,7 +23,6 @@ describe CryptocoinPayable::PaymentProcessor do
     after(:all) { GC.enable }
 
     before do
-      CryptocoinPayable::CurrencyConversion.create!(coin_type: :btc, currency: 1, price: 1)
       adapter = CryptocoinPayable::Adapters.bitcoin_adapter
       allow(adapter).to receive(:fetch_transactions) { build_fake_transactions_data }
     end

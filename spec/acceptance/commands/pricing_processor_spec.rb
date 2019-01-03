@@ -18,7 +18,7 @@ describe CryptocoinPayable::PricingProcessor, vcr: true do
       Timecop.return
     end
 
-    it 'can update' do
+    it 'can update without errors' do
       subject.perform
     end
   end

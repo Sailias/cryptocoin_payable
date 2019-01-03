@@ -1,0 +1,316 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.coinbase.com/v2/prices/BTC-USD/spot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 03 Jan 2019 06:16:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=dd4af8527655294ea5b85a44c50ba5bc11546496219; expires=Fri, 03-Jan-20
+        06:16:59 GMT; path=/; domain=.coinbase.com; HttpOnly
+      Cache-Control:
+      - public, max-age=30
+      Content-Disposition:
+      - attachment; filename=response.json
+      Content-Security-Policy:
+      - 'default-src ''self'' https://www.coinbase.com; child-src ''self'' https://www.coinbase.com
+        https://fast.wistia.net https://*.online-metrix.net https://*.wpstn.com https://netverify.com
+        https://platform.twitter.com https://www.google.com/recaptcha/ https://cdn.plaid.com/link/
+        https://*.doubleclick.net/ blob: https://coinbase.ada.support; connect-src
+        ''self'' https://www.coinbase.com https://api.coinbase.com https://api.mixpanel.com
+        https://*.online-metrix.net https://api.cloudinary.com https://ott9.wpstn.com/live
+        https://api.amplitude.com/ https://d3907m2cqladbn.cloudfront.net/ https://exceptions.coinbase.com
+        static.coinbase.com wss://ws.coinbase.com wss://ws.coinbase.com:443 https://www.coinbase.com/api
+        https://coinbase.ada.support/api/; font-src ''self'' https://www.coinbase.com
+        https://assets.coinbase.com/ static.coinbase.com; img-src ''self'' data: https://www.coinbase.com
+        https://images.coinbase.com https://d3907m2cqladbn.cloudfront.net/ https://dynamic-assets.coinbase.com
+        https://exceptions.coinbase.com https://coinbase-uploads.s3.amazonaws.com
+        https://s3.amazonaws.com/app-public/ https://maps.gstatic.com https://ssl.google-analytics.com
+        https://www.google.com https://maps.googleapis.com https://csi.gstatic.com
+        https://www.google-analytics.com https://res.cloudinary.com https://secure.gravatar.com
+        https://i2.wp.com https://*.online-metrix.net https://assets.coinbase.com/
+        https://hexagon-analytics.com https://api.mixpanel.com https://cb-brand.s3.amazonaws.com
+        https://googleads.g.doubleclick.net https://stats.g.doubleclick.net/r/collect
+        blob: static.coinbase.com https://d124s1zbdqkqqe.cloudfront.net https://www.facebook.com/tr;
+        media-src ''self'' https://www.coinbase.com blob:; object-src ''self'' data:
+        blob: https://www.coinbase.com https://cdn.siftscience.com https://*.online-metrix.net
+        https://www.gstatic.com https://www.google.com/recaptcha/api/; script-src
+        ''self'' ''unsafe-inline'' ''unsafe-eval'' https://www.coinbase.com https://fast.wistia.com/assets/external/E-v1.js
+        https://cdn.siftscience.com https://*.newrelic.com https://bam.nr-data.net
+        https://*.google-analytics.com https://www.google.com https://www.gstatic.com
+        https://*.online-metrix.net https://code.jquery.com https://chart.googleapis.com
+        https://maps.googleapis.com https://maps.gstatic.com https://netverify.com
+        https://ajax.cloudflare.com https://cdn.plaid.com/link/v2/stable/ https://www.googletagmanager.com/gtag/js
+        https://www.googletagmanager.com/gtm.js https://www.googleadservices.com https://googleads.g.doubleclick.net
+        https://assets.coinbase.com/ static.coinbase.com; style-src ''self'' ''unsafe-inline''
+        https://www.coinbase.com https://assets.coinbase.com/ static.coinbase.com;
+        report-uri /csp-report'
+      Etag:
+      - W/"f23beca76975a48cdfd807f7b2325631"
+      Expect-Ct:
+      - enforce; max-age=86400; report-uri="https://coinbase.report-uri.io/r/default/ct/reportOnly"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Origin,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Powered-By:
+      - Proof-of-Work
+      X-Request-Id:
+      - 3b5ee3d5-750e-43dd-8bf6-21de7799db6d
+      X-Xss-Protection:
+      - 1; mode=block
+      Cf-Cache-Status:
+      - HIT
+      Expires:
+      - Thu, 03 Jan 2019 06:17:29 GMT
+      Accept-Ranges:
+      - bytes
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 493356f9eea43307-HKG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"base":"BTC","currency":"USD","amount":"3847.715"}}'
+    http_version: 
+  recorded_at: Sun, 06 Jan 2019 06:17:09 GMT
+- request:
+    method: get
+    uri: https://api.coinbase.com/v2/prices/ETH-USD/spot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 03 Jan 2019 06:16:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d0d42a5c4acef107d2c3e931dc70afc351546496219; expires=Fri, 03-Jan-20
+        06:16:59 GMT; path=/; domain=.coinbase.com; HttpOnly
+      Cache-Control:
+      - public, max-age=30
+      Content-Disposition:
+      - attachment; filename=response.json
+      Content-Security-Policy:
+      - 'default-src ''self'' https://www.coinbase.com; child-src ''self'' https://www.coinbase.com
+        https://fast.wistia.net https://*.online-metrix.net https://*.wpstn.com https://netverify.com
+        https://platform.twitter.com https://www.google.com/recaptcha/ https://cdn.plaid.com/link/
+        https://*.doubleclick.net/ blob: https://coinbase.ada.support; connect-src
+        ''self'' https://www.coinbase.com https://api.coinbase.com https://api.mixpanel.com
+        https://*.online-metrix.net https://api.cloudinary.com https://ott9.wpstn.com/live
+        https://api.amplitude.com/ https://d3907m2cqladbn.cloudfront.net/ https://exceptions.coinbase.com
+        static.coinbase.com wss://ws.coinbase.com wss://ws.coinbase.com:443 https://www.coinbase.com/api
+        https://coinbase.ada.support/api/; font-src ''self'' https://www.coinbase.com
+        https://assets.coinbase.com/ static.coinbase.com; img-src ''self'' data: https://www.coinbase.com
+        https://images.coinbase.com https://d3907m2cqladbn.cloudfront.net/ https://dynamic-assets.coinbase.com
+        https://exceptions.coinbase.com https://coinbase-uploads.s3.amazonaws.com
+        https://s3.amazonaws.com/app-public/ https://maps.gstatic.com https://ssl.google-analytics.com
+        https://www.google.com https://maps.googleapis.com https://csi.gstatic.com
+        https://www.google-analytics.com https://res.cloudinary.com https://secure.gravatar.com
+        https://i2.wp.com https://*.online-metrix.net https://assets.coinbase.com/
+        https://hexagon-analytics.com https://api.mixpanel.com https://cb-brand.s3.amazonaws.com
+        https://googleads.g.doubleclick.net https://stats.g.doubleclick.net/r/collect
+        blob: static.coinbase.com https://d124s1zbdqkqqe.cloudfront.net https://www.facebook.com/tr;
+        media-src ''self'' https://www.coinbase.com blob:; object-src ''self'' data:
+        blob: https://www.coinbase.com https://cdn.siftscience.com https://*.online-metrix.net
+        https://www.gstatic.com https://www.google.com/recaptcha/api/; script-src
+        ''self'' ''unsafe-inline'' ''unsafe-eval'' https://www.coinbase.com https://fast.wistia.com/assets/external/E-v1.js
+        https://cdn.siftscience.com https://*.newrelic.com https://bam.nr-data.net
+        https://*.google-analytics.com https://www.google.com https://www.gstatic.com
+        https://*.online-metrix.net https://code.jquery.com https://chart.googleapis.com
+        https://maps.googleapis.com https://maps.gstatic.com https://netverify.com
+        https://ajax.cloudflare.com https://cdn.plaid.com/link/v2/stable/ https://www.googletagmanager.com/gtag/js
+        https://www.googletagmanager.com/gtm.js https://www.googleadservices.com https://googleads.g.doubleclick.net
+        https://assets.coinbase.com/ static.coinbase.com; style-src ''self'' ''unsafe-inline''
+        https://www.coinbase.com https://assets.coinbase.com/ static.coinbase.com;
+        report-uri /csp-report'
+      Etag:
+      - W/"18049f93c854cad2425f2a4ef68cc599"
+      Expect-Ct:
+      - enforce; max-age=86400; report-uri="https://coinbase.report-uri.io/r/default/ct/reportOnly"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Origin,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Powered-By:
+      - Proof-of-Work
+      X-Request-Id:
+      - c3f896ac-5980-4b8c-b4de-3bcc88f40ef7
+      X-Xss-Protection:
+      - 1; mode=block
+      Cf-Cache-Status:
+      - HIT
+      Expires:
+      - Thu, 03 Jan 2019 06:17:29 GMT
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 493356fbe9578496-HKG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"base":"ETH","currency":"USD","amount":"152.97"}}'
+    http_version: 
+  recorded_at: Sun, 06 Jan 2019 06:17:09 GMT
+- request:
+    method: get
+    uri: https://api.coinbase.com/v2/prices/BCH-USD/spot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 03 Jan 2019 06:16:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '81'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=dba0bc81102dac71ede146df16e0035391546496219; expires=Fri, 03-Jan-20
+        06:16:59 GMT; path=/; domain=.coinbase.com; HttpOnly
+      Cache-Control:
+      - public, max-age=30
+      Content-Disposition:
+      - attachment; filename=response.json
+      Content-Security-Policy:
+      - 'default-src ''self'' https://www.coinbase.com; child-src ''self'' https://www.coinbase.com
+        https://fast.wistia.net https://*.online-metrix.net https://*.wpstn.com https://netverify.com
+        https://platform.twitter.com https://www.google.com/recaptcha/ https://cdn.plaid.com/link/
+        https://*.doubleclick.net/ blob: https://coinbase.ada.support; connect-src
+        ''self'' https://www.coinbase.com https://api.coinbase.com https://api.mixpanel.com
+        https://*.online-metrix.net https://api.cloudinary.com https://ott9.wpstn.com/live
+        https://api.amplitude.com/ https://d3907m2cqladbn.cloudfront.net/ https://exceptions.coinbase.com
+        static.coinbase.com wss://ws.coinbase.com wss://ws.coinbase.com:443 https://www.coinbase.com/api
+        https://coinbase.ada.support/api/; font-src ''self'' https://www.coinbase.com
+        https://assets.coinbase.com/ static.coinbase.com; img-src ''self'' data: https://www.coinbase.com
+        https://images.coinbase.com https://d3907m2cqladbn.cloudfront.net/ https://dynamic-assets.coinbase.com
+        https://exceptions.coinbase.com https://coinbase-uploads.s3.amazonaws.com
+        https://s3.amazonaws.com/app-public/ https://maps.gstatic.com https://ssl.google-analytics.com
+        https://www.google.com https://maps.googleapis.com https://csi.gstatic.com
+        https://www.google-analytics.com https://res.cloudinary.com https://secure.gravatar.com
+        https://i2.wp.com https://*.online-metrix.net https://assets.coinbase.com/
+        https://hexagon-analytics.com https://api.mixpanel.com https://cb-brand.s3.amazonaws.com
+        https://googleads.g.doubleclick.net https://stats.g.doubleclick.net/r/collect
+        blob: static.coinbase.com https://d124s1zbdqkqqe.cloudfront.net https://www.facebook.com/tr;
+        media-src ''self'' https://www.coinbase.com blob:; object-src ''self'' data:
+        blob: https://www.coinbase.com https://cdn.siftscience.com https://*.online-metrix.net
+        https://www.gstatic.com https://www.google.com/recaptcha/api/; script-src
+        ''self'' ''unsafe-inline'' ''unsafe-eval'' https://www.coinbase.com https://fast.wistia.com/assets/external/E-v1.js
+        https://cdn.siftscience.com https://*.newrelic.com https://bam.nr-data.net
+        https://*.google-analytics.com https://www.google.com https://www.gstatic.com
+        https://*.online-metrix.net https://code.jquery.com https://chart.googleapis.com
+        https://maps.googleapis.com https://maps.gstatic.com https://netverify.com
+        https://ajax.cloudflare.com https://cdn.plaid.com/link/v2/stable/ https://www.googletagmanager.com/gtag/js
+        https://www.googletagmanager.com/gtm.js https://www.googleadservices.com https://googleads.g.doubleclick.net
+        https://assets.coinbase.com/ static.coinbase.com; style-src ''self'' ''unsafe-inline''
+        https://www.coinbase.com https://assets.coinbase.com/ static.coinbase.com;
+        report-uri /csp-report'
+      Etag:
+      - W/"77a093734a450f62c9c7c6605cb9010d"
+      Expect-Ct:
+      - enforce; max-age=86400; report-uri="https://coinbase.report-uri.io/r/default/ct/reportOnly"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Origin,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Powered-By:
+      - Proof-of-Work
+      X-Request-Id:
+      - b10f3d9b-69f2-49fa-8262-426756be5d6a
+      X-Xss-Protection:
+      - 1; mode=block
+      Cf-Cache-Status:
+      - HIT
+      Expires:
+      - Thu, 03 Jan 2019 06:17:29 GMT
+      Accept-Ranges:
+      - bytes
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 493356fe290332e3-HKG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"base":"BCH","currency":"USD","amount":"167.82"}}'
+    http_version: 
+  recorded_at: Sun, 06 Jan 2019 06:17:09 GMT
+recorded_with: VCR 4.0.0

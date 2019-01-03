@@ -68,7 +68,7 @@ module CryptocoinPayable
         transactions,
         on_duplicate_key_update: {
           conflict_target: [:transaction_hash],
-          columns: [:coin_conversion]
+          columns: [:confirmations]
         }
       )
       payment.reload

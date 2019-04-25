@@ -4,7 +4,7 @@ require 'cryptocoin_payable/orm/activerecord'
 
 describe CryptocoinPayable::CoinPayment do
   context 'when creating a Bitcoin Cash payment' do
-    subject { CryptocoinPayable::CoinPayment.new(coin_type: :bch, reason: 'test', price: 1) }
+    subject { CryptocoinPayable::CoinPayment.new(coin_type: :bch, reason: 'test', price: 1, currency: :usd) }
 
     it 'can save a payment' do
       expect { subject.save! }.not_to raise_error

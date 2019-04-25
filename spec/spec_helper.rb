@@ -76,6 +76,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     CryptocoinPayable.configure do |c|
+      c.currency = :usd
       c.configure_btc do |btc_config|
         # Created using BIP39 mnemonic 'dose rug must junk rug spell bracket
         # inside tissue artist patrol evil turtle brass ivory'
@@ -111,7 +112,7 @@ RSpec.configure do |config|
     CryptocoinPayable::CurrencyConversion.coin_types.keys.each do |coin_type|
       CryptocoinPayable::CurrencyConversion.create!(
         coin_type: coin_type,
-        currency: 1,
+        currency: 'usd',
         price: 1
       )
     end

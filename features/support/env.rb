@@ -18,7 +18,7 @@ Before do
   3.times do
     CryptocoinPayable::CurrencyConversion.create!(
       coin_type: :btc,
-      currency: rand(85...99),
+      currency: :usd,
       price: rand(10_000...15_000) * 100, # cents in fiat
     )
   end

@@ -8,6 +8,8 @@ module CryptocoinPayable
         bitcoin_adapter
       when :eth
         ethereum_adapter
+      when :ltc
+        litecoin_adapter
       else
         raise "Invalid coin type #{coin_type}"
       end

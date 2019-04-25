@@ -9,6 +9,7 @@ module CryptocoinPayable
     end
 
     def perform
+=begin
       rates = CurrencyConversion.coin_types.map do |coin_pair|
         coin_type = coin_pair[0].to_sym
         [
@@ -21,11 +22,13 @@ module CryptocoinPayable
           )
         ]
       end.to_h
+  
+=end
 
       # Loop through all unpaid payments and update them with the new price if
       # it has been 30 mins since they have been updated.
       CoinPayment.unpaid.stale.find_each do |payment|
-        payment.update_coin_amount_due(rate: rates[payment.coin_type.to_sym].price)
+        payment.update_coin_amount_due
       end
     end
 

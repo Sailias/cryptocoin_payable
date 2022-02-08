@@ -3,9 +3,10 @@ require 'eth'
 module CryptocoinPayable
   module Adapters
     class Ethereum < Base
+
       # Wei in Ether
       def self.subunit_in_main
-        1_000_000_000_000_000_000
+        Eth::Unit::ETHER
       end
 
       def self.coin_symbol
@@ -25,7 +26,7 @@ module CryptocoinPayable
       end
 
       def create_address(id)
-        Eth::Utils.public_key_to_address(super.public_key.uncompressed.to_hex)
+        Eth::Util.public_key_to_address(super.public_key.uncompressed.to_hex)
       end
 
       private

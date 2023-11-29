@@ -1,5 +1,7 @@
 test:
   adapter: postgresql
+  host: db
   encoding: unicode
   pool: 5
   database: cryptocoin_payable_test
+  username: postgres

@@ -1,0 +1,37 @@
+version: '3.4'
+services:
+  web:
+    build: .
+    command: /bin/bash -c "cd spec/dummy; rm -f /tmp/server.pid && bundle exec rails server -b 0.0.0.0 -p 3001 -P /tmp/server.pid"
+    env_file: .env
+    ports:
+      - 3001:3001
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/gem
+      - ruby-bundle-cache:/bundle
+    tty: true
+    stdin_open: true
+
+  redis:
+    image: "redis:7-alpine"
+    ports:
+      - 6379
+    volumes:
+    - ./tmp/redis_data:/var/lib/redis/data
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    restart: always
+    ports:
+      - 5433:5433
+    volumes:
+      - ./tmp/postgres_data:/var/lib/postgresql/data
+
+volumes:
+  ruby-bundle-cache:
+    external: true

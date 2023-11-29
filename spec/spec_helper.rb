@@ -1,6 +1,6 @@
 require 'vcr'
 require 'webmock/rspec'
-require 'active_support/time'
+# require 'active_support/time'
 require 'rspec-benchmark'
 require 'rspec/retry'
 
@@ -14,6 +14,7 @@ end
 
 def create_tables
   ENV['RAILS_ENV'] = 'test'
+  require_relative 'dummy/config/environment'
   load 'spec/dummy/db/schema.rb'
 end
 
@@ -105,7 +106,6 @@ RSpec.configure do |config|
       end
     end
 
-    ActiveRecord::Base.establish_connection(adapter: 'postgresql', database: 'cryptocoin_payable_test')
     create_tables
 
     CryptocoinPayable::CurrencyConversion.coin_types.keys.each do |coin_type|

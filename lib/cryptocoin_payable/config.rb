@@ -29,10 +29,6 @@ module CryptocoinPayable
     def configure_eth
       @eth ||= EthConfiguration.new
       yield(@eth)
-
-      Eth.configure do |config|
-        config.chain_id = CryptocoinPayable.configuration.testnet ? 4 : 1
-      end
     end
 
     class CoinConfiguration

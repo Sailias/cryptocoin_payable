@@ -57,12 +57,18 @@ bundle exec rake cryptocoin_payable:process_prices (see below)
 rails d cryptocoin_payable:install
 ```
 
+## Build Docker
+```
+docker-compose up --build
+```
+
 ## Run Tests
 
+
 ```sh
-cucumber features
-rspec
-rubocop
+docker-compose run web features
+docker-compose run web rspec
+docker-compose run web rubocop
 ```
 
 ## Usage

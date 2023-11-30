@@ -19,7 +19,7 @@ module CryptocoinPayable
         response = get_request(url)
         json = JSON.parse(response.body)
 
-        raise ApiError, json['message'] if json['status'] == '0' && json['message'] == 'NOTOK'
+        raise ApiError, json['message'] if json['status'] == '0' && json['message'].include?('NOTOK')
 
         json['result'].map { |tx| convert_transactions(tx, address) }
       end

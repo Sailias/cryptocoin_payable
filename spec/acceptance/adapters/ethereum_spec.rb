@@ -6,43 +6,33 @@ describe CryptocoinPayable::Adapters::Ethereum, :vcr do
     expect(response).to match_array(
       [
         {
-          transaction_hash: '0xa88b799514e9621962e3d0de25e7e0bc7a123e33085f322c7acdb99cc2585c6d',
-          block_hash: '0x752c50e426f65820f5bf6fd49acbb08d79464f8e7e8ea5b77e2299b69fd6398b',
+          transaction_hash: '0xeeadb31b3c646b74a8c1270626ab8e539d7a7e2369e98541f85f8a41cc4b49e9',
+          block_hash: '0x3cd7ca8c2b1a4d2df804538462676c7dde471654f45cb15476982a9b3d3845fe',
           block_time: nil,
-          estimated_time: be_within(1.day).of(Time.iso8601('2018-07-05T12:58:33.000000000+07:00')),
-          estimated_value: 33_753_640_000_000_000,
-          confirmations: 569_771
+          estimated_time: be_within(1.day).of(Time.iso8601('2023-11-30T12:58:33.000000000+07:00')),
+          estimated_value: 51_504_000_000_000_000,
+          gas: 21_000,
+          gas_price: 2_166_305_619,
+          gas_used: 21_000,
+          confirmations: 22
         },
         {
-          transaction_hash: '0xb325a8cf241f332bca92c7f715987e4d34be9a6b3bb78d2425c83086b4aced26',
-          block_hash: '0x1c2b73a16fd8c4d25feeccaa2f0bf5c82b8f415f1beaf4d34aaf870daf89689d',
+          transaction_hash: '0x72579c512ac244134f890bd617fa28c576d52a81e275c68a15bd5eb180f396ae',
+          block_hash: '0x73b73bbbbaf3e9ffcb42b843e1948231bac0193e278225957f773ede3670fe44',
           block_time: nil,
-          estimated_time: be_within(1.day).of(Time.iso8601('2018-07-05T13:35:07.000000000+07:00')),
-          estimated_value: 2_190_144_444_444_444,
-          confirmations: 569_629
-        },
-        {
-          transaction_hash: '0xcd874917be5ad177e7ebd88b5c4a7d4283796e00e43345da5b63fb4f78130b37',
-          block_hash: '0x4ce71d11146445f123680ea9beba7db968b04dc675caddf60248c9d9d6f5739e',
-          block_time: nil,
-          estimated_time: be_within(1.day).of(Time.iso8601('2018-07-05T13:55:53.000000000+07:00')),
-          estimated_value: 1_007_518_888_888_888,
-          confirmations: 569_549
-        },
-        {
-          transaction_hash: '0x799ec2aaafbddbc2e746334f96f59f6127dec62e5693480576db351aaf840bfb',
-          block_hash: '0xc1361b19b2266e2259ac433b9e18b4fbc81339304988bbc62dd93aa24fac6449',
-          block_time: nil,
-          estimated_time: be_within(1.day).of(Time.iso8601('2018-08-26T16:05:44.000000000+07:00')),
-          estimated_value: 15_678_420_000_000_000,
-          confirmations: 261_969
+          estimated_time: be_within(1.day).of(Time.iso8601('2023-11-30T13:35:07.000000000+07:00')),
+          estimated_value: 58_123_650_000_000_000,
+          gas: 21_000,
+          gas_price: 2_192_798_508,
+          gas_used: 21_000,
+          confirmations: 11
         }
       ]
     )
   end
 
   it 'gets transactions for a given address' do
-    response = subject.fetch_transactions('0xfc8cfb26c31931572e65e450f7fa498bcc11651c')
+    response = subject.fetch_transactions('0xebB838Cdb3e3F628f50BF0EDaC1E92b208149984')
     expect_transaction_result(response)
   end
 
@@ -57,9 +47,9 @@ describe CryptocoinPayable::Adapters::Ethereum, :vcr do
 
   it 'creates BIP32 addresses' do
     3.times do
-      expect(subject.create_address(0)).to eq('0xcDe321aCfa5B779dCD174850C3FB6E5Ff15cDEAf')
-      expect(subject.create_address(1)).to eq('0x0CA6E0C53EEb559c0D8803076D4F02b72f0FAE9C')
-      expect(subject.create_address(2)).to eq('0xD87D2476c93411242778fe0ef6e758De19ed19E8')
+      expect(subject.create_address(0).to_s).to eq('0xcDe321aCfa5B779dCD174850C3FB6E5Ff15cDEAf')
+      expect(subject.create_address(1).to_s).to eq('0x0CA6E0C53EEb559c0D8803076D4F02b72f0FAE9C')
+      expect(subject.create_address(2).to_s).to eq('0xD87D2476c93411242778fe0ef6e758De19ed19E8')
     end
   end
 end

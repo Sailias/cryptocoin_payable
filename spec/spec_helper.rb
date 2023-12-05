@@ -3,6 +3,8 @@ require 'webmock/rspec'
 # require 'active_support/time'
 require 'rspec-benchmark'
 require 'rspec/retry'
+require 'cryptocoin_payable'
+require 'cryptocoin_payable/orm/activerecord'
 
 # ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
 

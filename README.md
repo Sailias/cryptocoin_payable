@@ -85,6 +85,9 @@ CryptocoinPayable.configure do |config|
   config.request_delay = 0.5
   config.expire_payments_after = 15.minutes
 
+  # defaults to STDOUT
+  # config.logger = Rails.logger 
+  
   config.configure_btc do |btc_config|
     # btc_config.confirmations = 3
     # btc_config.node_path = ''

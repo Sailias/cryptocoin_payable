@@ -1,6 +1,3 @@
-require 'active_record'
-require 'cryptocoin_payable'
-
 describe CryptocoinPayable::Adapters::Ethereum, :vcr do
   def expect_transaction_result(response)
     expect(response).to match_array(

@@ -48,7 +48,6 @@ module CryptocoinPayable
 
       def parse_blockstream_transactions(response, address)
         json = JSON.parse(response)
-        puts json.inspect
         json.map { |tx| convert_blockstream_transactions(tx, address) }
       rescue JSON::ParserError
         raise ApiError, response
@@ -79,7 +78,7 @@ module CryptocoinPayable
       def parse_block_cypher_transactions(response, address)
         json = JSON.parse(response)
         raise ApiError, json['error'] if json['error']
-        puts json['txs'].map { |tx| convert_block_cypher_transactions(tx, address) }.inspect
+
         json['txs'].map { |tx| convert_block_cypher_transactions(tx, address) }
       rescue JSON::ParserError
         raise ApiError, response

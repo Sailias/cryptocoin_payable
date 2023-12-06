@@ -1,3 +1,11 @@
+development:
+  adapter: postgresql
+  host: db
+  encoding: unicode
+  pool: 5
+  database: cryptocoin_payable_development
+  username: postgres
+
 test:
   adapter: postgresql
   host: db

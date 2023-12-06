@@ -66,7 +66,7 @@ docker-compose up --build
 
 
 ```sh
-docker-compose run web features
+docker-compose run web bin/cucumber features
 docker-compose run web rspec
 docker-compose run web rubocop
 ```

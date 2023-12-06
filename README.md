@@ -57,12 +57,18 @@ bundle exec rake cryptocoin_payable:process_prices (see below)
 rails d cryptocoin_payable:install
 ```
 
+## Build Docker
+```
+docker-compose up --build
+```
+
 ## Run Tests
 
+
 ```sh
-cucumber features
-rspec
-rubocop
+docker-compose run web bin/cucumber features
+docker-compose run web rspec
+docker-compose run web rubocop
 ```
 
 ## Usage
@@ -79,6 +85,9 @@ CryptocoinPayable.configure do |config|
   config.request_delay = 0.5
   config.expire_payments_after = 15.minutes
 
+  # defaults to STDOUT
+  # config.logger = Rails.logger 
+  
   config.configure_btc do |btc_config|
     # btc_config.confirmations = 3
     # btc_config.node_path = ''

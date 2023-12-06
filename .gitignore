@@ -2,3 +2,5 @@ spec/dummy/log/*
 *.gem
 /Gemfile.lock
 /spec/dummy/log/development.log
+tmp/
+.idea

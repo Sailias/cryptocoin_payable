@@ -9,7 +9,7 @@ module CryptocoinPayable
   end
 
   class Configuration
-    attr_accessor :testnet, :expire_payments_after, :request_delay, :btc, :bch, :eth
+    attr_accessor :testnet, :expire_payments_after, :request_delay, :btc, :bch, :eth, :logger
     attr_writer :currency
 
     def currency
@@ -29,10 +29,10 @@ module CryptocoinPayable
     def configure_eth
       @eth ||= EthConfiguration.new
       yield(@eth)
+    end
 
-      Eth.configure do |config|
-        config.chain_id = CryptocoinPayable.configuration.testnet ? 4 : 1
-      end
+    def logger
+      @logger ||= Logger.new(STDOUT)
     end
 
     class CoinConfiguration

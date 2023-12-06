@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://blockexplorer.com/api/txs/?address=1twtr17A65VAPhJDJRxhoMSpLBTR5Xy44
+    uri: https://blockstream.info/testnet/api/address/tb1qdnynffwkqrtykapjmaeqvyncl8rfu58pqxamp8/txs
     body:
       encoding: US-ASCII
       string: ''
@@ -18,50 +18,27 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Server:
+      - nginx
       Date:
-      - Sun, 14 Oct 2018 10:35:50 GMT
+      - Mon, 04 Dec 2023 10:44:28 GMT
       Content-Type:
-      - application/json; charset=utf-8
+      - application/json
       Content-Length:
-      - '25'
-      Connection:
-      - keep-alive
-      Set-Cookie:
-      - __cfduid=d47ff8371481605e635f17b28a5748d871539513349; expires=Mon, 14-Oct-19
-        10:35:49 GMT; path=/; domain=.blockexplorer.com; HttpOnly; Secure
-      X-Powered-By:
-      - Express
-      X-Ratelimit-Limit:
-      - '10800'
-      X-Ratelimit-Remaining:
-      - '10788'
+      - '2'
+      Cache-Control:
+      - public, max-age=10
       Access-Control-Allow-Origin:
       - "*"
-      Access-Control-Allow-Methods:
-      - GET, HEAD, PUT, POST, OPTIONS
-      Access-Control-Allow-Headers:
-      - Origin, X-Requested-With, Content-Type, Accept, Content-Length, Cache-Control,
-        cf-connecting-ip
-      Cache-Control:
-      - public, max-age=30
-      X-Content-Type-Options:
-      - nosniff
-      - nosniff
-      Etag:
-      - W/"19-ateSR7OFd51Y/7Qm9D9BXg"
-      Vary:
-      - Accept-Encoding
-      Cf-Cache-Status:
-      - MISS
-      Expect-Ct:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
-      Server:
-      - cloudflare
-      Cf-Ray:
-      - 469966c21862c338-SIN
+      Access-Control-Expose-Headers:
+      - x-total-results
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: '{"pagesTotal":0,"txs":[]}'
+      string: "[]"
     http_version: 
-  recorded_at: Sun, 14 Oct 2018 10:35:52 GMT
+  recorded_at: Mon, 04 Dec 2023 10:44:28 GMT
 recorded_with: VCR 4.0.0

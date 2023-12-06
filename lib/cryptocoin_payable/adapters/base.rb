@@ -36,6 +36,10 @@ module CryptocoinPayable
       # def self.create_address(id)
       # end
 
+      def logger
+        CryptocoinPayable.configuration.logger
+      end
+
       def convert_subunit_to_main(subunit)
         subunit / self.class.subunit_in_main.to_f
       end
@@ -75,6 +79,7 @@ module CryptocoinPayable
       def adapter_api_key
         @adapter_api_key ||= coin_config && coin_config.adapter_api_key
       end
+
 
       def parse_timestamp(timestamp)
         timestamp.nil? ? nil : Time.strptime(timestamp.to_s, '%s')

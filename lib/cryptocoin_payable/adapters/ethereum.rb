@@ -19,19 +19,19 @@ module CryptocoinPayable
         response = get_request(url)
         json = JSON.parse(response.body)
 
-        raise ApiError, json['message'] if json['status'] == '0' && json['message'] == 'NOTOK'
+        raise ApiError, json['message'] if json['status'] == '0' && json['message'].include?('NOTOK')
 
         json['result'].map { |tx| convert_transactions(tx, address) }
       end
 
       def create_address(id)
-        Eth::Utils.public_key_to_address(super.public_key.uncompressed.to_hex)
+        Eth::Util.public_key_to_address(super.public_key.uncompressed.to_hex)
       end
 
       private
 
       def subdomain
-        @subdomain ||= CryptocoinPayable.configuration.testnet ? 'rinkeby' : 'api'
+        @subdomain ||= CryptocoinPayable.configuration.testnet ? 'api-sepolia' : 'api'
       end
 
       # Example response:
@@ -64,10 +64,13 @@ module CryptocoinPayable
       def convert_transactions(transaction, _address)
         {
           transaction_hash: transaction['hash'],
-          block_hash: transaction['block_hash'],
+          block_hash: transaction['blockHash'],
           block_time: nil, # Not supported
           estimated_time: parse_timestamp(transaction['timeStamp']),
           estimated_value: transaction['value'].to_i, # Units here are 'Wei'
+          gas: transaction['gas'].to_i,
+          gas_price: transaction['gasPrice'].to_i,
+          gas_used: transaction['gasUsed'].to_i,
           confirmations: transaction['confirmations'].to_i
         }
       end

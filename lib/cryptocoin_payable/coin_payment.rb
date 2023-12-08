@@ -58,6 +58,9 @@ module CryptocoinPayable
       end
     end
 
+    def coin_amount_due_main
+      adapter.convert_subunit_to_main(coin_amount_due)
+    end
     def coin_amount_paid
       transactions.sum { |tx| adapter.convert_subunit_to_main(tx.estimated_value) }
     end

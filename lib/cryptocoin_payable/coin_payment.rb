@@ -12,6 +12,7 @@ module CryptocoinPayable
 
     before_create :populate_currency_and_amount_due
     after_create :populate_address
+    after_create :create_qrcode, if: -> { CryptocoinPayable.configuration.qrcode? }
 
     scope :unconfirmed, -> { where(state: %i[pending partial_payment paid_in_full]) }
     scope :unpaid, -> { where(state: %i[pending partial_payment]) }
@@ -137,6 +138,17 @@ module CryptocoinPayable
 
     def notify_payable_expired
       notify_payable_event(:expired)
+    end
+
+
+    def create_qrcode
+      qrcode = RQRCode::QRCode.new("bitcoin://#{address}", size: 10, level: :h)
+      png = qrcode.as_png CryptocoinPayable.configuration.qrcode
+      self.qrcode.attach(
+        io: StringIO.new(png.to_s),
+        filename: "#{address}.png",
+        content_type: 'image/png'
+      )
     end
   end
 end

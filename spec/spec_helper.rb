@@ -3,6 +3,9 @@ require 'webmock/rspec'
 # require 'active_support/time'
 require 'rspec-benchmark'
 require 'rspec/retry'
+
+ENV['RAILS_ENV'] = 'test'
+require 'rails'
 require 'cryptocoin_payable'
 require 'cryptocoin_payable/orm/activerecord'
 
@@ -15,7 +18,6 @@ VCR.configure do |config|
 end
 
 def create_tables
-  ENV['RAILS_ENV'] = 'test'
   require_relative 'dummy/config/environment'
   load 'spec/dummy/db/schema.rb'
 end

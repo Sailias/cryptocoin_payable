@@ -71,6 +71,13 @@ docker-compose run web rspec
 docker-compose run web rubocop
 ```
 
+if you get an error about the database tables not being created, run:
+
+```sh
+cd spec/dummy
+RAILS_ENV=test bin/rails db:schema:load
+```
+
 ## Usage
 
 ### Configuration

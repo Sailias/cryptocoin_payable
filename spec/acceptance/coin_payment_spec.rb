@@ -1,6 +1,7 @@
-require 'active_record'
-require 'cryptocoin_payable'
-require 'cryptocoin_payable/orm/activerecord'
+# require 'active_record'
+# require 'cryptocoin_payable'
+# require 'cryptocoin_payable/orm/activerecord'
+require 'spec_helper'
 
 describe CryptocoinPayable::CoinPayment do
   context 'when creating a Bitcoin Cash payment' do
@@ -30,6 +31,13 @@ describe CryptocoinPayable::CoinPayment do
       expect(subject.coin_amount_due).to eq(59_000_000_000)
       expect(subject.coin_amount_due_main).to eq(590)
       expect(subject.coin_conversion).to eq(1)
+    end
+
+    it 'saves a qrcode if active storage' do
+      subject.save!
+      expect(subject.qrcode).to_not be_nil
+      ActiveStorage::Current.url_options = {host: "http://localhost"}
+      expect(subject.qrcode.url).to match /#{subject.address}\.png$/
     end
   end
 end

@@ -9,7 +9,7 @@ module CryptocoinPayable
   end
 
   class Configuration
-    attr_accessor :testnet, :expire_payments_after, :request_delay, :btc, :bch, :eth, :logger
+    attr_accessor :testnet, :expire_payments_after, :request_delay, :qrcode, :btc, :bch, :eth, :logger
     attr_writer :currency
 
     def currency
@@ -33,6 +33,10 @@ module CryptocoinPayable
 
     def logger
       @logger ||= Logger.new(STDOUT)
+    end
+
+    def qrcode?
+      @qrcode.present?
     end
 
     class CoinConfiguration

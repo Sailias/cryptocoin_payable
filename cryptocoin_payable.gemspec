@@ -40,5 +40,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'eth', '0.5.11'
   spec.add_dependency 'money-tree', '0.10.0'
   spec.add_dependency 'state_machines-activerecord', '~> 0.5'
+  spec.add_dependency 'rqrcode', '~> 2.2'
 end
 # rubocop:enable Metrics/BlockLength

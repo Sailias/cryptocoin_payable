@@ -1,8 +1,21 @@
+require 'chunky_png'
 CryptocoinPayable.configure do |config|
   config.currency = :usd
   config.testnet = true
   config.expire_payments_after = 15.minutes
   config.request_delay = 0.5
+
+  # config.qrcode = nil to disable qrcode generation
+  config.qrcode = { bit_depth: 1,
+                    border_modules: 4,
+                    color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+                    color: 'black',
+                    file: nil,
+                    fill: 'white',
+                    module_px_size: 6,
+                    resize_exactly_to: false,
+                    resize_gte_to: false,
+                    size: 120 }
 
   config.configure_btc do |btc_config|
     btc_config.node_path = 'm/0/'

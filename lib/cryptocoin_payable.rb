@@ -15,6 +15,8 @@ if defined?(Rails)
         config.after_initialize do
           if CryptocoinPayable.configuration.qrcode?
             require 'rqrcode'
+            require 'image_processing/vips'
+            require 'cryptocoin_payable/qr_codes'
             CryptocoinPayable::CoinPayment.has_one_attached(:qrcode)
           end
         end

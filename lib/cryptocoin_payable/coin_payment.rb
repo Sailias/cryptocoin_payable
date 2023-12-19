@@ -140,19 +140,19 @@ module CryptocoinPayable
       notify_payable_event(:expired)
     end
 
-    # Bitcoin URI Scheme (BIP21)
-    # https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
     def create_qrcode
-      uri = "bitcoin:#{address}?amount=#{coin_amount_due_main}"
-      uri += "&message=#{reason}" if reason.present?
-
-      qrcode = RQRCode::QRCode.new(uri, size: 10, level: :h)
-      png = qrcode.as_png CryptocoinPayable.configuration.qrcode
       self.qrcode.attach(
-        io: StringIO.new(png.to_s),
+        io: StringIO.new(qrcode_object.to_s),
         filename: "#{address}.png",
         content_type: 'image/png'
       )
     end
+
+    def qrcode_object
+      @qrcode_object ||= CryptocoinPayable::QRCodes.for(coin_type)
+                                                   .new(amount: coin_amount_due_main, address: , reason:,
+                                                        options: CryptocoinPayable.configuration.qrcode)
+    end
+
   end
 end

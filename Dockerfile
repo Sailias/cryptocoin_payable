@@ -1,6 +1,6 @@
 FROM ruby:3.2.2-bullseye
 
-RUN apt update -qq && apt install -y libpq-dev dh-autoreconf
+RUN apt update -qq && apt install -y libpq-dev dh-autoreconf libvips
 
 RUN gem update --system && gem install foreman
 

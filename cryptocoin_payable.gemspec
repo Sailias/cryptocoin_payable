@@ -41,5 +41,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'money-tree', '0.10.0'
   spec.add_dependency 'state_machines-activerecord', '~> 0.5'
   spec.add_dependency 'rqrcode', '~> 2.2'
+  spec.add_dependency 'image_processing', '~> 1.12'
 end
 # rubocop:enable Metrics/BlockLength

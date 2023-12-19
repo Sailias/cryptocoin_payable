@@ -38,6 +38,7 @@ describe CryptocoinPayable::CoinPayment do
       expect(subject.qrcode).to_not be_nil
       ActiveStorage::Current.url_options = {host: "http://localhost"}
       expect(subject.qrcode.url).to match /#{subject.address}\.png$/
+      puts subject.qrcode.url.inspect
     end
   end
 end

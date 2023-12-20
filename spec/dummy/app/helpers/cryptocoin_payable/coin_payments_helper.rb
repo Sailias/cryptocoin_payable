@@ -1,0 +1,2 @@
+module CryptocoinPayable::CoinPaymentsHelper
+end

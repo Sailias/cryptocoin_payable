@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Coin payments</h1>
+
+<div id="cryptocoin_payable_coin_payments">
+  <% @cryptocoin_payable_coin_payments.each do |cryptocoin_payable_coin_payment| %>
+    <%= render cryptocoin_payable_coin_payment %>
+    <p>
+      <%= link_to "Show this coin payment", cryptocoin_payable_coin_payment %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New coin payment", new_cryptocoin_payable_coin_payment_path %>

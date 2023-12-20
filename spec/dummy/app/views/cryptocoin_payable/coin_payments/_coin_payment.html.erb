@@ -1,0 +1,26 @@
+<div id="<%= dom_id coin_payment %>">
+  <p>
+    <strong>Amount:</strong>
+    <%= coin_payment.coin_amount_due %>
+  </p>
+
+  <p>
+    <strong>Reason:</strong>
+    <%= coin_payment.reason %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= coin_payment.address %>
+  </p>
+
+  <p>
+    <strong>Coin type:</strong>
+    <%= coin_payment.coin_type %>
+  </p>
+
+  <p>
+    <strong>QRCode:</strong>
+    <%= image_tag coin_payment.qrcode, width: 250 %>
+  </p>
+</div>

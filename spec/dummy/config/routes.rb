@@ -1,4 +1,7 @@
 Dummy::Application.routes.draw do
+  namespace :cryptocoin_payable do
+    resources :coin_payments
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,4 +56,5 @@ Dummy::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  root 'cryptocoin_payable/coin_payments#index'
 end

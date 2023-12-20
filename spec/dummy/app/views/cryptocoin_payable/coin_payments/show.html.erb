@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @cryptocoin_payable_coin_payment %>
+
+<div>
+  <%= link_to "Edit this coin payment", edit_cryptocoin_payable_coin_payment_path(@cryptocoin_payable_coin_payment) %> |
+  <%= link_to "Back to coin payments", cryptocoin_payable_coin_payments_path %>
+
+  <%= button_to "Destroy this coin payment", @cryptocoin_payable_coin_payment, method: :delete %>
+</div>

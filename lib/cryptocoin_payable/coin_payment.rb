@@ -141,8 +141,11 @@ module CryptocoinPayable
     end
 
     def create_qrcode
+      # qrcode_object.write_to_file("qqrcode-#{address}.png")
+      # self.qrcode.attach(qrcode_object)
+
       self.qrcode.attach(
-        io: StringIO.new(qrcode_object.to_s),
+        io: qrcode_object,
         filename: "#{address}.png",
         content_type: 'image/png'
       )
@@ -152,6 +155,7 @@ module CryptocoinPayable
       @qrcode_object ||= CryptocoinPayable::QRCodes.for(coin_type)
                                                    .new(amount: coin_amount_due_main, address: , reason:,
                                                         options: CryptocoinPayable.configuration.qrcode)
+                                                   .generate
     end
 
   end
